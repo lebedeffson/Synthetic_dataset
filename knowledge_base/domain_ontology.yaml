@@ -1,0 +1,202 @@
+domain: thermoradiobiology_temperature_radiation
+version: "2026-03-23"
+language: "en"
+
+scope:
+  description: "Knowledge model for the combined effect of hyperthermia and ionizing radiation on cancer cells and tumors."
+  focus:
+    - "locoregional hyperthermia"
+    - "mild hyperthermia 39-42 C"
+    - "sensitizing window 41-43 C"
+    - "radiotherapy combinations"
+  exclusions:
+    - "whole-body fever therapy"
+    - "pure thermoablation above 45 C"
+
+entities:
+  TreatmentEpisode:
+    description: "One thermoradiotherapy episode or one normalized protocol summary."
+  TumorContext:
+    description: "Disease, oxygenation, depth, prior treatment, and protocol context."
+
+inputs:
+  temperature_c:
+    type: continuous
+    unit: celsius
+    range: [35.0, 45.0]
+    fuzzy_sets:
+      normothermia: [35.0, 36.5, 38.0, 39.0]
+      mild: [38.5, 39.5, 41.0, 42.0]
+      sensitizing: [40.5, 41.5, 42.5, 43.2]
+      cytotoxic_high: [42.8, 43.5, 45.0, 45.0]
+
+  duration_min:
+    type: continuous
+    unit: minute
+    range: [0.0, 120.0]
+    fuzzy_sets:
+      short: [0.0, 10.0, 25.0, 40.0]
+      medium: [25.0, 40.0, 60.0, 75.0]
+      long: [60.0, 75.0, 120.0, 120.0]
+
+  interval_min:
+    type: continuous
+    unit: minute
+    range: [0.0, 240.0]
+    fuzzy_sets:
+      immediate: [0.0, 0.0, 20.0, 60.0]
+      short: [30.0, 60.0, 90.0, 120.0]
+      long: [90.0, 150.0, 240.0, 240.0]
+
+  radiation_dose_gy:
+    type: continuous
+    unit: gy
+    range: [0.0, 10.0]
+    fuzzy_sets:
+      low: [0.0, 0.0, 2.0, 3.0]
+      medium: [2.0, 4.0, 6.0, 7.0]
+      high: [6.0, 8.0, 10.0, 10.0]
+
+  tumor_hypoxia:
+    type: continuous
+    unit: normalized
+    range: [0.0, 1.0]
+    fuzzy_sets:
+      low: [0.0, 0.0, 0.25, 0.45]
+      medium: [0.25, 0.5, 0.75, 0.85]
+      high: [0.55, 0.75, 1.0, 1.0]
+
+  thermal_dose_cem43t90:
+    type: continuous
+    unit: cumulative_equivalent_minutes_at_43C
+    range: [0.0, 120.0]
+    fuzzy_sets:
+      low: [0.0, 0.0, 0.5, 10.0]
+      adequate: [0.5, 10.0, 30.0, 60.0]
+      high: [30.0, 60.0, 120.0, 120.0]
+
+  tumor_depth_cm:
+    type: continuous
+    unit: centimeter
+    range: [0.0, 6.0]
+    fuzzy_sets:
+      superficial: [0.0, 0.0, 1.5, 3.0]
+      intermediate: [2.0, 3.0, 4.0, 5.0]
+      deep: [4.0, 5.0, 6.0, 6.0]
+
+  session_count:
+    type: continuous
+    unit: count
+    range: [0.0, 10.0]
+    fuzzy_sets:
+      single: [0.0, 1.0, 1.0, 2.0]
+      few: [1.0, 2.0, 4.0, 5.0]
+      repeated: [4.0, 6.0, 10.0, 10.0]
+
+  prior_irradiation:
+    type: categorical
+    values: [no, yes]
+
+  sequence:
+    type: categorical
+    values: [ht_before_rt, rt_before_ht]
+
+outputs:
+  oxygenation_gain:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  dna_repair_inhibition:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  apoptosis_signal:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  radiosensitization:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  local_control_likelihood:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  direct_cytotoxicity:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  toxicity_risk:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  sequence_importance:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+  angiogenesis_marker_drop:
+    type: fuzzy_score
+    range: [0.0, 1.0]
+    labels: [low, medium, high]
+
+relations:
+  - "temperature_c modulates oxygenation_gain, dna_repair_inhibition, direct_cytotoxicity, and toxicity_risk"
+  - "interval_min modulates radiosensitization and apoptosis_signal"
+  - "thermal_dose_cem43t90 modulates local_control_likelihood"
+  - "tumor_depth_cm modulates achievable thermal dose and local control"
+  - "tumor_hypoxia modulates the benefit of mild hyperthermia through oxygenation"
+
+evidence_policy:
+  conflict_handling: "Preserve contradictory interval findings as weighted rules rather than forcing a universal crisp statement."
+  primary_predictors:
+    - "temperature_c"
+    - "duration_min"
+    - "thermal_dose_cem43t90"
+    - "interval_min"
+    - "tumor_depth_cm"
+  secondary_predictors:
+    - "sequence"
+    - "prior_irradiation"
+    - "tumor type"
+
+recommended_reasoners:
+  - "fuzzy logic IF-THEN"
+  - "Prolog or Datalog style crisp rules"
+  - "JSON rule engine with confidence weights"
+
+symbolic_aliases:
+  medium_or_high:
+    variable: radiation_dose_gy
+    any_of: [medium, high]
+
+  very_short:
+    variable: interval_min
+    any_of: [immediate]
+
+  either:
+    variable: sequence
+    any_of: [ht_before_rt, rt_before_ht]
+
+  mild_around_40:
+    variable: temperature_c
+    numeric_hint: [39.5, 40.5]
+
+  gy4:
+    variable: radiation_dose_gy
+    numeric_hint: [3.5, 4.5]
+
+  clinically_sensitizing:
+    variable: temperature_c
+    numeric_hint: [41.5, 42.5]
+
+  short_or_within_120min:
+    variable: interval_min
+    numeric_hint: [0.0, 120.0]

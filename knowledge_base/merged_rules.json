@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "name": "merged_thermoradiobiology_rules",
+    "version": "2026-03-23",
+    "language": "ru",
+    "description": "Merged expert rules combining user-authored heuristics with literature-grounded refinements."
+  },
+  "sources": {
+    "user_document": {
+      "path": "C:/Users/AIRC2/Desktop/Таня/База знаний для синетического датасета/Файлы с правилами/knowledge_rules.docx",
+      "rule_ids": ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10", "R11", "R12", "R13"]
+    },
+    "literature_kb": {
+      "files": [
+        "knowledge_base/expert_kb.json",
+        "knowledge_base/fuzzy_rules.fcl",
+        "literature/literature_evidence.csv"
+      ]
+    }
+  },
+  "merged_rules": [
+    {
+      "id": "M1",
+      "title": "dna_repair_window",
+      "derived_from": ["R1", "R2", "FR02"],
+      "status": "refined",
+      "logic_type": "fuzzy",
+      "if": [
+        { "variable": "temperature_c", "value": "sensitizing", "numeric_hint": [41.0, 43.0] },
+        { "variable": "duration_min", "value": "medium", "numeric_hint": [30, 60] }
+      ],
+      "then": [
+        { "variable": "dna_repair_inhibition", "value": "high" }
+      ],
+      "confidence": 0.88,
+      "evidence_ids": ["E03", "E04", "E05"],
+      "note": "General user rule was narrowed to the best-supported sensitizing window."
+    },
+    {
+      "id": "M2",
+      "title": "residual_damage_and_survival",
+      "derived_from": ["R3", "R4"],
+      "status": "preserved",
+      "logic_type": "crisp_weighted",
+      "if": [
+        { "variable": "radiation", "value": true },
+        { "variable": "dna_repair_inhibition", "value": "high" }
+      ],
+      "then": [
+        { "variable": "unrepaired_dna_damage", "value": "high" },
+        { "variable": "survival_fraction", "value": "low" }
+      ],
+      "confidence": 0.9,
+      "evidence_ids": ["E03", "E04", "E05", "E06"]
+    },
+    {
+      "id": "M3",
+      "title": "mild_ht_oxygenation_rule",
+      "derived_from": ["R9", "R10", "FR01"],
+      "status": "refined",
+      "logic_type": "fuzzy",
+      "if": [
+        { "variable": "temperature_c", "value": "mild", "numeric_hint": [39.0, 42.0] },
+        { "variable": "tumor_hypoxia", "value": "high" }
+      ],
+      "then": [
+        { "variable": "oxygenation_gain", "value": "high" },
+        { "variable": "radiation_damage", "value": "enhanced" }
+      ],
+      "confidence": 0.84,
+      "evidence_ids": ["E01", "E02", "E11"],
+      "exception": "Do not generalize to all hyperthermia; above about 43 C vascular impairment may reduce oxygenation."
+    },
+    {
+      "id": "M4",
+      "title": "short_interval_synergy",
+      "derived_from": ["R7", "R8", "FR03", "FR04"],
+      "status": "refined",
+      "logic_type": "fuzzy",
+      "if": [
+        { "variable": "interval_min", "value": "immediate_or_short", "numeric_hint": [0, 90] }
+      ],
+      "then": [
+        { "variable": "radiosensitization", "value": "high" },
+        { "variable": "apoptosis_signal", "value": "high" }
+      ],
+      "confidence": 0.86,
+      "evidence_ids": ["E06", "E07"],
+      "exception": "A longer interval does not automatically eliminate benefit if thermal dose remains adequate."
+    },
+    {
+      "id": "M5",
+      "title": "sequence_is_secondary",
+      "derived_from": ["R5", "R6", "FR05"],
+      "status": "reworked",
+      "logic_type": "crisp_weighted",
+      "if": [
+        { "variable": "interval_min", "value": "short" },
+        { "variable": "sequence", "value": "either" }
+      ],
+      "then": [
+        { "variable": "sequence_importance", "value": "low" }
+      ],
+      "confidence": 0.72,
+      "evidence_ids": ["E06"],
+      "note": "Sequence alone is weaker than interval and thermal dose."
+    },
+    {
+      "id": "M6",
+      "title": "combined_synergy_condition",
+      "derived_from": ["R11", "R12", "FR02", "FR03", "FR06"],
+      "status": "refined",
+      "logic_type": "fuzzy",
+      "if": [
+        { "variable": "hyperthermia", "value": true },
+        { "variable": "radiation", "value": true },
+        { "variable": "temperature_c", "value": "sensitizing" },
+        { "variable": "interval_min", "value": "immediate_or_short" },
+        { "variable": "thermal_dose_cem43t90", "value": "adequate_or_high" }
+      ],
+      "then": [
+        { "variable": "combined_effect", "value": "synergistic" },
+        { "variable": "survival_fraction_combined", "value": "lower_than_each_monotherapy" }
+      ],
+      "confidence": 0.87,
+      "evidence_ids": ["E05", "E06", "E07", "E09", "E11", "E12"]
+    },
+    {
+      "id": "M7",
+      "title": "radioresistant_context_benefit",
+      "derived_from": ["R13"],
+      "status": "preserved_with_conditions",
+      "logic_type": "crisp_weighted",
+      "if": [
+        { "variable": "radioresistant", "value": true },
+        { "variable": "radiation", "value": true },
+        { "variable": "hyperthermia", "value": true }
+      ],
+      "then": [
+        { "variable": "expected_benefit", "value": "high" }
+      ],
+      "confidence": 0.8,
+      "evidence_ids": ["E02", "E03", "E12"],
+      "note": "Benefit is stronger when thermal conditions are appropriate."
+    },
+    {
+      "id": "M8",
+      "title": "thermal_dose_and_depth",
+      "derived_from": ["FR06", "FR07"],
+      "status": "added_from_literature",
+      "logic_type": "fuzzy",
+      "if": [
+        { "variable": "thermal_dose_cem43t90", "value": "high" },
+        { "variable": "tumor_depth_cm", "value": "superficial" },
+        { "variable": "session_count", "value": "repeated" }
+      ],
+      "then": [
+        { "variable": "local_control_likelihood", "value": "high" }
+      ],
+      "confidence": 0.9,
+      "evidence_ids": ["E09", "E11", "E12"]
+    },
+    {
+      "id": "M9",
+      "title": "high_temperature_tradeoff",
+      "derived_from": ["FR08"],
+      "status": "added_from_literature",
+      "logic_type": "fuzzy",
+      "if": [
+        { "variable": "temperature_c", "value": "cytotoxic_high", "numeric_hint": [43.0, 45.0] },
+        { "variable": "duration_min", "value": "long" }
+      ],
+      "then": [
+        { "variable": "direct_cytotoxicity", "value": "high" },
+        { "variable": "toxicity_risk", "value": "high" },
+        { "variable": "oxygenation_gain", "value": "low" }
+      ],
+      "confidence": 0.79,
+      "evidence_ids": ["E01", "E05", "E11"]
+    }
+  ],
+  "user_rule_alignment": {
+    "fully_aligned": ["R3", "R4", "R13"],
+    "partially_aligned_refined": ["R1", "R2", "R7", "R8", "R9", "R10", "R11", "R12"],
+    "strongly_reworked": ["R5", "R6"]
+  },
+  "integration_policy": {
+    "preferred_runtime_layer": "merged_rules",
+    "reasoning_priority": [
+      "fuzzy_if_then",
+      "weighted_symbolic_rules",
+      "original_user_heuristics"
+    ],
+    "conflict_handling": "Preserve user heuristics as source knowledge, but prefer merged or literature-grounded rule when the user rule is too broad."
+  }
+}

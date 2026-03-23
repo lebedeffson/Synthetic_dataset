@@ -1,0 +1,365 @@
+{
+  "meta": {
+    "name": "thermoradiobiology_temperature_radiation",
+    "version": "2026-03-23",
+    "logic_priority": "fuzzy_if_then",
+    "description": "Machine-readable expert knowledge base for combined hyperthermia and radiotherapy effects on cancer cells and tumors."
+  },
+  "inputs": [
+    { "name": "temperature_c", "type": "continuous", "range": [35.0, 45.0] },
+    { "name": "duration_min", "type": "continuous", "range": [0.0, 120.0] },
+    { "name": "interval_min", "type": "continuous", "range": [0.0, 240.0] },
+    { "name": "radiation_dose_gy", "type": "continuous", "range": [0.0, 10.0] },
+    { "name": "tumor_hypoxia", "type": "continuous", "range": [0.0, 1.0] },
+    { "name": "thermal_dose_cem43t90", "type": "continuous", "range": [0.0, 120.0] },
+    { "name": "tumor_depth_cm", "type": "continuous", "range": [0.0, 6.0] },
+    { "name": "session_count", "type": "continuous", "range": [0.0, 10.0] },
+    { "name": "prior_irradiation", "type": "categorical", "values": ["no", "yes"] },
+    { "name": "sequence", "type": "categorical", "values": ["ht_before_rt", "rt_before_ht"] },
+    { "name": "tumor_type", "type": "categorical", "values": ["generic_solid", "cervical", "superficial", "hepatocellular", "head_neck", "glioblastoma"] }
+  ],
+  "outputs": [
+    { "name": "oxygenation_gain", "labels": ["low", "medium", "high"] },
+    { "name": "dna_repair_inhibition", "labels": ["low", "medium", "high"] },
+    { "name": "apoptosis_signal", "labels": ["low", "medium", "high"] },
+    { "name": "radiosensitization", "labels": ["low", "medium", "high"] },
+    { "name": "local_control_likelihood", "labels": ["low", "medium", "high"] },
+    { "name": "direct_cytotoxicity", "labels": ["low", "medium", "high"] },
+    { "name": "toxicity_risk", "labels": ["low", "medium", "high"] },
+    { "name": "sequence_importance", "labels": ["low", "medium", "high"] },
+    { "name": "angiogenesis_marker_drop", "labels": ["low", "medium", "high"] }
+  ],
+  "symbolic_aliases": {
+    "medium_or_high": {
+      "variable": "radiation_dose_gy",
+      "any_of": ["medium", "high"]
+    },
+    "very_short": {
+      "variable": "interval_min",
+      "any_of": ["immediate"]
+    },
+    "either": {
+      "variable": "sequence",
+      "any_of": ["ht_before_rt", "rt_before_ht"]
+    },
+    "mild_around_40": {
+      "variable": "temperature_c",
+      "numeric_hint": [39.5, 40.5]
+    },
+    "gy4": {
+      "variable": "radiation_dose_gy",
+      "numeric_hint": [3.5, 4.5]
+    },
+    "clinically_sensitizing": {
+      "variable": "temperature_c",
+      "numeric_hint": [41.5, 42.5]
+    },
+    "short_or_within_120min": {
+      "variable": "interval_min",
+      "numeric_hint": [0.0, 120.0]
+    }
+  },
+  "evidence": [
+    {
+      "id": "E01",
+      "year": 1982,
+      "pmid": "7146320",
+      "type": "animal_experiment",
+      "title": "Oxygenation of malignant tumors after localized microwave hyperthermia",
+      "summary": "Around 40 C oxygenation improved; at higher temperatures oxygenation decreased because of vascular restriction.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7146320/"
+    },
+    {
+      "id": "E02",
+      "year": 2001,
+      "pmid": "11260653",
+      "type": "review",
+      "title": "Improvement of tumor oxygenation by mild hyperthermia",
+      "summary": "Mild hyperthermia can improve tumor oxygenation during and up to 1-2 days after heating and enhance radiation response.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11260653/"
+    },
+    {
+      "id": "E03",
+      "year": 2015,
+      "pmid": "26245485",
+      "type": "mechanistic_review",
+      "title": "Effects of hyperthermia on DNA repair pathways: one treatment to inhibit them all",
+      "summary": "Hyperthermia perturbs multiple repair pathways and proteins, supporting multi-pathway radiosensitization.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4554295/"
+    },
+    {
+      "id": "E04",
+      "year": 2011,
+      "pmid": "21555554",
+      "type": "in_vitro_mechanistic",
+      "title": "Mild hyperthermia inhibits homologous recombination, induces BRCA2 degradation, and sensitizes cancer cells to poly (ADP-ribose) polymerase-1 inhibition",
+      "summary": "Mild hyperthermia suppresses homologous recombination and degrades BRCA2.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21555554/"
+    },
+    {
+      "id": "E05",
+      "year": 2017,
+      "pmid": "28574821",
+      "type": "in_vitro_mechanistic",
+      "title": "The effect of thermal dose on hyperthermia-mediated inhibition of DNA repair through homologous recombination",
+      "summary": "Thermal dose matters; 41-43 C for about 30-60 min is a key sensitizing window.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28574821/"
+    },
+    {
+      "id": "E06",
+      "year": 2020,
+      "pmid": "32138173",
+      "type": "in_vitro",
+      "title": "Radiosensitization by Hyperthermia: The Effects of Temperature, Sequence, and Time Interval in Cervical Cell Lines",
+      "summary": "Short intervals increased residual DNA damage, apoptosis, and cell kill; sequence had similar effects on survival.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32138173/"
+    },
+    {
+      "id": "E07",
+      "year": 2024,
+      "pmid": "37820768",
+      "type": "translational_multimodel",
+      "title": "Radiosensitization by Hyperthermia Critically Depends on the Time Interval",
+      "summary": "Interval critically influenced radiosensitization across preclinical and translational settings.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37820768/"
+    },
+    {
+      "id": "E08",
+      "year": 2019,
+      "pmid": "30906734",
+      "type": "retrospective_clinical",
+      "title": "The Effect of the Time Interval Between Radiation and Hyperthermia on Clinical Outcome in 400 Locally Advanced Cervical Carcinoma Patients",
+      "summary": "Interval alone was not dominant once thermal dose and treatment quality were considered.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30906734/"
+    },
+    {
+      "id": "E09",
+      "year": 2005,
+      "pmid": "15860867",
+      "type": "randomized_trial",
+      "title": "Randomized trial of hyperthermia and radiation for superficial tumors",
+      "summary": "Adequate thermal dose improved complete response; superficial lesions were favored when heating quality was sufficient.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15860867/"
+    },
+    {
+      "id": "E10",
+      "year": 2019,
+      "pmid": "31450899",
+      "type": "in_vitro_pilot",
+      "title": "Combined Hyperthermia and Radiation Therapy for Treatment of Hepatocellular Carcinoma",
+      "summary": "In HepG2 cells the strongest pattern was 40 C plus 4 Gy plus 48 h with high apoptosis and reduced angiogenic markers.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31450899/"
+    },
+    {
+      "id": "E11",
+      "year": 2022,
+      "pmid": "35158893",
+      "type": "clinical_review",
+      "title": "Clinical Evidence for Thermometric Parameters to Guide Hyperthermia Treatment",
+      "summary": "Thermometric parameters and thermal dose are major reproducible predictors.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35158893/"
+    },
+    {
+      "id": "E12",
+      "year": 2016,
+      "pmid": "27411568",
+      "type": "systematic_review",
+      "title": "Hyperthermia and radiotherapy with or without chemotherapy in locally advanced cervical cancer: a systematic review with conventional and network meta-analyses",
+      "summary": "HTRT improved complete response and loco-regional control compared with RT.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27411568/"
+    },
+    {
+      "id": "E13",
+      "year": 2025,
+      "pmid": "39920700",
+      "type": "phase_ii_trial",
+      "title": "Phase II clinical trial assessing the addition of hyperthermia to salvage concurrent chemoradiotherapy for unresectable recurrent head and neck cancer in previously irradiated patients",
+      "summary": "Repeated HT within 2 h after RT gave high response with manageable toxicity.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39920700/"
+    }
+  ],
+  "rules": [
+    {
+      "id": "FR01",
+      "family": "oxygenation",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "temperature_c", "set": "mild" },
+        { "var": "duration_min", "set": "medium" },
+        { "var": "tumor_hypoxia", "set": "high" }
+      ],
+      "then": [
+        { "var": "oxygenation_gain", "set": "high" },
+        { "var": "radiosensitization", "set": "medium" }
+      ],
+      "confidence": 0.84,
+      "evidence_ids": ["E01", "E02", "E11"],
+      "note": "Mild HT mainly contributes through reoxygenation and perfusion support."
+    },
+    {
+      "id": "FR02",
+      "family": "dna_repair",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "temperature_c", "set": "sensitizing" },
+        { "var": "duration_min", "set": "medium" }
+      ],
+      "then": [
+        { "var": "dna_repair_inhibition", "set": "high" },
+        { "var": "radiosensitization", "set": "high" }
+      ],
+      "confidence": 0.88,
+      "evidence_ids": ["E03", "E04", "E05"],
+      "note": "This rule captures the HR inhibition window centered around 41-43 C."
+    },
+    {
+      "id": "FR03",
+      "family": "interval",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "interval_min", "set": "immediate" },
+        { "var": "temperature_c", "set": "sensitizing" },
+        { "var": "radiation_dose_gy", "set": "medium_or_high" }
+      ],
+      "then": [
+        { "var": "apoptosis_signal", "set": "high" },
+        { "var": "radiosensitization", "set": "high" }
+      ],
+      "confidence": 0.86,
+      "evidence_ids": ["E06", "E07"],
+      "note": "Short HT-RT intervals usually increase residual DNA damage and cell kill."
+    },
+    {
+      "id": "FR04",
+      "family": "interval_conflict",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "interval_min", "set": "long" },
+        { "var": "thermal_dose_cem43t90", "set": "low" }
+      ],
+      "then": [
+        { "var": "radiosensitization", "set": "low" },
+        { "var": "local_control_likelihood", "set": "low" }
+      ],
+      "confidence": 0.73,
+      "evidence_ids": ["E06", "E07", "E08"],
+      "exception": "If thermal dose is adequate or high, interval alone may become a weaker predictor."
+    },
+    {
+      "id": "FR05",
+      "family": "sequence",
+      "logic_type": "crisp_weighted",
+      "if": [
+        { "var": "sequence", "set": "either" },
+        { "var": "interval_min", "set": "short" }
+      ],
+      "then": [
+        { "var": "sequence_importance", "set": "low" }
+      ],
+      "confidence": 0.72,
+      "evidence_ids": ["E06"],
+      "note": "Sequence is usually less important than interval in cervical cell lines."
+    },
+    {
+      "id": "FR06",
+      "family": "thermal_dose",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "thermal_dose_cem43t90", "set": "high" },
+        { "var": "tumor_depth_cm", "set": "superficial" },
+        { "var": "session_count", "set": "repeated" }
+      ],
+      "then": [
+        { "var": "local_control_likelihood", "set": "high" },
+        { "var": "radiosensitization", "set": "high" }
+      ],
+      "confidence": 0.90,
+      "evidence_ids": ["E09", "E11", "E12"],
+      "note": "High-quality heating and repeated sessions raise response probability."
+    },
+    {
+      "id": "FR07",
+      "family": "depth",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "tumor_depth_cm", "set": "deep" },
+        { "var": "thermal_dose_cem43t90", "set": "low" }
+      ],
+      "then": [
+        { "var": "local_control_likelihood", "set": "low" }
+      ],
+      "confidence": 0.83,
+      "evidence_ids": ["E09", "E11"],
+      "note": "Depth acts through heating difficulty and reduced achievable thermal dose."
+    },
+    {
+      "id": "FR08",
+      "family": "high_temperature_risk",
+      "logic_type": "fuzzy",
+      "if": [
+        { "var": "temperature_c", "set": "cytotoxic_high" },
+        { "var": "duration_min", "set": "long" }
+      ],
+      "then": [
+        { "var": "direct_cytotoxicity", "set": "high" },
+        { "var": "toxicity_risk", "set": "high" },
+        { "var": "oxygenation_gain", "set": "low" }
+      ],
+      "confidence": 0.79,
+      "evidence_ids": ["E01", "E05", "E11"],
+      "note": "Above 43 C, direct kill rises but vascular support may worsen."
+    },
+    {
+      "id": "FR09",
+      "family": "tumor_specific",
+      "logic_type": "crisp_weighted",
+      "context": "hepatocellular",
+      "if": [
+        { "var": "tumor_type", "set": "hepatocellular" },
+        { "var": "temperature_c", "set": "mild_around_40" },
+        { "var": "radiation_dose_gy", "set": "gy4" }
+      ],
+      "then": [
+        { "var": "apoptosis_signal", "set": "high" }
+      ],
+      "confidence": 0.68,
+      "evidence_ids": ["E10"],
+      "exception": "This is a local pilot-study rule and should not be treated as universal."
+    },
+    {
+      "id": "FR10",
+      "family": "clinical_schedule",
+      "logic_type": "crisp_weighted",
+      "if": [
+        { "var": "session_count", "set": "repeated" },
+        { "var": "temperature_c", "set": "clinically_sensitizing" },
+        { "var": "interval_min", "set": "short_or_within_120min" }
+      ],
+      "then": [
+        { "var": "local_control_likelihood", "set": "high" },
+        { "var": "toxicity_risk", "set": "medium" }
+      ],
+      "confidence": 0.82,
+      "evidence_ids": ["E12", "E13"],
+      "note": "Repeated combined schedules can provide benefit with manageable toxicity."
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "interval_min",
+      "statement_a": "Shorter HT-RT intervals increase radiosensitization.",
+      "evidence_a": ["E06", "E07"],
+      "statement_b": "Within routine cervical practice, interval alone was not independently dominant when thermal dose was considered.",
+      "evidence_b": ["E08"],
+      "resolution": "Model interval as a weighted context-dependent rule and prioritize thermal dose quality during inference."
+    },
+    {
+      "topic": "temperature_c",
+      "statement_a": "Mild HT supports oxygenation and can improve radiation response.",
+      "evidence_a": ["E01", "E02"],
+      "statement_b": "Higher temperatures increase direct cytotoxicity but may worsen perfusion and toxicity.",
+      "evidence_b": ["E01", "E05", "E11"],
+      "resolution": "Use separate fuzzy regions for mild/sensitizing and cytotoxic-high temperature windows."
+    }
+  ]
+}

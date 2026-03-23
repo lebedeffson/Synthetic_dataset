@@ -1,0 +1,54 @@
+{
+  "generator": "rule_guided_conditional_vae",
+  "seed": 42,
+  "epochs": 250,
+  "n_boot_per_row": 80,
+  "n_synthetic_requested": 1000,
+  "n_synthetic_saved": 1000,
+  "assumed_interval_min": 0.0,
+  "assumed_hypoxia": 0.7,
+  "rules_file": "knowledge_base/merged_rules.json",
+  "used_merged_rules": [
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "M8",
+    "M9"
+  ],
+  "evaluation_outputs": [
+    "C:\\Users\\AIRC2\\Desktop\\База знаний Таня\\synthetic_data\\evaluation_distribution_metrics.csv",
+    "C:\\Users\\AIRC2\\Desktop\\База знаний Таня\\synthetic_data\\evaluation_summary_statistics.csv",
+    "C:\\Users\\AIRC2\\Desktop\\База знаний Таня\\synthetic_data\\evaluation_metrics.json"
+  ],
+  "columns_minimal": [
+    "Радиация",
+    "Температура",
+    "Время",
+    "Выживаемость"
+  ],
+  "columns_full": [
+    "Радиация",
+    "Температура",
+    "Время",
+    "Выживаемость",
+    "source",
+    "Интервал_мин",
+    "Гипоксия_предположенная",
+    "CEM43",
+    "Подавление_репарации",
+    "Оксигенация_выигрыш",
+    "Синергия",
+    "Радиосенсибилизация",
+    "Прямая_цитотоксичность",
+    "Риск_высокой_температуры",
+    "Оценка_правил",
+    "log_survival",
+    "Неопределенность_CVAE",
+    "Источник",
+    "RuleConsistency"
+  ]
+}
