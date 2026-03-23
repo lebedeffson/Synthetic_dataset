@@ -1,60 +1,96 @@
-# Thermoradiobiology Expert KB
+# Thermoradiobiology Synthetic Data Project
 
-This workspace contains a literature-grounded expert knowledge base about the combined effect of temperature and ionizing radiation on cancer cells and tumors.
+This repository contains a literature-grounded expert knowledge base and a cleaned final pipeline for generating a **cell-level synthetic survival dataset** for the 15-point experiment on combined radiation and hyperthermia.
 
-## Files
+## Active Project Core
 
-- `literature/literature_slice.md` - curated literature slice with extracted patterns
-- `literature/literature_evidence.csv` - tabular evidence sheet for downstream analysis
-- `knowledge_base/domain_ontology.yaml` - domain ontology, variables, and fuzzy partitions
-- `knowledge_base/fuzzy_rules.fcl` - fuzzy `IF-THEN` rule base in FCL style
-- `knowledge_base/rules_prolog.pl` - alternative crisp logical representation in Prolog-like facts
-- `knowledge_base/expert_kb.json` - unified machine-readable expert KB
-- `knowledge_base/merged_rules_ru.md` - human-readable merged rules in Russian
-- `knowledge_base/merged_rules.yaml` - merged rule base in YAML
-- `knowledge_base/merged_rules.json` - merged rule base in JSON
-- `scripts/generate_rule_guided_cvae.py` - Python generator for a rule-guided Conditional VAE synthetic dataset
-- `notebooks/rule_guided_cvae_workflow.ipynb` - standalone Jupyter notebook with the full CVAE workflow code inside
-- `synthetic_data/cvae_synthetic_dataset.csv` - final generated synthetic dataset with 4 columns only
-- `synthetic_data/cvae_synthetic_dataset_full.csv` - extended synthetic dataset with rule features and diagnostics
-- `synthetic_data/rule_guided_training_frame.csv` - augmented training frame used for CVAE fitting
-- `synthetic_data/cvae_run_metadata.json` - generator run metadata
-- `synthetic_data/evaluation_distribution_metrics.csv` - per-column distribution metrics
-- `synthetic_data/evaluation_summary_statistics.csv` - descriptive statistics comparison
-- `synthetic_data/evaluation_metrics.json` - global quality metrics for the synthetic dataset
-- `ml/train_rules.jsonl` - structured examples for ML/AI training
+The files below are the active, recommended workflow:
 
-## Core Modeling Assumptions
+- `knowledge_base/cell_level_rules.json` - machine-readable cell-level rules used by the final generator and validation layer
+- `knowledge_base/cell_level_rules_ru.md` - human-readable Russian description of the active cell-level rules
+- `knowledge_base/cell_level_rule_traceability.csv` - traceability matrix `rule -> evidence -> generator -> validation`
+- `knowledge_base/cell_level_rule_traceability.md` - readable traceability report
+- `scripts/common_synthetic_metrics.py` - shared statistical quality metrics for synthetic tabular data
+- `scripts/generate_cell_level_article_guided_dataset.py` - design-preserving monotone generator for the 15 observed design points
+- `scripts/build_cell_level_final_pipeline.py` - end-to-end production pipeline for the final dataset and explainability artifacts
+- `scripts/analyze_cell_level_final_dataset.py` - uncertainty, bootstrap, and multi-seed robustness analysis for the final dataset
+- `scripts/validate_cell_level_datasets.py` - independent audit using only observable columns and exact design support
+- `synthetic_data_cell_level_final/final_synthetic_dataset.csv` - primary final synthetic dataset
+- `synthetic_data_cell_level_final/final_dataset_report.md` - report for the active final dataset
+- `synthetic_data_cell_level_final/final_analysis_report.md` - final interpretation and robustness report
+- `synthetic_data_cell_level_final/design_point_rule_explanations.csv` - explanation per observed design point
+- `synthetic_data_cell_level_final/design_point_rule_explanations.md` - readable design-point explanation report
+- `comparison/cell_level_end_to_end_audit.md` - benchmark comparison focused on exact design support and independent rule compliance
+- `comparison/implementation_review.md` - review of the whole implementation and why the final pipeline was selected
 
-- The main focus is locoregional hyperthermia combined with radiotherapy.
-- The best-supported sensitizing window is roughly `39-43 C`, with many mechanistic data concentrated around `41-43 C`.
-- Temperatures above `43 C` are modeled as a transition zone toward stronger direct cytotoxicity and higher normal-tissue risk.
-- Conflicting interval findings are preserved through weighted rules rather than collapsed into a single hard statement.
+## Repository Layout
 
-## Suggested Usage
+- `literature/` - literature slice and evidence table extracted from source papers
+- `knowledge_base/` - expert rules, merged knowledge base, ontology, and traceability artifacts
+- `scripts/` - active generation, validation, and metric code
+- `synthetic_data_cell_level_final/` - active final outputs
+- `comparison/` - active audit/review documents
+- `benchmarks/` - minimal archive note; raw old benchmark outputs were removed during cleanup
+- `ml/` - auxiliary training examples for ML/AI
 
-- Expert system: load `knowledge_base/domain_ontology.yaml` and `knowledge_base/fuzzy_rules.fcl`.
-- Logic engine: load `knowledge_base/rules_prolog.pl` or parse `knowledge_base/expert_kb.json`.
-- Retrieval / RAG: index `literature/literature_slice.md` and `knowledge_base/expert_kb.json`.
-- ML/AI: use `literature/literature_evidence.csv` as an evidence table and `ml/train_rules.jsonl` as supervised examples.
+## Recommended Workflow
 
-## Synthetic Dataset Generation
-
-Run:
+Build the final dataset:
 
 ```bash
-python scripts/generate_rule_guided_cvae.py --epochs 250 --n-boot-per-row 80 --n-synthetic 1000 --device cpu
+python scripts/build_cell_level_final_pipeline.py
 ```
 
-What the script does:
+Re-run the independent audit:
 
-- computes derived thermoradiobiology features such as `CEM43`
-- operationalizes merged rules as fuzzy guidance signals
-- builds a rule-guided bootstrap training frame from the small raw dataset
-- trains a Conditional VAE on log-transformed survival
-- generates a synthetic dataset and filters it by rule consistency
-- computes quality metrics for synthetic tabular data, including distribution similarity, correlation preservation, separability, utility, and coverage
+```bash
+python scripts/validate_cell_level_datasets.py
+```
+
+Run the uncertainty and robustness analysis:
+
+```bash
+python scripts/analyze_cell_level_final_dataset.py
+```
+
+## Why This Pipeline Is The Default
+
+The final pipeline was chosen because it is the most defensible for the very small `n=15` dataset:
+
+- it preserves the **exact experimental support** instead of inventing unsupported treatment conditions;
+- it uses only **cell-level rules** that are appropriate for the observed survival matrix;
+- it enforces monotone structure across radiation and thermal intensity;
+- it calibrates synthetic survival back to the observed design-point matrix after projection;
+- it produces explicit explainability artifacts that connect each rule to the source literature and to the final dataset.
+
+## Current Final Dataset Snapshot
+
+The active final dataset in `synthetic_data_cell_level_final/` currently achieves:
+
+- `mean_wasserstein_normalized = 0.0050`
+- `mean_ks_statistic = 0.0203`
+- `tstr_mae = 0.0023`
+- `tstr_r2 = 0.9991`
+- `support_violation_rate_mean = 0.0000`
+- `exact_design_support_rate = 1.0000`
+- `local_mean_abs_error = 0.0023`
+- `radiation_monotonicity_mean_rate = 1.0000`
+- `thermal_monotonicity_mean_rate = 1.0000`
+
+## Rule Philosophy
+
+The project now separates three layers clearly:
+
+- `cell-level rules` - active in the final generator
+- `tumor / in vivo rules` - kept in the broader knowledge base, but not used in the default cell-level generator
+- `clinical rules` - preserved for the expert knowledge base, but excluded from synthetic generation for the 15-point cell dataset
+
+This avoids mixing patient-level logic with a simple in vitro survival matrix.
+
+## Historical Benchmarks
+
+Older CVAE and continuous-generator code is still available in `scripts/legacy/`, but raw historical outputs were removed during cleanup because they no longer improve the active project workflow.
 
 ## Caution
 
-This is a research knowledge base, not a validated clinical treatment protocol. Human expert review is required before any biomedical or clinical use.
+This is a research repository, not a validated clinical treatment protocol. Human expert review is still required before biomedical interpretation or downstream publication claims.

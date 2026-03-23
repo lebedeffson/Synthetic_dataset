@@ -67,7 +67,7 @@ class GenerationConfig:
     assumed_hypoxia: float = 0.70
     run_evaluation: bool = True
     discriminator_rounds: int = 10
-    outdir: str = "synthetic_data"
+    outdir: str = "benchmarks/results/synthetic_data"
     device: str = "auto"
 
 
@@ -547,9 +547,15 @@ def compute_separability_metrics(real_df: pd.DataFrame, synthetic_df: pd.DataFra
         probas = cross_val_predict(clf, X, y, cv=cv, method="predict_proba")[:, 1]
         aucs.append(float(roc_auc_score(y, probas)))
 
+    auc_mean = float(np.mean(aucs))
+    auc_std = float(np.std(aucs))
+    gini_values = [2.0 * auc - 1.0 for auc in aucs]
     return {
-        "separability_auc_mean": float(np.mean(aucs)),
-        "separability_auc_std": float(np.std(aucs)),
+        "separability_auc_mean": auc_mean,
+        "separability_auc_std": auc_std,
+        "separability_auc_distance_from_0_5": float(abs(auc_mean - 0.5)),
+        "separability_gini_mean": float(np.mean(gini_values)),
+        "separability_gini_abs_mean": float(np.mean(np.abs(gini_values))),
     }
 
 
@@ -721,7 +727,7 @@ def parse_args() -> GenerationConfig:
     parser.add_argument("--assumed-hypoxia", type=float, default=0.70)
     parser.add_argument("--discriminator-rounds", type=int, default=10)
     parser.add_argument("--skip-evaluation", action="store_true")
-    parser.add_argument("--outdir", type=str, default="synthetic_data")
+    parser.add_argument("--outdir", type=str, default="benchmarks/results/synthetic_data")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"])
     args = parser.parse_args()
     return GenerationConfig(

@@ -35,7 +35,7 @@ class NotebookCVAEConfig:
     temp_max: float = 45.0
     time_min: float = 20.0
     time_max: float = 60.0
-    outdir: str = "synthetic_data_notebook_cvae"
+    outdir: str = "benchmarks/results/synthetic_data_notebook_cvae"
 
 
 class NotebookCVAE(nn.Module):

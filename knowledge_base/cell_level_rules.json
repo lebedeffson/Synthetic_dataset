@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "name": "cell_level_survival_rules",
+    "version": "2026-03-23",
+    "description": "Cell-level rules for synthetic generation and validation of survival data under combined radiation and hyperthermia."
+  },
+  "scope": {
+    "included": [
+      "in vitro or cell-level survival behavior",
+      "radiation dose dependence",
+      "thermal dose ordering in the observed experimental domain",
+      "DNA repair inhibition and radiosensitization windows"
+    ],
+    "excluded": [
+      "tumor oxygenation and perfusion in vivo",
+      "clinical interval effects on patient outcome",
+      "tumor depth and repeated-session local control",
+      "patient-level toxicity rules"
+    ]
+  },
+  "rules": [
+    {
+      "id": "CL1",
+      "name": "radiation_monotonicity",
+      "type": "hard_process_rule",
+      "support_basis": ["observed_design", "literature_compatible"],
+      "if": [
+        { "variable": "thermal_condition", "relation": "fixed" },
+        { "variable": "radiation_dose_gy", "relation": "increases" }
+      ],
+      "then": [
+        { "variable": "survival_fraction", "relation": "non_increasing" }
+      ],
+      "evidence_ids": ["E03", "E05", "E06"]
+    },
+    {
+      "id": "CL2",
+      "name": "sensitizing_window",
+      "type": "soft_mechanistic_rule",
+      "support_basis": ["literature_anchor"],
+      "if": [
+        { "variable": "temperature_c", "relation": "between", "value": [41.0, 43.0] },
+        { "variable": "duration_min", "relation": "between", "value": [30.0, 60.0] }
+      ],
+      "then": [
+        { "variable": "dna_repair_inhibition", "relation": "high" },
+        { "variable": "radiosensitization", "relation": "high" }
+      ],
+      "evidence_ids": ["E03", "E04", "E05"]
+    },
+    {
+      "id": "CL3",
+      "name": "thermal_ordering_in_observed_domain",
+      "type": "hard_article_guided_rule",
+      "support_basis": ["observed_design", "literature_compatible"],
+      "if": [
+        { "variable": "radiation_dose_gy", "relation": "fixed" }
+      ],
+      "then": [
+        {
+          "variable": "survival_order",
+          "relation": "non_increasing",
+          "value": [
+            "42C_45min",
+            "43C_45min",
+            "44C_30min"
+          ]
+        }
+      ],
+      "evidence_ids": ["E03", "E05"]
+    },
+    {
+      "id": "CL4",
+      "name": "high_temperature_direct_cytotoxicity",
+      "type": "soft_to_hard_rule_in_domain",
+      "support_basis": ["literature_anchor", "observed_design"],
+      "if": [
+        { "variable": "temperature_c", "relation": "greater_equal", "value": 43.0 }
+      ],
+      "then": [
+        { "variable": "direct_heat_kill", "relation": "increases" }
+      ],
+      "evidence_ids": ["E01", "E05", "E14"]
+    },
+    {
+      "id": "CL5",
+      "name": "high_combined_dose_low_survival",
+      "type": "hard_plausibility_rule",
+      "support_basis": ["observed_design", "literature_compatible"],
+      "if": [
+        { "variable": "radiation_dose_gy", "relation": "greater_equal", "value": 6.0 },
+        { "variable": "cem43", "relation": "greater_equal", "value": 45.0 }
+      ],
+      "then": [
+        { "variable": "survival_fraction", "relation": "very_low" }
+      ],
+      "evidence_ids": ["E05", "E06"]
+    }
+  ]
+}

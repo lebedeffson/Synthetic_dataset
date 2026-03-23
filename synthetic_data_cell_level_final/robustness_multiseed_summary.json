@@ -1,0 +1,236 @@
+{
+  "seeds": [
+    7,
+    11,
+    17,
+    23,
+    42,
+    84,
+    126,
+    256
+  ],
+  "n_runs": 8,
+  "worst_design_point_by_max_error": {
+    "Радиация": 0.0,
+    "Температура": 42.0,
+    "Время": 45.0,
+    "synthetic_mean_mean": 0.5186446917891195,
+    "synthetic_mean_std": 0.001732555583204338,
+    "synthetic_mean_min": 0.5168012044361011,
+    "synthetic_mean_max": 0.5212030154765732,
+    "abs_mean_error_mean": 0.01135530821088053,
+    "abs_mean_error_max": 0.013198795563898913
+  },
+  "metric_summary": [
+    {
+      "metric": "mean_wasserstein_normalized",
+      "mean": 0.004660701763432513,
+      "std": 0.00036838008764640567,
+      "min": 0.004221470641799145,
+      "max": 0.005307197593139668
+    },
+    {
+      "metric": "mean_ks_statistic",
+      "mean": 0.02,
+      "std": 0.0008030200930495263,
+      "min": 0.01875,
+      "max": 0.021083333333333332
+    },
+    {
+      "metric": "pearson_correlation_frobenius",
+      "mean": 0.0072921038529899585,
+      "std": 0.0020876993984889924,
+      "min": 0.004321617973796696,
+      "max": 0.010616693138428203
+    },
+    {
+      "metric": "pearson_correlation_mean_abs_diff",
+      "mean": 0.0012574812450766464,
+      "std": 0.0004682999641455876,
+      "min": 0.0006108134860447621,
+      "max": 0.001990881576959196
+    },
+    {
+      "metric": "spearman_correlation_frobenius",
+      "mean": 0.05737024167450419,
+      "std": 0.0027614075305651764,
+      "min": 0.05426462778297369,
+      "max": 0.06205952433563508
+    },
+    {
+      "metric": "spearman_correlation_mean_abs_diff",
+      "mean": 0.00908163425492014,
+      "std": 0.0006195768906834046,
+      "min": 0.008200657245707607,
+      "max": 0.009957803563217219
+    },
+    {
+      "metric": "separability_auc_mean",
+      "mean": 0.3674166666666666,
+      "std": 0.035525371612675556,
+      "min": 0.3075555555555555,
+      "max": 0.4235555555555555
+    },
+    {
+      "metric": "separability_auc_std",
+      "mean": 0.10924238300128067,
+      "std": 0.025288666345527278,
+      "min": 0.0560815103440442,
+      "max": 0.13415469235729877
+    },
+    {
+      "metric": "separability_auc_distance_from_0_5",
+      "mean": 0.13258333333333333,
+      "std": 0.03552537161267556,
+      "min": 0.07644444444444448,
+      "max": 0.19244444444444447
+    },
+    {
+      "metric": "separability_gini_mean",
+      "mean": -0.26516666666666666,
+      "std": 0.07105074322535114,
+      "min": -0.3848888888888889,
+      "max": -0.15288888888888888
+    },
+    {
+      "metric": "separability_gini_abs_mean",
+      "mean": 0.2965,
+      "std": 0.058468369778455986,
+      "min": 0.20177777777777778,
+      "max": 0.3848888888888889
+    },
+    {
+      "metric": "tstr_mae",
+      "mean": 0.002132016884732758,
+      "std": 0.00011861985811554791,
+      "min": 0.0019989263115573258,
+      "max": 0.0023371986029787346
+    },
+    {
+      "metric": "tstr_rmse",
+      "mean": 0.004192197554062088,
+      "std": 0.0003283450909020277,
+      "min": 0.003735826177679417,
+      "max": 0.004531229434229599
+    },
+    {
+      "metric": "tstr_r2",
+      "mean": 0.9991806766799968,
+      "std": 0.0001270618165160977,
+      "min": 0.99904790775692,
+      "max": 0.9993528272191299
+    },
+    {
+      "metric": "trtr_mae_leave_one_out",
+      "mean": 0.09596009184827442,
+      "std": 0.0014581952023785222,
+      "min": 0.09355600693386243,
+      "max": 0.09787888468795096
+    },
+    {
+      "metric": "trtr_rmse_leave_one_out",
+      "mean": 0.13182034317742344,
+      "std": 0.0015067591714939777,
+      "min": 0.12988508669672574,
+      "max": 0.13391478732610232
+    },
+    {
+      "metric": "trtr_r2_leave_one_out",
+      "mean": 0.19413657767845663,
+      "std": 0.018438346987293477,
+      "min": 0.1684200815705642,
+      "max": 0.2177141073919071
+    },
+    {
+      "metric": "tstr_to_trtr_mae_ratio",
+      "mean": 0.02221357843603974,
+      "std": 0.0010845228726772088,
+      "min": 0.020630262186331353,
+      "max": 0.023878476041385127
+    },
+    {
+      "metric": "real_to_synth_mean_nn_distance",
+      "mean": 0.0015985070366332562,
+      "std": 0.0009432398631237278,
+      "min": 0.0005884069028910773,
+      "max": 0.0028378364465782052
+    },
+    {
+      "metric": "synth_to_real_mean_nn_distance",
+      "mean": 0.07199664366889616,
+      "std": 0.003692414796004786,
+      "min": 0.06780052212827588,
+      "max": 0.07753771131218667
+    },
+    {
+      "metric": "duplicate_rate_vs_real",
+      "mean": 0.123,
+      "std": 0.0029760952365713825,
+      "min": 0.119,
+      "max": 0.129
+    },
+    {
+      "metric": "support_violation_rate_mean",
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    {
+      "metric": "support_violation_rate_max",
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    {
+      "metric": "exact_design_support_rate",
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    {
+      "metric": "local_mean_abs_error",
+      "mean": 0.0021390083076379823,
+      "std": 0.00012644950882605027,
+      "min": 0.0019858631416211094,
+      "max": 0.002363799951895569
+    },
+    {
+      "metric": "local_max_abs_error",
+      "mean": 0.011394304373814813,
+      "std": 0.0016750531958098843,
+      "min": 0.00901834586440392,
+      "max": 0.013198795563898913
+    },
+    {
+      "metric": "radiation_monotonicity_mean_rate",
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    {
+      "metric": "thermal_monotonicity_mean_rate",
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    {
+      "metric": "high_combined_dose_low_survival_rate",
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    {
+      "metric": "independent_article_compliance_mean",
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "generator": "cell_level_article_guided_design_preserving",
+  "seed": 42,
+  "n_synthetic_requested": 1000,
+  "n_synthetic_saved": 1000,
+  "design_support": [
+    {
+      "radiation": 0.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 0.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 0.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 2.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 2.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 2.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 4.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 4.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 4.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 6.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 6.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 6.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 8.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 8.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 8.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    }
+  ],
+  "sigma_matrix_log10": [
+    [
+      0.10825558474239921,
+      0.12,
+      0.12
+    ],
+    [
+      0.10825558474239921,
+      0.12,
+      0.12
+    ],
+    [
+      0.12,
+      0.12,
+      0.12
+    ],
+    [
+      0.09212874484984447,
+      0.09212874484984447,
+      0.12
+    ],
+    [
+      0.12,
+      0.12,
+      0.12
+    ]
+  ],
+  "calibration_iterations": 4,
+  "rules_file": "knowledge_base/cell_level_rules.json"
+}
