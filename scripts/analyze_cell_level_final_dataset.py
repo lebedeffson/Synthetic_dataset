@@ -103,6 +103,19 @@ def evaluate_single_seed(seed: int) -> tuple[Dict, pd.DataFrame]:
         [COL_RADIATION, COL_TEMPERATURE, COL_TIME, "synthetic_mean", "abs_mean_error"]
     ].copy()
     design_df["seed"] = seed
+
+    # Extract explainability info
+    meta_path = OUTDIR / "generation_metadata.json"
+    if meta_path.exists():
+        with meta_path.open("r", encoding="utf-8") as fh:
+            metadata = json.load(fh)
+            x_summary = metadata.get("explainability_summary", {})
+            metrics.update({
+                "x_pass_rate": x_summary.get("pass_rate", 1.0),
+                "x_mean_pressure": x_summary.get("mean_constraint_pressure", 0.0),
+                "x_mean_delta_proj": x_summary.get("mean_delta_projection", 0.0),
+                "x_mean_delta_calib": x_summary.get("mean_delta_calibration", 0.0),
+            })
     return metrics, design_df
 
 
@@ -167,6 +180,8 @@ def build_multiseed_robustness() -> Dict[str, Path]:
         f"- `thermal_monotonicity_mean_rate` stayed at `{metrics_df['thermal_monotonicity_mean_rate'].min():.4f}` to `{metrics_df['thermal_monotonicity_mean_rate'].max():.4f}`.",
         f"- `local_mean_abs_error` ranged from `{metrics_df['local_mean_abs_error'].min():.4f}` to `{metrics_df['local_mean_abs_error'].max():.4f}`.",
         f"- `mean_wasserstein_normalized` ranged from `{metrics_df['mean_wasserstein_normalized'].min():.4f}` to `{metrics_df['mean_wasserstein_normalized'].max():.4f}`.",
+        f"- `x_mean_pressure` (Explainability) ranged from `{metrics_df['x_mean_pressure'].min():.4f}` to `{metrics_df['x_mean_pressure'].max():.4f}`.",
+        f"- `x_pass_rate` (Enforcement) was always `{metrics_df['x_pass_rate'].mean():.4f}` across seeds.",
         f"- Worst design-point max error across seeds: `{int(worst_point[COL_RADIATION])} Gy, {int(worst_point[COL_TEMPERATURE])} C, {int(worst_point[COL_TIME])} min -> {worst_point['abs_mean_error_max']:.4f}`.",
         "",
         "## Outputs",

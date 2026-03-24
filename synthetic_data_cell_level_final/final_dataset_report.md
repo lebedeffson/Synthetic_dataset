@@ -39,6 +39,9 @@ This dataset is the primary synthetic dataset for the 15-point cell survival exp
 - `knowledge_base/cell_level_rule_traceability.md`
 - `synthetic_data_cell_level_final/design_point_rule_explanations.csv`
 - `synthetic_data_cell_level_final/design_point_rule_explanations.md`
+- `synthetic_data_cell_level_final/block_explainability_log.csv` (§8, §12)
+- `synthetic_data_cell_level_final/block_explainability_summary.json` (§12)
+- `synthetic_data_cell_level_final/explainability_plots/` (§14)
 
 ## Files
 
