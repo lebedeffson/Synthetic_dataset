@@ -1,4 +1,4 @@
-# Thermoradiobiology Synthetic Data Project
+# Thermoradiobiology Synthetic Data Project.
 
 This repository contains a literature-grounded expert knowledge base and a cleaned final pipeline for generating a **cell-level synthetic survival dataset** for the 15-point experiment on combined radiation and hyperthermia.
 
