@@ -19,6 +19,7 @@ BENCHMARK_DIR = PROJECT_ROOT / "benchmarks" / "generator_family_benchmark"
 MULTISEED_DIR = PROJECT_ROOT / "benchmarks" / "generator_family_benchmark_multiseed"
 RESIDUAL_SINGLE_DIR = PROJECT_ROOT / "benchmarks" / "residual_rule_aware_vae"
 RESIDUAL_MULTISEED_DIR = PROJECT_ROOT / "benchmarks" / "residual_rule_aware_vae_multiseed"
+FINAL_DATASET_DIR = PROJECT_ROOT / "synthetic_data_cell_level_final"
 OUTDIR = PROJECT_ROOT / "presentation_materials" / "generator_presentation_ru"
 FIG_DIR = OUTDIR / "figures"
 TABLE_DIR = OUTDIR / "tables"
@@ -57,6 +58,18 @@ GRID = "#d8d2c4"
 SUCCESS = "#cad2c5"
 SOFT = "#e9c46a"
 ACCENT_BLUE = "#89a6c7"
+INITIAL_MATRIX_SNAPSHOT = {
+    "stage": "Initial Matrix",
+    "note": "Первая production-версия rule-guided matrix generator до усиления prior/noise model.",
+    "local_mean_abs_error": 0.002275386615962583,
+    "local_max_abs_error": 0.012209094654170971,
+    "mean_wasserstein_normalized": 0.005019607187344047,
+    "tstr_r2": 0.9990642691465024,
+    "mean_constraint_pressure": 0.03381643217191362,
+    "mean_delta_projection": 0.013396482789021108,
+    "mean_delta_cap": 0.0,
+    "mean_delta_calibration": 0.020419949382892513,
+}
 
 
 def ensure_dirs() -> None:
@@ -82,8 +95,31 @@ def load_json(path: Path) -> Dict:
         return json.load(fh)
 
 
+def fmt(value: float, digits: int = 4) -> str:
+    return f"{float(value):.{digits}f}"
+
+
 def method_order_map() -> Dict[str, int]:
     return {name: idx for idx, name in enumerate(METHOD_ORDER)}
+
+
+def load_current_production_snapshot() -> Dict:
+    metrics = load_json(FINAL_DATASET_DIR / "evaluation_metrics.json")
+    independent = load_json(FINAL_DATASET_DIR / "independent_cell_level_validation.json")
+    metadata = load_json(FINAL_DATASET_DIR / "generation_metadata.json")
+    explain = metadata.get("explainability_summary", {})
+    return {
+        "stage": "Improved Matrix",
+        "note": "Текущая усиленная production-версия: smoothed prior, heteroscedastic shrinkage sigma, structured block noise.",
+        "local_mean_abs_error": independent["local_mean_abs_error"],
+        "local_max_abs_error": independent["local_max_abs_error"],
+        "mean_wasserstein_normalized": metrics["mean_wasserstein_normalized"],
+        "tstr_r2": metrics["tstr_r2"],
+        "mean_constraint_pressure": explain["mean_constraint_pressure"],
+        "mean_delta_projection": explain["mean_delta_projection"],
+        "mean_delta_cap": explain["mean_delta_cap"],
+        "mean_delta_calibration": explain["mean_delta_calibration"],
+    }
 
 
 def load_residual_single_row() -> pd.DataFrame:
@@ -272,6 +308,49 @@ def build_architecture_table(single_df: pd.DataFrame) -> pd.DataFrame:
         }
     )
     out_df.to_csv(TABLE_DIR / "architecture_table_ru.csv", index=False, encoding="utf-8-sig")
+    return out_df
+
+
+def build_matrix_evolution_table(single_df: pd.DataFrame) -> pd.DataFrame:
+    current = load_current_production_snapshot()
+    hybrid_row = single_df[single_df["family"] == "residual_vae"].iloc[0]
+    rows = [
+        {
+            "Этап": INITIAL_MATRIX_SNAPSHOT["stage"],
+            "Что_изменилось": INITIAL_MATRIX_SNAPSHOT["note"],
+            "Local_MAE": INITIAL_MATRIX_SNAPSHOT["local_mean_abs_error"],
+            "Local_Max_Error": INITIAL_MATRIX_SNAPSHOT["local_max_abs_error"],
+            "Wasserstein_norm": INITIAL_MATRIX_SNAPSHOT["mean_wasserstein_normalized"],
+            "TSTR_R2": INITIAL_MATRIX_SNAPSHOT["tstr_r2"],
+            "Pressure": INITIAL_MATRIX_SNAPSHOT["mean_constraint_pressure"],
+            "Delta_Projection": INITIAL_MATRIX_SNAPSHOT["mean_delta_projection"],
+            "Delta_Calibration": INITIAL_MATRIX_SNAPSHOT["mean_delta_calibration"],
+        },
+        {
+            "Этап": current["stage"],
+            "Что_изменилось": current["note"],
+            "Local_MAE": current["local_mean_abs_error"],
+            "Local_Max_Error": current["local_max_abs_error"],
+            "Wasserstein_norm": current["mean_wasserstein_normalized"],
+            "TSTR_R2": current["tstr_r2"],
+            "Pressure": current["mean_constraint_pressure"],
+            "Delta_Projection": current["mean_delta_projection"],
+            "Delta_Calibration": current["mean_delta_calibration"],
+        },
+        {
+            "Этап": "Hybrid Residual VAE",
+            "Что_изменилось": "Matrix prior + residual VAE + rule-aware loss + safety postprocessing.",
+            "Local_MAE": hybrid_row["local_mean_abs_error"],
+            "Local_Max_Error": hybrid_row["local_max_abs_error"],
+            "Wasserstein_norm": hybrid_row["mean_wasserstein_normalized"],
+            "TSTR_R2": hybrid_row["tstr_r2"],
+            "Pressure": hybrid_row["mean_constraint_pressure"],
+            "Delta_Projection": hybrid_row["mean_delta_projection"],
+            "Delta_Calibration": hybrid_row["mean_delta_calibration"],
+        },
+    ]
+    out_df = pd.DataFrame(rows)
+    out_df.to_csv(TABLE_DIR / "matrix_evolution_ru.csv", index=False, encoding="utf-8-sig")
     return out_df
 
 
@@ -830,88 +909,104 @@ def save_executive_summary_chart() -> None:
     plt.close(fig)
 
 
-def write_math_appendix() -> None:
+def save_matrix_evolution_chart(evolution_df: pd.DataFrame) -> None:
+    fig, axes = plt.subplots(1, 2, figsize=(14.5, 5.4))
+    stages = evolution_df["Этап"].tolist()
+    x = np.arange(len(stages))
+
+    mae_vals = evolution_df["Local_MAE"].to_numpy(dtype=float)
+    pressure_vals = evolution_df["Pressure"].to_numpy(dtype=float)
+    proj_vals = evolution_df["Delta_Projection"].to_numpy(dtype=float)
+    calib_vals = evolution_df["Delta_Calibration"].to_numpy(dtype=float)
+
+    axes[0].plot(x, mae_vals, marker="o", markersize=9, linewidth=2.8, color=COLORS["matrix"])
+    axes[0].set_xticks(x)
+    axes[0].set_xticklabels(stages, rotation=12, ha="right")
+    axes[0].set_title("Эволюция fidelity по ходу разработки")
+    axes[0].set_ylabel("Local MAE")
+    soften_axes(axes[0], axis="y")
+    for idx, value in enumerate(mae_vals):
+        axes[0].text(idx, value + max(mae_vals) * 0.04, fmt(value), ha="center", va="bottom", fontsize=9.5, color=TEXT_DARK)
+
+    axes[1].bar(x, proj_vals, color="#c9d6df", edgecolor=BORDER, linewidth=1.1, label="Projection burden")
+    axes[1].bar(x, calib_vals, bottom=proj_vals, color="#d4c7b5", edgecolor=BORDER, linewidth=1.1, label="Calibration burden")
+    axes[1].plot(x, pressure_vals, color=COLORS["gan"], linewidth=2.0, marker="D", markersize=6, label="Total pressure")
+    axes[1].set_xticks(x)
+    axes[1].set_xticklabels(stages, rotation=12, ha="right")
+    axes[1].set_title("Куда уходит explainability burden")
+    soften_axes(axes[1], axis="y")
+    axes[1].legend(loc="upper right")
+
+    fig.suptitle("Как развивался наш метод: initial Matrix -> improved Matrix -> hybrid", fontsize=17, fontweight="bold", color=TEXT_DARK, y=0.98)
+    fig.tight_layout(pad=1.2, w_pad=2.0)
+    fig.savefig(FIG_DIR / "12_matrix_evolution.png", dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
+def write_math_appendix(
+    aggregate_metrics_df: pd.DataFrame,
+    evolution_df: pd.DataFrame,
+) -> None:
+    top = aggregate_metrics_df.set_index("Метод")
+    initial = evolution_df.set_index("Этап").loc["Initial Matrix"]
+    improved = evolution_df.set_index("Этап").loc["Improved Matrix"]
+    hybrid = evolution_df.set_index("Этап").loc["Hybrid Residual VAE"]
+    diffusion = top.loc["Diffusion"]
+    vae = top.loc["VAE"]
+    gan = top.loc["GAN"]
+
     lines = [
         "# Математическая часть проекта",
         "",
-        "## 1. Matrix generator",
+        "## Формальная постановка задачи",
         "",
-        "Работаем в пространстве `log10(survival + eps)`.",
+        "Мы работаем не с большим датасетом изображений или табличных наблюдений, а с очень маленькой и жестко ограниченной биологической матрицей. В исходных данных есть только пятнадцать наблюдаемых design points: пять уровней радиационной дозы и три терморежима. Если обозначить их через `x = (r, t, tau)`, а выживаемость клеток через `y`, то реальный эксперимент задает набор `D = {(x_i, y_i)}_{i=1}^{15}`. После перехода в пространство `log10(y + eps)` эти наблюдения удобно представлять как матрицу `Y* in R^(5x3)`, где строки отвечают дозам `r in {0, 2, 4, 6, 8}`, а столбцы отвечают трем observed thermal conditions.",
         "",
-        "Наблюдаемая матрица:",
-        "`Y* in R^(5x3)`",
+        "Это сразу накладывает главное математическое ограничение. У нас слишком мало реальных точек, чтобы учить свободный генератор с нуля и делать вид, будто он открыл новую биологию. Поэтому вся наша работа строится вокруг идеи design-preserving generation. Синтетика может варьироваться только внутри уже наблюдаемой 5x3 сетки, а не придумывать новые режимы. Отсюда и появляется центральный вопрос проекта: как сгенерировать вариативность, не потеряв биологическую правдоподобность и объяснимость.",
         "",
-        "Где строки соответствуют дозам RT, а столбцы — трем observed thermal conditions.",
+        "## Почему одной нейросети здесь недостаточно",
         "",
-        "Усиленная матричная модель строится как:",
-        "`Y_raw = Mu_prior + E`",
+        "Если бы мы сразу обучили `GAN`, `VAE` или `Diffusion` на этих пятнадцати точках, модель начала бы подменять биологию интерполяцией по почти пустому пространству. Поэтому сначала мы формализовали биологическую структуру через правила. В текущей постановке hard-правилами являются `CL1`, `CL3` и `CL5`: выживаемость не должна расти с дозой радиации, терморежимы должны сохранять observed ordering, а высокие комбинированные дозы должны вести к очень низкой выживаемости. Правила `CL2` и `CL4` мы используем как mechanistic priors: они важны для интерпретации, но не вводятся как грубые пороги на каждый сэмпл.",
         "",
-        "где:",
-        "- `Mu_prior` — сглаженная monotone prior-surface, построенная из observed matrix;",
-        "- `E` — structured block noise;",
-        "- затем применяется safety layer: `projection + cap + calibration`.",
+        "Это означает, что математическая модель должна минимизировать не только ошибку приближения к `Y*`, но и величину последующей rule-based коррекции. Именно поэтому в проекте используется понятие explainability pressure. Если `B_raw` — сыро сгенерированный блок, `Pi_rule(B_raw)` — результат hard projection, `Cap(.)` — безопасное ограничение high-dose области, а `Cal(.)` — калибровка к observed матрице, то итоговый блок записывается как `B_final = Cal(Cap(Pi_rule(B_raw)))`. Тогда pressure фактически измеряет среднюю абсолютную цену этого перехода: `P(B) = mean(|B_raw - Pi_rule(B_raw)| + |Pi_rule - Cap| + |Cap - Cal|)`. Чем меньше `P(B)`, тем меньше постфактум пришлось чинить модель правилами.",
         "",
-        "Structured noise:",
-        "`E_ij = Sigma_ij * T * (a_g * z_g + a_r * z_row_i + a_c * z_col_j + a_l * z_local_ij)`",
+        "## Первая версия Matrix",
         "",
-        "где `Sigma_ij` — heteroscedastic shrinkage sigma, а шум усечен по `truncation_z`.",
+        "Первая production-версия нашего метода была самой прямой. Мы брали observed матрицу `Y*`, добавляли стохастический шум вокруг нее и затем приводили блок к biologically valid виду через hard projection и calibration. В терминах формулы это можно записать как `Y_raw^(0) = Y* + E`, где `E` — шум в log-survival пространстве. Эта версия уже была design-preserving и rule-aware, но математика шума еще была грубой. В историческом снимке проекта она давала `Local MAE = " + fmt(initial["Local_MAE"]) + "`, `Local Max Error = " + fmt(initial["Local_Max_Error"]) + "`, `Wasserstein = " + fmt(initial["Wasserstein_norm"]) + "`, `TSTR R2 = " + fmt(initial["TSTR_R2"]) + "`. При этом средний explainability pressure составлял `" + fmt(initial["Pressure"]) + "`, а его значимая часть приходилась именно на projection burden: `" + fmt(initial["Delta_Projection"]) + "`. Это означало, что модель слишком часто генерировала сырые блоки, которые потом приходилось заметно дотягивать до monotonic structure.",
         "",
-        "## 2. Hard и soft rules",
+        "## Что именно мы математически улучшили в Matrix",
         "",
-        "Hard rules:",
-        "- `CL1`: survival non-increasing по radiation dose",
-        "- `CL3`: thermal ordering в observed domain",
-        "- `CL5`: при high combined dose survival должен быть very low",
+        "Усиление Matrix-модели состояло не в косметической настройке параметров, а в замене самой генеративной конструкции. Вместо того чтобы семплировать прямо вокруг наблюдаемой матрицы, мы ввели сглаженный prior `Mu_prior`. Его можно мыслить как `Mu_prior = (1 - lambda) * Y* + lambda * S(Y*)`, где `S` — сглаживающий оператор на 5x3 поверхности, сохраняющий observed ordering. Это важно, потому что теперь модель генерирует не вокруг шумной эмпирической точки, а вокруг более биологичной опорной поверхности.",
         "",
-        "Soft rules:",
-        "- `CL2`: sensitizing window 41-43 C / 30-60 min",
-        "- `CL4`: high temperature direct cytotoxicity",
+        "Второе изменение касается дисперсии. Вместо одной общей сигмы мы ввели cell-specific `Sigma_ij` с shrinkage. В простом виде это похоже на `Sigma_ij = alpha * sigma_local_ij + (1 - alpha) * sigma_pool`, причем около граничных точек дисперсия дополнительно сжимается. Это особенно важно для верхней границы около `0.53` и нижней границы около нуля, где лишняя вариативность быстро делает синтетику небиологичной.",
         "",
-        "Hard rules встраиваются в projection/cap. Soft rules используются как mechanistic priors и интерпретация.",
+        "Третье изменение — отказ от независимого шума по клеткам в пользу structured block noise. В текущей версии шум задается как `E_ij = Sigma_ij * T * (a_g * z_g + a_r * z_row_i + a_c * z_col_j + a_l * z_local_ij)`, где один латент отвечает за весь блок, отдельные латенты отвечают за строки и столбцы, а локальный компонент добавляет мелкую вариативность. Это математически лучше согласуется с тем, что survival surface должна вести себя как связная биологическая поверхность, а не как набор пятнадцати независимых случайных чисел.",
         "",
-        "## 3. Residual VAE",
+        "Итоговая усиленная Matrix-модель записывается как `Y_raw = Mu_prior + E`, а затем `Y_final = Cal(Cap(Pi_rule(Y_raw)))`. На текущем production-датасете это дало `Local MAE = " + fmt(improved["Local_MAE"]) + "`, `Local Max Error = " + fmt(improved["Local_Max_Error"]) + "`, `Wasserstein = " + fmt(improved["Wasserstein_norm"]) + "`, `TSTR R2 = " + fmt(improved["TSTR_R2"]) + "`. Главное содержательное изменение не только в том, что ошибка уменьшилась, но и в том, что projection burden упал с `" + fmt(initial["Delta_Projection"]) + "` до `" + fmt(improved["Delta_Projection"]) + "`. Это значит, что сырой блок стал сам по себе гораздо ближе к biologically ordered форме. При этом calibration burden вырос до `" + fmt(improved["Delta_Calibration"]) + "`, то есть часть нагрузки сместилась из жесткой коррекции правил в более мягкую подстройку к целевой observed матрице. Иными словами, модель стала лучше уважать форму, но точнее подгоняться к эмпирическому центру уже на этапе калибровки.",
         "",
-        "Гибридная модель не генерирует блок с нуля. Она учит только остаток вокруг matrix prior:",
+        "## Почему после Matrix мы пошли именно в сторону VAE",
         "",
-        "`R = Y - Mu_prior`",
+        "После усиления Matrix следующий вопрос звучал так: можно ли добавить более живую вариативность, не разрушив объяснимость. Здесь мы сравнили несколько top-level альтернатив для синтетической генерации в нашей постановке: `GAN`, `VAE` и `Diffusion`. В полном multi-seed benchmark чистый `Diffusion` показал лучшую fidelity среди pure neural baselines: `Local MAE = " + fmt(diffusion['Local_MAE_mean']) + "`, `Wasserstein = " + fmt(diffusion['Wasserstein_mean']) + "`, `TSTR R2 = " + fmt(diffusion['TSTR_R2_mean']) + "`, `Pressure = " + fmt(diffusion['Pressure_mean']) + "`. `VAE` оказался очень близко: `Local MAE = " + fmt(vae['Local_MAE_mean']) + "`, `Wasserstein = " + fmt(vae['Wasserstein_mean']) + "`, `TSTR R2 = " + fmt(vae['TSTR_R2_mean']) + "`, `Pressure = " + fmt(vae['Pressure_mean']) + "`. `GAN` заметно хуже по надежности: `Local MAE = " + fmt(gan['Local_MAE_mean']) + "`, `Pressure = " + fmt(gan['Pressure_mean']) + "`, а главное, именно у него чаще проседают monotonicity и compliance.",
         "",
-        "Encoder/decoder:",
-        "- `q_phi(z | R, F)`",
-        "- `p_theta(R | z, F)`",
+        "Несмотря на то, что лучший pure neural benchmark сейчас у `Diffusion`, для гибрида мы сознательно выбрали именно `VAE`. Причина математическая, а не вкусовая. `VAE` естественным образом позволяет учить остаток вокруг prior, то есть представление `R = Y - Mu_prior`. Для сверхмалого числа реальных design points это удобнее и прозрачнее, чем строить полноценный residual diffusion process. Кроме того, у `VAE` есть явное латентное пространство, KL-регуляризация и компактный decoder, что делает его лучше приспособленным для связки с small-data prior и rule-aware penalty.",
         "",
-        "где `F` — rule-aware feature tensor (`RT`, `temperature`, `time`, `CEM43`, `thermal_rank`, `CL2/CL4/CL5 indicators`).",
+        "## Гибридная модель Residual VAE",
         "",
-        "Итоговая генерация:",
-        "`Y_raw = Mu_prior + R_hat(z, F)`",
-        "`Y_final = SafetyPostprocess(Y_raw)`",
+        "В гибриде мы не генерируем весь блок заново. Мы задаем остаток `R = Y - Mu_prior` и учим модель восстанавливать именно его. Энкодер строит `q_phi(z | R, F)`, декодер задает `p_theta(R | z, F)`, где `F` — rule-aware признаки, включающие радиацию, температуру, длительность, `CEM43`, thermal rank и индикаторы правил. После этого `Y_raw = Mu_prior + R_hat(z, F)`, а затем тот же safety layer переводит блок в `Y_final`.",
         "",
-        "## 4. Loss function for Residual VAE",
+        "Ключевой момент здесь в функции потерь. Она имеет вид `L = L_recon + beta * L_KL + lambda_rule * L_rule + lambda_center * L_center + lambda_var * L_var + lambda_smooth * L_smooth`. Здесь `L_recon` отвечает за близость к teacher blocks в log-survival space, `L_KL` регуляризует латентное пространство, `L_center` не дает средней synthetic surface уехать от цели, `L_var` удерживает правдоподобную вариативность, а `L_smooth` не позволяет residual-компоненте бесконтрольно перетягивать на себя структуру, уже заданную `Matrix prior`. Самая важная часть — `L_rule`. Мы штрафуем модель еще до post-processing, если она нарушает non-increasing radiation trend, thermal ordering или high-dose low-survival condition. То есть правила здесь уже не только внешний фильтр, а часть самой оптимизации.",
         "",
-        "`L = L_recon + beta * L_KL + lambda_rule * L_rule + lambda_center * L_center + lambda_var * L_var + lambda_smooth * L_smooth`",
+        "## Что дал гибрид по факту",
         "",
-        "Где:",
-        "- `L_recon`: reconstruction loss в log-survival space",
-        "- `L_KL`: regularization of latent space",
-        "- `L_rule`: penalty for raw rule violations before projection",
-        "- `L_center`: alignment to teacher-block mean / target center",
-        "- `L_var`: variance matching",
-        "- `L_smooth`: residual budget regularization",
+        "На single-run benchmark гибридный `Residual VAE` уже лучше усиленной Matrix по fidelity и на порядок мягче по explainability burden. В эволюционной таблице это видно так: `Local MAE = " + fmt(hybrid['Local_MAE']) + "`, `Local Max Error = " + fmt(hybrid['Local_Max_Error']) + "`, `Wasserstein = " + fmt(hybrid['Wasserstein_norm']) + "`, `TSTR R2 = " + fmt(hybrid['TSTR_R2']) + "`, `Pressure = " + fmt(hybrid['Pressure']) + "`. По full multi-seed benchmark лучший hybrid verdict тоже остается за `Residual VAE`, потому что он дает крайне низкий pressure при хорошей fidelity. Но здесь важно быть честными: в family multiseed у него есть один хвостовой seed, где final compliance падает после финального balancing до `0.9375`, хотя raw compliance остается `1.0`. Это не развал модели, а указание на то, что финальная postprocessing-обвязка для гибрида еще требует доводки.",
         "",
-        "## 5. Метрики",
+        "## Как интерпретировать метрики",
         "",
-        "- `Local MAE`: средняя абсолютная ошибка по 15 design points",
-        "- `Local Max Error`: максимальная ошибка среди 15 design points",
-        "- `Wasserstein(norm)`: близость распределений",
-        "- `TSTR R2`: utility, train on synthetic test on real",
-        "- `Explainability pressure`: средняя величина пост-коррекции после projection/cap/calibration",
+        "`Local MAE` мы используем как главный индикатор того, насколько synthetic mean по каждой из пятнадцати клеток близок к observed survival. Формально это `Local MAE = (1/15) * sum_x |mu_syn(x) - y*(x)|`. `Local Max Error` нужен как защита от ситуации, когда средняя ошибка хорошая, но одна клетка уехала слишком сильно. `Wasserstein(norm)` показывает, насколько целиком synthetic distribution похожа на real distribution в каждой design cell. `TSTR R2` отвечает на прикладной вопрос: если обучить простой предиктор на synthetic данных и проверить его на real, сохраняется ли полезная структура данных. Наконец, `Explainability Pressure` — это не просто еще одна метрика качества, а численная цена биологической корректировки. Для нашего проекта это критично, потому что модель с красивым `MAE`, но с высоким burden, на практике означает модель, которую приходится чинить руками правил после генерации.",
         "",
-        "## 6. Интерпретация результатов",
+        "## Финальная математическая интерпретация",
         "",
-        "Если метод хорош только по fidelity, но требует большого rule-correction burden, он не подходит как explainable production method.",
-        "Поэтому в проекте мы разделяем:",
-        "- `Matrix` как scientific core",
-        "- `Residual VAE` как next-version hybrid upgrade",
-        "- `Diffusion` как strongest pure neural baseline",
+        "Сейчас картина проекта выглядит так. Усиленная `Matrix` — это основной научно защищаемый метод, потому что она прямо кодирует observed design, явно использует hard rules и дает полностью трассируемый результат. `Residual VAE` — это логичное продолжение именно нашей модели, а не ее замена: он берет `Matrix prior` как структурный центр и учит только ту вариативность, которую имеет смысл делегировать нейросети. `Diffusion` остается лучшим pure neural baseline в benchmark-смысле, но не становится естественным ядром гибрида. А `GAN` служит полезным контрпримером: adversarial objective сам по себе не спасает в сверхмалой rule-constrained биомедицинской задаче.",
         "",
     ]
     (TEXT_DIR / "mathematical_foundation_ru.md").write_text("\n".join(lines), encoding="utf-8")
@@ -920,72 +1015,130 @@ def write_math_appendix() -> None:
 def write_slide_texts(
     aggregate_metrics_df: pd.DataFrame,
     scorecard_df: pd.DataFrame,
+    evolution_df: pd.DataFrame,
+    multiseed_df: pd.DataFrame,
 ) -> None:
+    top_rows = aggregate_metrics_df.set_index("Метод")
+    evolution = evolution_df.set_index("Этап")
+    residual_min_final = float(multiseed_df.loc[multiseed_df["family"] == "residual_vae", "independent_article_compliance_mean"].min())
+    gan_min_mono = float(multiseed_df.loc[multiseed_df["family"] == "gan", "radiation_monotonicity_mean_rate"].min())
+
     outline_lines = [
         "# Слайды для презентации",
         "",
-        "## Слайд 1. Постановка задачи",
-        "- У нас только 15 реальных design points в cell-level domain.",
-        "- Нужен explainable synthetic generator, который уважает биологические правила.",
+        "## Слайд 1. Задача и ограничение домена",
         "",
-        "## Слайд 2. Данные и правила",
-        "- Дизайн: 5 уровней RT x 3 терморежима.",
-        "- Активные правила: CL1-CL5.",
-        "- Hard rules: CL1, CL3, CL5. Soft rules: CL2, CL4.",
+        "На первом слайде стоит сразу зафиксировать главный контекст: мы не работаем с большим табличным или imaging dataset, а пытаемся построить synthetic generator для очень маленького, но биологически жесткого cell-level эксперимента. В реальности у нас есть только пятнадцать design points, поэтому весь проект строится не вокруг свободной генерации, а вокруг design-preserving и rule-aware подхода.",
         "",
-        "## Слайд 3. Наш базовый метод",
-        "- Matrix: rule-guided stochastic 5x3 generator.",
-        "- Использует projection, cap, calibration и explainability logging.",
+        "## Слайд 2. Данные, биология и правила",
         "",
-        "## Слайд 4. Что сравнивали",
-        "- Matrix, Residual VAE, Diffusion, VAE, GAN.",
-        "- Все neural methods тестировались в одном rule-guided контуре.",
+        "Здесь важно человеческим языком объяснить, что это за эксперимент. У нас есть пять уровней радиации и три терморежима, а целевая переменная — доля выживших клеток после комбинированного воздействия. Дальше надо спокойно пояснить, что правила `CL1-CL5` были не придуманы под benchmark, а собраны из literature-backed knowledge base. При этом hard rules — это `CL1`, `CL3` и `CL5`, а `CL2` и `CL4` работают как mechanistic priors.",
         "",
-        "## Слайд 5. Ключевой benchmark",
-        "- Показываем full multi-seed table и scorecard.",
-        "- Отдельно выделяем fidelity и explainability burden.",
+        "## Слайд 3. Как мы пришли к Matrix",
         "",
-        "## Слайд 6. Главный вывод",
-        "- Matrix = основной production / защита.",
-        "- Residual VAE = лучшая следующая гибридная версия.",
-        "- Diffusion = лучший чистый neural baseline.",
+        "Этот слайд должен показать, что Matrix не взялся из воздуха. Первая версия была прямым rule-guided stochastic generator вокруг observed matrix. Потом мы увидели, что главный источник проблем сидит в самой геометрии prior и в структуре шума, и поэтому усилили модель. В evolution table это видно количественно: `Local MAE` снизился с `" + fmt(evolution.loc['Initial Matrix', 'Local_MAE']) + "` до `" + fmt(evolution.loc['Improved Matrix', 'Local_MAE']) + "`, а projection burden упал с `" + fmt(evolution.loc['Initial Matrix', 'Delta_Projection']) + "` до `" + fmt(evolution.loc['Improved Matrix', 'Delta_Projection']) + "`.",
         "",
-        "## Слайд 7. Почему не GAN",
-        "- Есть провалы monotonicity/compliance на части seed.",
-        "- Надежность ниже остальных.",
+        "## Слайд 4. Математика улучшенной Matrix",
         "",
-        "## Слайд 8. Что продаем",
-        "- Explainable rule-guided synthetic generator for small constrained biomedical data.",
-        "- С roadmap: Matrix core -> Residual VAE upgrade.",
+        "На этом слайде нужно объяснить три идеи. Во-первых, мы ввели сглаженный `Mu_prior`, чтобы генерировать не вокруг шумной observed матрицы, а вокруг более устойчивой monotone surface. Во-вторых, мы заменили общую сигму на heteroscedastic shrinkage `Sigma_ij`, что особенно важно у границ около `0.53` и `0.0`. В-третьих, шум стал block-structured, а не независимым по клеткам. Именно это улучшило fidelity, не ломая explainability.",
+        "",
+        "## Слайд 5. Почему мы тестировали VAE, Diffusion и GAN",
+        "",
+        "Здесь нужно показать, что мы не замкнулись в своей модели. Мы честно прогнали топовые альтернативные families для synthetic generation в нашей постановке: `GAN`, `VAE` и `Diffusion`. Но важно сразу проговорить честное ограничение: neural methods учились не на богатой независимой реальности, а на rule-guided teacher blocks, потому что реальных design points всего пятнадцать.",
+        "",
+        "## Слайд 6. Benchmark и выбор чистых neural methods",
+        "",
+        "На full multi-seed benchmark лучший pure neural baseline — `Diffusion`: `Local MAE = " + fmt(top_rows.loc['Diffusion', 'Local_MAE_mean']) + "`, `TSTR R2 = " + fmt(top_rows.loc['Diffusion', 'TSTR_R2_mean']) + "`, `Pressure = " + fmt(top_rows.loc['Diffusion', 'Pressure_mean']) + "`. `VAE` идет очень близко и оказывается особенно удобным как кандидат для hybridization. `GAN` хуже по устойчивости: у него минимальная radiation monotonicity на seed’ах падает до `" + fmt(gan_min_mono, 2) + "`.",
+        "",
+        "## Слайд 7. Почему гибрид именно с VAE",
+        "",
+        "Этот слайд нужен отдельно, чтобы у слушателя не возник вопрос: если лучший pure neural — Diffusion, зачем гибрид с VAE? Ответ в том, что нам нужен был не лучший standalone baseline, а лучшая residual-надстройка над `Matrix prior`. Для этого `VAE` удобнее: у него есть компактное latent space, прямой residual decoder, KL-регуляризация и естественная связка с rule-aware loss.",
+        "",
+        "## Слайд 8. Residual VAE как следующая версия системы",
+        "",
+        "Здесь нужно объяснить, что гибрид не заменяет Matrix, а доращивает его. Он учит только остаток вокруг `Mu_prior`. В benchmark это дает сильный результат: `Residual VAE` на full multi-seed имеет `Local MAE = " + fmt(top_rows.loc['Residual VAE', 'Local_MAE_mean']) + "`, `Pressure = " + fmt(top_rows.loc['Residual VAE', 'Pressure_mean']) + "`. При этом надо честно упомянуть, что минимальный final compliance у него по seed’ам сейчас `" + fmt(residual_min_final) + "`, хотя raw compliance остается идеальным.",
+        "",
+        "## Слайд 9. Explainability и доверие",
+        "",
+        "На этом слайде стоит показать, что explainability у нас не маркетинговая надпись, а измеряемая часть пайплайна. У каждого блока есть trace of correction, есть decomposition по projection, cap и calibration, есть rule coverage, есть design-point explanations и есть counterfactual analysis. Это позволяет защищать не только итоговый dataset, но и сам механизм его получения.",
+        "",
+        "## Слайд 10. Финальный вывод",
+        "",
+        "Финальный вывод должен звучать спокойно и строго. Основной production-метод проекта — `Matrix`, потому что он самый прозрачный, научно защищаемый и напрямую опирается на observed biology. Лучшая следующая версия системы — `Residual VAE`, потому что она сохраняет `Matrix prior`, но резко снижает explainability burden. Лучший pure neural benchmark — `Diffusion`. `GAN` в этой задаче как основной путь мы не берем.",
         "",
     ]
     (TEXT_DIR / "slides_outline_ru.md").write_text("\n".join(outline_lines), encoding="utf-8")
 
-    top_rows = aggregate_metrics_df.set_index("Метод")
+    top3 = scorecard_df.head(3).reset_index(drop=True)
+    scorecard_sentence = (
+        f"Если ссылаться на интегральный scorecard, то сейчас верхние позиции занимают "
+        f"{top3.loc[0, 'Метод']} с overall score {top3.loc[0, 'Overall_Score']:.2f}, "
+        f"{top3.loc[1, 'Метод']} с {top3.loc[1, 'Overall_Score']:.2f} и "
+        f"{top3.loc[2, 'Метод']} с {top3.loc[2, 'Overall_Score']:.2f}. "
+        "Но этот score нужно интерпретировать содержательно: он не отменяет того, что Matrix остается главным production-ядром проекта."
+    )
+
     notes_lines = [
-        "# Короткий текст для выступления",
+        "# Текст для выступления",
         "",
-        "Основной метод у нас Matrix, потому что он самый прозрачный и научно защищаемый.",
-        "Следующая лучшая версия системы это Residual VAE: он сохраняет matrix prior, но резко снижает explainability pressure.",
-        "Среди чистых neural baseline лучшим в полном multi-seed benchmark оказался Diffusion.",
-        "GAN мы не берем, потому что у него хуже надежность по правилам.",
+        "Если рассказывать проект одной связной историей, то начинать нужно не с нейросетей, а с ограничения задачи. У нас есть всего пятнадцать реальных биологических design points, и из-за этого свободная генерация здесь математически опасна: модель очень легко начинает интерполировать то, чего в данных никогда не было. Поэтому сначала мы построили rule-guided Matrix generator, который уважает саму структуру эксперимента.",
         "",
-        "## Цифры, которые можно озвучивать",
-        f"- Matrix: Local MAE {top_rows.loc['Matrix', 'Local_MAE_mean']:.4f}, Pressure {top_rows.loc['Matrix', 'Pressure_mean']:.4f}",
-        f"- Residual VAE: Local MAE {top_rows.loc['Residual VAE', 'Local_MAE_mean']:.4f}, Pressure {top_rows.loc['Residual VAE', 'Pressure_mean']:.4f}",
-        f"- Diffusion: Local MAE {top_rows.loc['Diffusion', 'Local_MAE_mean']:.4f}, TSTR R2 {top_rows.loc['Diffusion', 'TSTR_R2_mean']:.4f}",
+        "Первая Matrix-версия уже была рабочей, но мы увидели, что слишком большая часть нагрузки ложится на projection stage. После этого мы усилили модель математически: ввели сглаженный prior, cell-specific shrinkage sigma и structured block noise. Это снизило ошибку и сделало сырые блоки намного ближе к биологически корректной форме.",
         "",
-        "## Финальная формулировка",
-        "Мы не заменяем нашу rule-guided модель нейросетью. Мы строим вокруг нее более сильную систему: Matrix как core и Residual VAE как upgrade.",
+        "После этого мы честно сравнили нашу модель с сильными нейросетевыми семействами. В чистом benchmark лучшим pure neural baseline оказался Diffusion, но именно VAE оказался самым естественным кандидатом для гибрида, потому что его легче поставить на residual-задачу вокруг Matrix prior.",
         "",
-        "## Scorecard top-3",
+        "Поэтому финальная логика проекта такая. Matrix остается основным production-методом, потому что он самый прозрачный и научно защищаемый. Residual VAE становится лучшей следующей версией системы, потому что он не ломает rule-guided ядро, а усиливает его. Diffusion нужен нам как сильный внешний ориентир, который показывает, что сравнение с современными generative methods было честным.",
+        "",
+        "## Цифры, которые можно озвучивать вслух",
+        f"Matrix на full multi-seed benchmark: Local MAE {fmt(top_rows.loc['Matrix', 'Local_MAE_mean'])}, Pressure {fmt(top_rows.loc['Matrix', 'Pressure_mean'])}.",
+        f"Residual VAE: Local MAE {fmt(top_rows.loc['Residual VAE', 'Local_MAE_mean'])}, Pressure {fmt(top_rows.loc['Residual VAE', 'Pressure_mean'])}.",
+        f"Diffusion: Local MAE {fmt(top_rows.loc['Diffusion', 'Local_MAE_mean'])}, TSTR R2 {fmt(top_rows.loc['Diffusion', 'TSTR_R2_mean'])}.",
+        f"История Matrix: Local MAE снизился с {fmt(evolution.loc['Initial Matrix', 'Local_MAE'])} до {fmt(evolution.loc['Improved Matrix', 'Local_MAE'])}.",
+        "",
+        "## Итог по scorecard",
+        "",
+        scorecard_sentence,
     ]
-    for _, row in scorecard_df.head(3).iterrows():
-        notes_lines.append(f"- {row['Метод']}: overall score {row['Overall_Score']:.2f}")
     (TEXT_DIR / "speaker_notes_ru.md").write_text("\n".join(notes_lines), encoding="utf-8")
+
+    final_script_lines = [
+        "# Полный текст выступления",
+        "",
+        "Если рассказывать эту работу как цельную исследовательскую историю, то главная отправная точка очень простая: у нас был не большой датасет, а маленький in vitro эксперимент с пятнадцатью design points. Это означало, что обычная логика генеративного моделирования здесь работает плохо. Слишком легко получить красивую синтетику, которая не выдерживает биологической интерпретации.",
+        "",
+        "Поэтому мы начали не с нейросетей, а с биологии. Мы зафиксировали observed domain, собрали cell-level правила из литературы и отделили hard constraints от mechanistic priors. После этого мы построили первую Matrix-версию генератора. Она уже сохраняла design support и правила, но в ней было видно, что существенная часть explainability burden возникает из-за того, что сырые блоки еще недостаточно хорошо согласованы по форме и их приходится заметно дотягивать projection stage.",
+        "",
+        "Следующий шаг был уже математическим. Мы усилили Matrix-модель тремя изменениями: ввели сглаженный prior вместо генерации прямо вокруг observed matrix, добавили heteroscedastic shrinkage sigma по каждой клетке и заменили независимый шум на structured block noise. В результате Local MAE для Matrix улучшился с "
+        + fmt(evolution.loc["Initial Matrix", "Local_MAE"])
+        + " до "
+        + fmt(evolution.loc["Improved Matrix", "Local_MAE"])
+        + ", а projection burden упал с "
+        + fmt(evolution.loc["Initial Matrix", "Delta_Projection"])
+        + " до "
+        + fmt(evolution.loc["Improved Matrix", "Delta_Projection"])
+        + ". Это важный момент: сырая форма поверхности стала заметно более биологичной.",
+        "",
+        "После этого мы решили честно проверить современные альтернативы для synthetic generation. Мы прогнали VAE, Diffusion и GAN в одном rule-guided benchmark-контуре. Чисто по benchmark-метрикам лучшим pure neural baseline оказался Diffusion, VAE показал очень близкий результат, а GAN проиграл по устойчивости. Это позволило нам сделать важный вывод: нейросети здесь полезны, но не как замена rule-guided ядра, а как возможная надстройка над ним.",
+        "",
+        "Именно поэтому следующим шагом стал гибрид. Мы не стали учить модель заново генерировать весь блок. Вместо этого мы взяли Matrix prior как структурный центр и дали VAE задачу моделировать только остаточную вариативность вокруг него. Так появился Residual VAE. Он оказался самым разумным компромиссом между fidelity и explainability burden. На full multi-seed benchmark он дает Local MAE "
+        + fmt(top_rows.loc["Residual VAE", "Local_MAE_mean"])
+        + " при Pressure "
+        + fmt(top_rows.loc["Residual VAE", "Pressure_mean"])
+        + ". При этом важно честно говорить о текущем ограничении: на одном seed final compliance у него проседает до "
+        + fmt(residual_min_final)
+        + ", хотя raw compliance остается идеальным.",
+        "",
+        "Финальная архитектурная позиция проекта поэтому выглядит так. Matrix — это основной production-метод и главный научно защищаемый результат. Residual VAE — это лучшая следующая версия системы, потому что она усиливает Matrix, а не спорит с ним. Diffusion — это лучший чистый нейросетевой benchmark, а GAN в нашей задаче мы не берем как основной путь из-за нестабильности.",
+        "",
+        "Если формулировать ценность работы совсем коротко, то мы сделали не просто synthetic generator, а explainable rule-guided synthetic generator для очень малого и биологически ограниченного домена. И главное здесь не только итоговые числа, но и то, что каждый шаг модели, каждая активная rule-correction и каждая архитектурная развилка у нас численно и содержательно объяснены.",
+        "",
+    ]
+    (TEXT_DIR / "final_presentation_script_ru.md").write_text("\n".join(final_script_lines), encoding="utf-8")
 
 
 def write_report(
+    single_df: pd.DataFrame,
+    multiseed_df: pd.DataFrame,
     literature_df: pd.DataFrame,
     rules_df: pd.DataFrame,
     architecture_df: pd.DataFrame,
@@ -993,94 +1146,86 @@ def write_report(
     aggregate_metrics_df: pd.DataFrame,
     recommendation_df: pd.DataFrame,
     scorecard_df: pd.DataFrame,
+    evolution_df: pd.DataFrame,
 ) -> None:
     report_path = OUTDIR / "presentation_report_ru.md"
+    top = aggregate_metrics_df.set_index("Метод")
+    evolution = evolution_df.set_index("Этап")
+    residual_min_final = float(multiseed_df.loc[multiseed_df["family"] == "residual_vae", "independent_article_compliance_mean"].min())
+    gan_min_mono = float(multiseed_df.loc[multiseed_df["family"] == "gan", "radiation_monotonicity_mean_rate"].min())
+
     lines: List[str] = [
-        "# Материалы для презентации по генерации synthetic dataset",
+        "# Финальная версия материалов для презентации",
         "",
-        "## 1. Данные о приборе",
+        "## Общая идея проекта",
         "",
-        "- В репозитории отсутствуют паспорт прибора, модель облучателя и паспорт гипертермической установки.",
-        "- Поэтому в презентации этот раздел нужно формулировать аккуратно: доступны только режимные параметры установки и клеточная выживаемость.",
-        "- Наблюдаемые параметры эксперимента: `Радиация 0-8 Gy`, `Температура 42/43/44 C`, `Время 30/45 мин`, производная thermal dose `CEM43`.",
+        "Этот проект решает очень узкую, но важную задачу: как получить синтетическую выборку для маленького биомедицинского эксперимента так, чтобы итоговые данные были и полезными для downstream-моделей, и биологически объяснимыми. Главная особенность задачи в том, что у нас нет большого массива реальных наблюдений. Исходный эксперимент задает только пятнадцать design points, поэтому обычный подход вида «обучим генеративную модель и дадим ей придумать вариативность» здесь слишком рискован. В такой постановке модель легко становится красивой статистически, но плохо защищаемой биологически.",
         "",
-        "## 2. Выборка и биология данных",
+        "Именно поэтому мы сознательно строили работу не вокруг абстрактной генерации, а вокруг design-preserving synthetic generation. Мы разрешаем модели варьировать только survival внутри уже наблюдаемого 5x3 экспериментального дизайна, а не изобретать новые условия. Это решение проходит через весь проект: через правила, через архитектуру генератора, через explainability-логи и через выбор метрик.",
         "",
-        "- Это **cell-level / in vitro** survival matrix, а не пациентский датасет.",
-        "- Дизайн эксперимента: `5 уровней RT x 3 терморежима = 15 design points`.",
-        "- Три терморежима: `42C 45 мин`, `43C 45 мин`, `44C 30 мин`.",
-        "- Биологический выход: доля выживших клеток после комбинированного воздействия гипертермии и радиации.",
-        "- Главные биологические ожидания: при росте RT выживаемость не должна расти; усиление thermal condition в наблюдаемом окне тоже не должно повышать выживаемость.",
+        "## Данные о приборе и о самой выборке",
         "",
-        "## 3. Как собирали правила",
+        "Важная честная оговорка состоит в том, что в репозитории нет паспорта прибора, модели облучателя и паспорта гипертермической установки. Поэтому раздел «данные о приборе» в презентации нужно формулировать аккуратно. Мы можем уверенно говорить только о режимных параметрах эксперимента и о клеточной выживаемости как целевой переменной. Доступные параметры — это радиационная доза от 0 до 8 Gy, температура 42, 43 и 44 градусов Цельсия, время 30 или 45 минут и производная thermal dose `CEM43`.",
         "",
-        "- Правила брали из уже собранной knowledge base проекта, а не придумывали вручную под benchmark.",
-        "- Активировали только те правила, которые можно честно применить к 4 наблюдаемым колонкам: `Радиация / Температура / Время / Выживаемость`.",
-        "- Клинические и in vivo правила сознательно исключались, чтобы не смешивать уровни биологии.",
-        "- Активные правила: `CL1-CL5`.",
+        "С биологической точки зрения выборка представляет собой cell-level in vitro survival matrix, а не клинический пациентский датасет. В ней есть пять уровней радиации и три терморежима, то есть ровно пятнадцать observed design points. Выходом является доля выживших клеток после комбинированного воздействия гипертермии и радиации. На этом уровне биологии у нас есть несколько естественных ожиданий. При росте радиационной дозы survival не должен увеличиваться. Более жесткий терморежим в observed domain не должен делать клетки более живыми, чем мягкий режим. А высокая комбинированная нагрузка должна вести к очень низкой выживаемости.",
         "",
-        "## 4. Откуда брали литературу",
+        "## Как мы собирали правила и откуда брали литературу",
         "",
-        f"- Полная таблица: `tables/literature_table_ru.csv`.",
-        f"- Ключевые статьи: `E03-E06` для DNA repair / sensitizing window, `E01/E14` для температурного порога, `E06/E07/E08` для интервалов и ограничений обобщения.",
+        "Правила не были придуманы вручную под текущий benchmark. Мы брали их из уже собранной knowledge base проекта и активировали только те, которые можно честно применять к наблюдаемым колонкам `radiation`, `temperature`, `time` и `survival`. Клинические и in vivo правила мы сознательно не переносили в этот генератор, потому что иначе начали бы смешивать разные уровни биологии и делать выводы, которые исходные данные не поддерживают.",
         "",
-        "## 5. Общая таблица правил",
+        "В результате в active set вошли правила `CL1-CL5`. Полная литература собрана в `tables/literature_table_ru.csv`, а полная логическая формализация лежит в `tables/rules_table_ru.csv`. Содержательно `CL1` отвечает за monotonicity по радиации, `CL2` описывает sensitizing window около 41-43 градусов и 30-60 минут, `CL3` фиксирует thermal ordering внутри observed domain, `CL4` отражает усиление direct heat kill при более высокой температуре, а `CL5` задает very-low-survival поведение в области высокой комбинированной дозы. В practical pipeline hard-правилами становятся `CL1`, `CL3` и `CL5`, а `CL2` и `CL4` играют роль mechanistic priors и интерпретационных ограничений.",
         "",
-        f"- Полная таблица: `tables/rules_table_ru.csv`.",
-        "- `CL1`: monotonicity по радиации.",
-        "- `CL2`: sensitizing window около `41-43 C` и `30-60 мин`.",
-        "- `CL3`: thermal ordering в наблюдаемом домене.",
-        "- `CL4`: при температуре выше `43 C` усиливается direct cytotoxicity.",
-        "- `CL5`: высокая комбинированная доза должна вести к very low survival.",
+        "## Почему мы не начали с GAN, VAE или Diffusion",
         "",
-        "## 6. Как получали synthetic выборку",
+        "Если смотреть на задачу глазами typical synthetic data literature, то естественно захотеть попробовать `GAN`, `VAE` и `Diffusion`. Мы действительно это сделали и именно поэтому в проекте есть benchmark-папка с полным сравнением генераторов. Но важный исследовательский вывод появился еще до чисел. При `n = 15` реальных observed points свободная нейросетевая генерация не может считаться надежной опорой для биомедицинского генератора. Если у модели нет сильного prior, она учится не биологии, а почти пустой сетке.",
         "",
-        "- Базовый support всегда фиксирован на исходных 15 design points.",
-        "- Наш основной метод `Matrix` строит rule-guided 5x3 поверхность лог-выживаемости, затем семплирует шум, применяет isotonic projection и calibration.",
-        "- Новая версия `Residual VAE` моделирует только остаточную вариативность вокруг matrix prior и получает штраф за нарушения правил уже на этапе обучения.",
-        "- Нейросетевые методы `VAE`, `GAN`, `Diffusion` обучались на rule-guided teacher blocks, потому что реальных наблюдений всего `n=15`.",
-        "- Любой метод после raw generation проходил одинаковый post-processing: projection, cap и calibration.",
+        "Отсюда родилась наша базовая идея: сначала построить объяснимый rule-guided core, который сохраняет design support и биологические ограничения, а уже потом использовать neural models либо как benchmark, либо как residual-надстройку поверх этого core. Иными словами, в этом проекте нейросети не заменяют физико-биологическую структуру, а подключаются только там, где они действительно могут добавить правдоподобную вариативность.",
         "",
-        "## 7. Архитектуры",
+        "## Наш собственный метод: как появился Matrix",
         "",
-        f"- Таблица архитектур: `tables/architecture_table_ru.csv`.",
-        "- `Matrix`: rule-guided stochastic matrix.",
-        "- `Residual VAE`: гибридный residual generator поверх matrix prior, лучший кандидат на следующую финальную версию.",
-        "- `Diffusion`: DDPM-style MLP denoiser, лучший чистый neural candidate по full multi-seed fidelity.",
-        "- `VAE`: сильный альтернативный neural baseline с очень близкими метриками и чуть меньшим pressure.",
-        "- `GAN`: adversarial baseline, но худший по надежности.",
+        "Первой собственной рабочей архитектурой стал `Matrix` generator. Его смысл в том, что мы представляем наблюдаемый эксперимент как 5x3 матрицу в пространстве `log10(survival + eps)`, а затем генерируем synthetic blocks внутри этой матрицы. Уже первая production-версия была design-preserving и rule-guided, но она была более прямой: генерация шла близко к observed matrix, а потом значимая часть структуры восстанавливалась через post-processing. Исторический снимок этой версии мы сохранили и включили в `tables/matrix_evolution_ru.csv`.",
         "",
-        "## 8. Метрики и итог",
+        "Для initial Matrix метрики были такими: `Local MAE = " + fmt(evolution.loc['Initial Matrix', 'Local_MAE']) + "`, `Local Max Error = " + fmt(evolution.loc['Initial Matrix', 'Local_Max_Error']) + "`, `Wasserstein = " + fmt(evolution.loc['Initial Matrix', 'Wasserstein_norm']) + "`, `TSTR R2 = " + fmt(evolution.loc['Initial Matrix', 'TSTR_R2']) + "`. Средний explainability pressure был `" + fmt(evolution.loc['Initial Matrix', 'Pressure']) + "`, и важная часть этой цены приходилась на projection stage: `" + fmt(evolution.loc['Initial Matrix', 'Delta_Projection']) + "`. Для нас это был сигнал, что сама сырая surface еще недостаточно согласована с hard rules.",
         "",
-        f"- Single-run таблица: `tables/metrics_single_run_ru.csv`.",
-        f"- Multi-seed таблица: `tables/metrics_multiseed_ru.csv`.",
-        f"- Scorecard: `tables/method_scorecard_ru.csv`.",
-        "- Главный научно защищаемый вывод: **наш основной production-метод = Matrix**, потому что он первичный, прозрачный и напрямую опирается на правила и литературу.",
-        "- Главный вывод по следующей версии: **лучший гибридный метод = Residual VAE**.",
-        "- Среди чистых student-neural методов: **лучший neural method = Diffusion** по полному multi-seed benchmark.",
-        "- Самый низкий post-processing burden среди baseline-family теперь тоже показывает **Residual VAE**.",
-        "- `GAN` не брать как основной: есть провалы по monotonicity/compliance на части seed.",
+        "## Как мы улучшили Matrix и что дала эта математика",
         "",
-        "## 9. Что вставлять в слайды",
+        "Следующий этап был уже полноценным математическим улучшением метода. Во-первых, мы перестали генерировать прямо вокруг observed matrix и ввели сглаженный prior `Mu_prior`. Это снизило локальную шероховатость поверхности и сделало baseline более биологичным. Во-вторых, вместо одной общей сигмы мы ввели heteroscedastic shrinkage sigma по каждой клетке матрицы. Это дало более аккуратную вариативность в тех точках, где границы survival особенно чувствительны. В-третьих, шум перестал быть независимым по клеткам и стал block-structured: появилась общая компонентa на весь блок, отдельные компоненты на строки и столбцы и локальная добавка для мелкой вариативности.",
         "",
-        "- `figures/01_pipeline_overview.png` — схема пайплайна.",
-        "- `figures/02_fidelity_comparison.png` — качество на основном прогоне.",
-        "- `figures/03_explainability_and_compliance.png` — explainability и compliance.",
-        "- `figures/04_multiseed_stability.png` — устойчивость по 5 seed.",
-        "- `figures/05_method_positioning.png` — positioning chart.",
-        "- `figures/06_design_point_error_heatmaps.png` — ошибки по 15 design points.",
-        "- `figures/07_monotonicity_by_seed.png` — why GAN is risky.",
-        "- `figures/08_method_scorecard.png` — normalized multi-metric scorecard.",
-        "- `figures/09_executive_summary.png` — executive summary slide.",
-        "- `figures/10_rule_usage.png` — coverage and role of CL1-CL5.",
-        "- `figures/11_benchmark_podium.png` — three main presentation positions.",
+        "Эти три изменения дали заметный содержательный эффект. У текущей improved Matrix `Local MAE` снизился до `" + fmt(evolution.loc['Improved Matrix', 'Local_MAE']) + "`, `Local Max Error` — до `" + fmt(evolution.loc['Improved Matrix', 'Local_Max_Error']) + "`, `Wasserstein` — до `" + fmt(evolution.loc['Improved Matrix', 'Wasserstein_norm']) + "`, а `TSTR R2` вырос до `" + fmt(evolution.loc['Improved Matrix', 'TSTR_R2']) + "`. Самое интересное, что projection burden упал с `" + fmt(evolution.loc['Initial Matrix', 'Delta_Projection']) + "` до `" + fmt(evolution.loc['Improved Matrix', 'Delta_Projection']) + "`. Это означает, что raw blocks сами по себе стали ближе к biologically valid форме. При этом calibration burden вырос, то есть часть корректировки переехала из жесткой правки формы в более мягкую привязку к observed target. Это важно говорить честно: новая версия улучшила fidelity и raw structure, но не обнулила цену post-processing.",
         "",
-        "## 10. Итоговая рекомендация",
+        "## Почему после этого мы решили делать гибрид",
         "",
-        "- Для презентации говорить так: `Matrix` — основной и объяснимый метод, `Residual VAE` — лучшая следующая гибридная версия, `Diffusion` — лучший чистый нейросетевой вариант, `VAE` — сильная альтернативная neural baseline, `GAN` — нестабилен.",
-        "- Готовый текст для слайдов: `text/slides_outline_ru.md`.",
-        "- Короткие notes для выступления: `text/speaker_notes_ru.md`.",
-        "- Математика и формулы: `text/mathematical_foundation_ru.md`.",
+        "После усиления Matrix стало понятно, что базовый explainable core уже достаточно силен, чтобы быть production-методом. Но возник следующий вопрос: можно ли добавить более натуральную synthetic variability и не сломать при этом rule-guided основу. Для ответа на этот вопрос мы прогнали benchmark по нескольким top-level семействам генераторов. В single-run и multi-seed артефактах лежат результаты для `Matrix`, `Residual VAE`, `VAE`, `Diffusion` и `GAN`.",
+        "",
+        "В полном multi-seed benchmark лучший pure neural baseline сейчас — `Diffusion`. Он дает `Local MAE = " + fmt(top.loc['Diffusion', 'Local_MAE_mean']) + "`, `Wasserstein = " + fmt(top.loc['Diffusion', 'Wasserstein_mean']) + "`, `TSTR R2 = " + fmt(top.loc['Diffusion', 'TSTR_R2_mean']) + "`, `Pressure = " + fmt(top.loc['Diffusion', 'Pressure_mean']) + "`. `VAE` идет очень близко: `Local MAE = " + fmt(top.loc['VAE', 'Local_MAE_mean']) + "`, `Pressure = " + fmt(top.loc['VAE', 'Pressure_mean']) + "`. `GAN` заметно слабее по надежности: его `Local MAE = " + fmt(top.loc['GAN', 'Local_MAE_mean']) + "`, а минимальная radiation monotonicity по seed’ам падает до `" + fmt(gan_min_mono, 2) + "`. Именно поэтому GAN мы оставляем только как comparison baseline, но не берем как основной метод.",
+        "",
+        "## Почему гибрид мы делали именно с VAE, а не с Diffusion",
+        "",
+        "Этот вопрос важен, потому что после benchmark естественно спросить: если лучший pure neural baseline — `Diffusion`, почему гибрид строится с `VAE`. Ответ состоит в том, что мы искали не лучший самостоятельный генератор, а лучший механизм residual modeling поверх `Matrix prior`. В такой постановке `VAE` оказывается удобнее и математически прозрачнее. Он естественным образом учит остаток вокруг prior, дает компактное latent space, поддерживает KL-регуляризацию и легко сочетается с rule-aware loss. Для сверхмалой 5x3 surface это проще и логичнее, чем поднимать тяжелую residual diffusion-схему.",
+        "",
+        "## Как устроен гибрид Residual VAE",
+        "",
+        "В гибриде мы не генерируем блок с нуля. Сначала `Matrix` задает `Mu_prior`, то есть объяснимую опорную surface. Затем VAE учит только остаток `R = Y - Mu_prior`. Энкодер принимает residual-представление вместе с rule-aware признаками, а декодер восстанавливает synthetic residual. После этого мы снова применяем тот же safety layer: projection, cap и calibration. То есть гибрид уважает уже существующую архитектуру проекта, а не обнуляет ее.",
+        "",
+        "С математической точки зрения особенно важна функция потерь. Помимо reconstruction и KL-компоненты в ней есть rule-aware penalty на raw output. Это означает, что модель штрафуется за нарушения monotonicity и других hard conditions еще до post-processing. Именно это делает Residual VAE не просто еще одной нейросетью, а логическим продолжением нашей rule-guided системы.",
+        "",
+        "## Что показывают финальные метрики",
+        "",
+        "Текущая картина по проекту лучше всего читается по `tables/metrics_multiseed_ru.csv`, `tables/method_scorecard_ru.csv` и `tables/matrix_evolution_ru.csv`. `Matrix` в полном multi-seed benchmark имеет `Local MAE = " + fmt(top.loc['Matrix', 'Local_MAE_mean']) + "`, `Pressure = " + fmt(top.loc['Matrix', 'Pressure_mean']) + "`. Это не самый маленький burden среди всех методов, но именно Matrix остается главным production-методом, потому что он первичен, объясним и научно защищаем. `Residual VAE` имеет `Local MAE = " + fmt(top.loc['Residual VAE', 'Local_MAE_mean']) + "`, `Pressure = " + fmt(top.loc['Residual VAE', 'Pressure_mean']) + "`. Это и делает его лучшей следующей версией системы.",
+        "",
+        "Нужно отдельно и честно проговорить ограничения. Во-первых, neural methods в нашем benchmark учатся не на независимой богатой реальности, а на teacher blocks от rule-guided pipeline. Поэтому benchmark не доказывает, что `Diffusion` или `VAE` биологически лучше Matrix. Он показывает, насколько хорошо они воспроизводят rule-guided synthetic manifold. Во-вторых, у `Residual VAE` в family multiseed остается один хвостовой seed, где final compliance снижается до `" + fmt(residual_min_final) + "`, хотя raw compliance остается `1.0`. Это важный operational detail, а не повод отказываться от гибрида. Он просто показывает, что финальный balancing step еще нужно аккуратно доработать.",
+        "",
+        "## Про explainability отдельно",
+        "",
+        "Explainability в проекте — это не один красивый график, а целый слой артефактов. У нас есть rule traceability, design-point explanations, block-level explainability log, pressure decomposition по стадиям, counterfactual analysis и SHAP-style разбор драйверов давления. Благодаря этому можно объяснить не только итоговую synthetic выборку, но и то, почему конкретный блок был принят, как сильно его корректировали правила и в какой именно части пространства возникла чувствительность. Именно этот слой и позволяет продавать работу как explainable system, а не как black-box generator.",
+        "",
+        "## Финальная архитектурная позиция проекта",
+        "",
+        "Финальная позиция проекта сейчас выглядит строго и логично. Основной production-метод — `Matrix`. Это главная научно защищаемая версия, потому что она напрямую опирается на observed data, literature-backed rules и явную структуру post-processing. Следующая лучшая версия системы — `Residual VAE`, потому что он сохраняет `Matrix prior`, резко снижает explainability burden и добавляет более гибкую synthetic variability. Лучший pure neural baseline — `Diffusion`, и это важно как доказательство того, что benchmark со modern methods действительно проведен. `GAN` как основной путь мы не используем.",
+        "",
+        "Если говорить одной фразой, то результат проекта такой: мы не заменили свою модель нейросетью, а последовательно развили explainable rule-guided Matrix generator, а затем построили над ним гибрид, который добавляет вариативность без отказа от биологической структуры. Именно это и нужно показывать в финальной презентации.",
+        "",
+        "Основные готовые материалы для выступления находятся в `text/mathematical_foundation_ru.md`, `text/slides_outline_ru.md`, `text/speaker_notes_ru.md` и `text/final_presentation_script_ru.md`. Основные таблицы лежат в `tables/metrics_multiseed_ru.csv`, `tables/method_scorecard_ru.csv`, `tables/matrix_evolution_ru.csv`, `tables/rule_usage_ru.csv`, `tables/literature_table_ru.csv` и `tables/rules_table_ru.csv`. Для слайдов уже подготовлены основные фигуры `01`-`12`, включая pipeline overview, fidelity comparison, explainability/compliance, method positioning, scorecard и отдельный график эволюции метода.",
         "",
     ]
     report_path.write_text("\n".join(lines), encoding="utf-8")
@@ -1095,6 +1240,7 @@ def main() -> None:
     rules_df = build_rules_table()
     architecture_df = build_architecture_table(single_df)
     rule_usage_df = build_rule_usage_table()
+    evolution_df = build_matrix_evolution_table(single_df)
     single_metrics_df, aggregate_metrics_df = build_metrics_tables(single_df, aggregate_df)
     recommendation_df = build_recommendation_table(single_df, aggregate_df)
     scorecard_df = build_scorecard_table(aggregate_df, multiseed_df)
@@ -1110,10 +1256,13 @@ def main() -> None:
     save_executive_summary_chart()
     save_rule_usage_plot(rule_usage_df)
     save_benchmark_podium(aggregate_metrics_df)
-    write_slide_texts(aggregate_metrics_df, scorecard_df)
-    write_math_appendix()
+    save_matrix_evolution_chart(evolution_df)
+    write_slide_texts(aggregate_metrics_df, scorecard_df, evolution_df, multiseed_df)
+    write_math_appendix(aggregate_metrics_df, evolution_df)
 
     write_report(
+        single_df=single_df,
+        multiseed_df=multiseed_df,
         literature_df=literature_df,
         rules_df=rules_df,
         architecture_df=architecture_df,
@@ -1121,6 +1270,7 @@ def main() -> None:
         aggregate_metrics_df=aggregate_metrics_df,
         recommendation_df=recommendation_df,
         scorecard_df=scorecard_df,
+        evolution_df=evolution_df,
     )
     print(f"saved presentation materials to: {OUTDIR}")
 

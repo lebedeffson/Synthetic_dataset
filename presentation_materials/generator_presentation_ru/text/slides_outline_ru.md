@@ -1,35 +1,41 @@
 # Слайды для презентации
 
-## Слайд 1. Постановка задачи
-- У нас только 15 реальных design points в cell-level domain.
-- Нужен explainable synthetic generator, который уважает биологические правила.
+## Слайд 1. Задача и ограничение домена
 
-## Слайд 2. Данные и правила
-- Дизайн: 5 уровней RT x 3 терморежима.
-- Активные правила: CL1-CL5.
-- Hard rules: CL1, CL3, CL5. Soft rules: CL2, CL4.
+На первом слайде стоит сразу зафиксировать главный контекст: мы не работаем с большим табличным или imaging dataset, а пытаемся построить synthetic generator для очень маленького, но биологически жесткого cell-level эксперимента. В реальности у нас есть только пятнадцать design points, поэтому весь проект строится не вокруг свободной генерации, а вокруг design-preserving и rule-aware подхода.
 
-## Слайд 3. Наш базовый метод
-- Matrix: rule-guided stochastic 5x3 generator.
-- Использует projection, cap, calibration и explainability logging.
+## Слайд 2. Данные, биология и правила
 
-## Слайд 4. Что сравнивали
-- Matrix, Residual VAE, Diffusion, VAE, GAN.
-- Все neural methods тестировались в одном rule-guided контуре.
+Здесь важно человеческим языком объяснить, что это за эксперимент. У нас есть пять уровней радиации и три терморежима, а целевая переменная — доля выживших клеток после комбинированного воздействия. Дальше надо спокойно пояснить, что правила `CL1-CL5` были не придуманы под benchmark, а собраны из literature-backed knowledge base. При этом hard rules — это `CL1`, `CL3` и `CL5`, а `CL2` и `CL4` работают как mechanistic priors.
 
-## Слайд 5. Ключевой benchmark
-- Показываем full multi-seed table и scorecard.
-- Отдельно выделяем fidelity и explainability burden.
+## Слайд 3. Как мы пришли к Matrix
 
-## Слайд 6. Главный вывод
-- Matrix = основной production / защита.
-- Residual VAE = лучшая следующая гибридная версия.
-- Diffusion = лучший чистый neural baseline.
+Этот слайд должен показать, что Matrix не взялся из воздуха. Первая версия была прямым rule-guided stochastic generator вокруг observed matrix. Потом мы увидели, что главный источник проблем сидит в самой геометрии prior и в структуре шума, и поэтому усилили модель. В evolution table это видно количественно: `Local MAE` снизился с `0.0023` до `0.0016`, а projection burden упал с `0.0134` до `0.0033`.
 
-## Слайд 7. Почему не GAN
-- Есть провалы monotonicity/compliance на части seed.
-- Надежность ниже остальных.
+## Слайд 4. Математика улучшенной Matrix
 
-## Слайд 8. Что продаем
-- Explainable rule-guided synthetic generator for small constrained biomedical data.
-- С roadmap: Matrix core -> Residual VAE upgrade.
+На этом слайде нужно объяснить три идеи. Во-первых, мы ввели сглаженный `Mu_prior`, чтобы генерировать не вокруг шумной observed матрицы, а вокруг более устойчивой monotone surface. Во-вторых, мы заменили общую сигму на heteroscedastic shrinkage `Sigma_ij`, что особенно важно у границ около `0.53` и `0.0`. В-третьих, шум стал block-structured, а не независимым по клеткам. Именно это улучшило fidelity, не ломая explainability.
+
+## Слайд 5. Почему мы тестировали VAE, Diffusion и GAN
+
+Здесь нужно показать, что мы не замкнулись в своей модели. Мы честно прогнали топовые альтернативные families для synthetic generation в нашей постановке: `GAN`, `VAE` и `Diffusion`. Но важно сразу проговорить честное ограничение: neural methods учились не на богатой независимой реальности, а на rule-guided teacher blocks, потому что реальных design points всего пятнадцать.
+
+## Слайд 6. Benchmark и выбор чистых neural methods
+
+На full multi-seed benchmark лучший pure neural baseline — `Diffusion`: `Local MAE = 0.0008`, `TSTR R2 = 0.9999`, `Pressure = 0.0061`. `VAE` идет очень близко и оказывается особенно удобным как кандидат для hybridization. `GAN` хуже по устойчивости: у него минимальная radiation monotonicity на seed’ах падает до `0.83`.
+
+## Слайд 7. Почему гибрид именно с VAE
+
+Этот слайд нужен отдельно, чтобы у слушателя не возник вопрос: если лучший pure neural — Diffusion, зачем гибрид с VAE? Ответ в том, что нам нужен был не лучший standalone baseline, а лучшая residual-надстройка над `Matrix prior`. Для этого `VAE` удобнее: у него есть компактное latent space, прямой residual decoder, KL-регуляризация и естественная связка с rule-aware loss.
+
+## Слайд 8. Residual VAE как следующая версия системы
+
+Здесь нужно объяснить, что гибрид не заменяет Matrix, а доращивает его. Он учит только остаток вокруг `Mu_prior`. В benchmark это дает сильный результат: `Residual VAE` на full multi-seed имеет `Local MAE = 0.0010`, `Pressure = 0.0027`. При этом надо честно упомянуть, что минимальный final compliance у него по seed’ам сейчас `0.9375`, хотя raw compliance остается идеальным.
+
+## Слайд 9. Explainability и доверие
+
+На этом слайде стоит показать, что explainability у нас не маркетинговая надпись, а измеряемая часть пайплайна. У каждого блока есть trace of correction, есть decomposition по projection, cap и calibration, есть rule coverage, есть design-point explanations и есть counterfactual analysis. Это позволяет защищать не только итоговый dataset, но и сам механизм его получения.
+
+## Слайд 10. Финальный вывод
+
+Финальный вывод должен звучать спокойно и строго. Основной production-метод проекта — `Matrix`, потому что он самый прозрачный, научно защищаемый и напрямую опирается на observed biology. Лучшая следующая версия системы — `Residual VAE`, потому что она сохраняет `Matrix prior`, но резко снижает explainability burden. Лучший pure neural benchmark — `Diffusion`. `GAN` в этой задаче как основной путь мы не берем.

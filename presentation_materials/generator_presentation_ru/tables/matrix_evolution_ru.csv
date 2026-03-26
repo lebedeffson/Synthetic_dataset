@@ -1,0 +1,4 @@
+﻿Этап,Что_изменилось,Local_MAE,Local_Max_Error,Wasserstein_norm,TSTR_R2,Pressure,Delta_Projection,Delta_Calibration
+Initial Matrix,Первая production-версия rule-guided matrix generator до усиления prior/noise model.,0.002275386615962583,0.012209094654170971,0.005019607187344047,0.9990642691465024,0.03381643217191362,0.013396482789021108,0.020419949382892513
+Improved Matrix,"Текущая усиленная production-версия: smoothed prior, heteroscedastic shrinkage sigma, structured block noise.",0.0015975267632836188,0.009189131198319767,0.004493241352941584,0.999497175593013,0.03478773551423575,0.0033261215887608136,0.03146161392547493
+Hybrid Residual VAE,Matrix prior + residual VAE + rule-aware loss + safety postprocessing.,0.0010689246635543,0.0055178197578854,0.0045925795909909,0.999799184408896,0.0027346152243095,6.833771564714825e-05,0.0026662775086624
