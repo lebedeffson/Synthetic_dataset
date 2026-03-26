@@ -1,19 +1,61 @@
-# Benchmarks And Legacy Artifacts
+# Benchmarks
 
-This folder stores only a minimal archive note for older experimental generators so the repository stays clean and the active production pipeline remains easy to navigate.
+This folder now contains the active benchmark artifacts for the current synthetic-generation project, not only legacy leftovers.
 
-## Contents
+## Active Benchmark Outputs
 
-- `../scripts/legacy/` - legacy generator scripts kept for reproducibility
+- `generator_family_benchmark/`
+  Single-run comparison of the current generator families:
+  `Matrix`, `Residual VAE`, `VAE`, `Diffusion`, `GAN`.
 
-## Status
+- `generator_family_benchmark_multiseed/`
+  Full family benchmark across multiple seeds. This is the main benchmark used in the presentation materials and method comparison tables.
 
-Raw historical outputs and old notebook artifacts were removed during cleanup because they no longer add value to the active project surface.
+- `residual_rule_aware_vae/`
+  Dedicated single-run artifacts for the hybrid `Residual VAE` generator.
 
-Legacy scripts are still available if an old benchmark needs to be reproduced again.
+- `residual_rule_aware_vae_multiseed/`
+  Dedicated multi-seed robustness run for `Residual VAE`.
 
-The active production pipeline remains:
+## Main Scripts
+
+- `../scripts/benchmark_generator_families.py`
+  Runs the single-run family benchmark.
+
+- `../scripts/benchmark_generator_families_multiseed.py`
+  Runs the full multi-seed family benchmark.
+
+- `../scripts/benchmark_residual_rule_aware_vae_multiseed.py`
+  Runs the dedicated multi-seed benchmark for `Residual VAE`.
+
+## Canonical Run Order
+
+### 1. Production dataset
 
 ```bash
-python scripts/build_cell_level_final_pipeline.py
+/home/lebedeffson/Code/venv/bin/python scripts/build_cell_level_final_pipeline.py
+/home/lebedeffson/Code/venv/bin/python scripts/analyze_counterfactual_rule_interventions.py
+/home/lebedeffson/Code/venv/bin/python scripts/explain_constraint_pressure_shap.py
+/home/lebedeffson/Code/venv/bin/python scripts/analyze_cell_level_final_dataset.py
+/home/lebedeffson/Code/venv/bin/python scripts/perform_rule_ablations.py
 ```
+
+### 2. Generator benchmarks
+
+```bash
+/home/lebedeffson/Code/venv/bin/python scripts/benchmark_generator_families.py
+/home/lebedeffson/Code/venv/bin/python scripts/benchmark_residual_rule_aware_vae_multiseed.py
+/home/lebedeffson/Code/venv/bin/python scripts/benchmark_generator_families_multiseed.py
+```
+
+### 3. Presentation materials
+
+```bash
+/home/lebedeffson/Code/venv/bin/python scripts/build_presentation_materials.py
+```
+
+## Notes
+
+- The repository uses the virtual environment at `/home/lebedeffson/Code/venv/bin/python`.
+- The benchmark reports consumed by the current presentation bundle are generated from the folders listed above.
+- Legacy scripts are still available under `../scripts/legacy/` if an old result needs to be reproduced separately.

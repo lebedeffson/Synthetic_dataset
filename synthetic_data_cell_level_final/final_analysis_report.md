@@ -9,27 +9,27 @@
 
 ## Main Quality Metrics
 
-- `mean_wasserstein_normalized = 0.0050`
-- `mean_ks_statistic = 0.0203`
-- `tstr_mae = 0.0022`
-- `tstr_r2 = 0.9991`
+- `mean_wasserstein_normalized = 0.0045`
+- `mean_ks_statistic = 0.0190`
+- `tstr_mae = 0.0017`
+- `tstr_r2 = 0.9995`
 - `support_violation_rate_mean = 0.0000`
-- `duplicate_rate_vs_real = 0.1230`
-- `local_mean_abs_error = 0.0023`
-- `local_max_abs_error = 0.0122`
+- `duplicate_rate_vs_real = 0.1280`
+- `local_mean_abs_error = 0.0016`
+- `local_max_abs_error = 0.0092`
 
 ## Uncertainty And Stability
 
 - Bootstrap CI coverage for real survival values across design points: `0.8667`.
-- Widest design-point CI width: `0.0276`.
+- Widest design-point CI width: `0.0287`.
 - Highest CI upper bound occurred at `0 Gy, 42 C, 45 min`.
 - Multi-seed runs analyzed: `8`.
-- Worst design-point max error across seeds: `0 Gy, 42 C, 45 min -> 0.0132`.
+- Worst design-point max error across seeds: `2 Gy, 42 C, 45 min -> 0.0121`.
 
 CI misses:
 
-- 0 Gy, 42 C, 45 min (real=0.53, CI=[0.509378, 0.52477])
-- 8 Gy, 44 C, 30 min (real=0, CI=[8.51854e-09, 5.22535e-08])
+- 0 Gy, 42 C, 45 min (real=0.53, CI=[0.518579, 0.52695])
+- 8 Gy, 44 C, 30 min (real=0, CI=[5.72921e-09, 2.12041e-08])
 
 ## Interpretation
 

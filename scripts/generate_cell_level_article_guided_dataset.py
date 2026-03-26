@@ -502,7 +502,10 @@ def plot_explainability_artifacts(metadata: Dict, outdir: Path) -> List[Path]:
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    import seaborn as sns
+    try:
+        import seaborn as sns  # type: ignore
+    except ModuleNotFoundError:
+        sns = None
 
     plot_dir = outdir / "explainability_plots"
     plot_dir.mkdir(parents=True, exist_ok=True)
@@ -511,11 +514,26 @@ def plot_explainability_artifacts(metadata: Dict, outdir: Path) -> List[Path]:
     log_rows = [{k: v for k, v in r.items() if not k.startswith("_")} for r in records]
     df = pd.DataFrame(log_rows)
 
-    sns.set_theme(style="whitegrid", context="talk")
+    if sns is not None:
+        sns.set_theme(style="whitegrid", context="talk")
+    else:
+        plt.style.use("default")
+        plt.rcParams.update(
+            {
+                "axes.grid": True,
+                "grid.alpha": 0.3,
+                "grid.linestyle": "-",
+                "axes.spines.top": False,
+                "axes.spines.right": False,
+            }
+        )
 
     # 1. Histogram of constraint_pressure_score
     plt.figure(figsize=(10, 6))
-    sns.histplot(df["constraint_pressure_score"], bins=20, kde=True, color="skyblue")
+    if sns is not None:
+        sns.histplot(df["constraint_pressure_score"], bins=20, kde=True, color="skyblue")
+    else:
+        plt.hist(df["constraint_pressure_score"], bins=20, color="skyblue", edgecolor="#2f3e46", alpha=0.85)
     plt.title("Constraint Pressure Score Distribution (§8, §11, §14)")
     plt.xlabel("Pressure Score (sum of abs deltas)")
     pressure_path = plot_dir / "constraint_pressure_hist.png"
@@ -527,7 +545,11 @@ def plot_explainability_artifacts(metadata: Dict, outdir: Path) -> List[Path]:
     delta_cols = ["delta_projection_mean", "delta_cap_mean", "delta_calibration_mean"]
     melted = df.melt(value_vars=delta_cols, var_name="Stage", value_name="Mean Abs Delta")
     plt.figure(figsize=(12, 6))
-    sns.boxplot(data=melted, x="Stage", y="Mean Abs Delta", palette="viridis")
+    if sns is not None:
+        sns.boxplot(data=melted, x="Stage", y="Mean Abs Delta", palette="viridis")
+    else:
+        grouped = [melted.loc[melted["Stage"] == col, "Mean Abs Delta"].to_numpy(dtype=float) for col in delta_cols]
+        plt.boxplot(grouped, tick_labels=delta_cols, patch_artist=True)
     plt.title("Correction Magnitude per Stage (§8)")
     delta_path = plot_dir / "stage_deltas_boxplot.png"
     plt.savefig(delta_path, bbox_inches="tight", dpi=150)
@@ -539,7 +561,10 @@ def plot_explainability_artifacts(metadata: Dict, outdir: Path) -> List[Path]:
     rates_df = df[rate_cols].mean().reset_index()
     rates_df.columns = ["Stage", "Activation Rate"]
     plt.figure(figsize=(10, 6))
-    sns.barplot(data=rates_df, x="Stage", y="Activation Rate", palette="magma")
+    if sns is not None:
+        sns.barplot(data=rates_df, x="Stage", y="Activation Rate", palette="magma")
+    else:
+        plt.bar(rates_df["Stage"], rates_df["Activation Rate"], color=["#6c757d", "#adb5bd", "#457b9d"], edgecolor="#2f3e46")
     plt.title("Rule Activation Rates per Stage (§13, §14)")
     plt.ylim(0, 1.05)
     rate_path = plot_dir / "activation_rates_bar.png"
@@ -569,8 +594,16 @@ def plot_explainability_artifacts(metadata: Dict, outdir: Path) -> List[Path]:
         plt.figure(figsize=(10, 8))
         xticklabels = [t["label"] for t in THERMAL_CONDITIONS]
         yticklabels = [f"{r} Gy" for r in RADIATION_LEVELS]
-        sns.heatmap(mean_abs, annot=True, fmt=".3f", cmap="YlOrRd", 
-                    xticklabels=xticklabels, yticklabels=yticklabels)
+        if sns is not None:
+            sns.heatmap(mean_abs, annot=True, fmt=".3f", cmap="YlOrRd", xticklabels=xticklabels, yticklabels=yticklabels)
+        else:
+            plt.imshow(mean_abs, cmap="YlOrRd", aspect="auto")
+            plt.xticks(range(len(xticklabels)), xticklabels)
+            plt.yticks(range(len(yticklabels)), yticklabels)
+            for i in range(mean_abs.shape[0]):
+                for j in range(mean_abs.shape[1]):
+                    plt.text(j, i, f"{mean_abs[i, j]:.3f}", ha="center", va="center", color="#2f3e46", fontsize=9)
+            plt.colorbar(label="Mean abs delta")
         plt.title("Per-Design-Point Correction Pressure (§14)")
         plt.xlabel("Thermal Condition")
         plt.ylabel("Radiation Dose")

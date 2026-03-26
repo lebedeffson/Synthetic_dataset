@@ -13,6 +13,13 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUTDIR = PROJECT_ROOT / "synthetic_data_cell_level_final" / "counterfactuals"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
+
+def dataframe_to_markdown(df: pd.DataFrame) -> str:
+    header = "| " + " | ".join(map(str, df.columns)) + " |"
+    separator = "| " + " | ".join(["---"] * len(df.columns)) + " |"
+    rows = ["| " + " | ".join(map(str, row)) + " |" for row in df.itertuples(index=False, name=None)]
+    return "\n".join([header, separator, *rows])
+
 def analyze_counterfactuals():
     print("Running Counterfactual Trust Analysis (§20)...")
     
@@ -79,7 +86,9 @@ def analyze_counterfactuals():
         "",
         "## Pressure Attribution by Stage",
         "",
-        df.groupby("primary_constraint")["pressure"].mean().to_markdown(),
+        dataframe_to_markdown(
+            df.groupby("primary_constraint", as_index=False)["pressure"].mean().sort_values("pressure", ascending=False)
+        ),
         "",
         "## Conclusion",
         "",

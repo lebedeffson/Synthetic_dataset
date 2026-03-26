@@ -5,9 +5,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 0 Gy, 42 C, 45 min
 
 - `real_survival`: 0.530000
-- `synthetic_mean`: 0.517791
+- `synthetic_mean`: 0.523112
 - `synthetic_median`: 0.530000
-- `abs_mean_error`: 0.012209
+- `abs_mean_error`: 0.006888
 - `rules`: CL1; CL3
 - `evidence_ids`: E03; E05; E06
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL3: это самый мягкий тепловой режим в наблюдаемом дизайне и он должен давать наибольшую выживаемость среди трех терморежимов. Без радиации различия между точками определяются главным образом тепловым порядком режимов.
@@ -15,9 +15,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 0 Gy, 43 C, 45 min
 
 - `real_survival`: 0.180000
-- `synthetic_mean`: 0.185835
-- `synthetic_median`: 0.176799
-- `abs_mean_error`: 0.005835
+- `synthetic_mean`: 0.183419
+- `synthetic_median`: 0.175264
+- `abs_mean_error`: 0.003419
 - `rules`: CL1; CL3; CL4
 - `evidence_ids`: E01; E03; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: режим попадает в окно 41-43 C и 30-60 мин, где по статьям ожидается подавление репарации ДНК и радиосенсибилизация. CL3/CL4: режим должен лежать между 42C_45min и 44C_30min по степени повреждения. Без радиации различия между точками определяются главным образом тепловым порядком режимов.
@@ -25,9 +25,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 0 Gy, 44 C, 30 min
 
 - `real_survival`: 0.021000
-- `synthetic_mean`: 0.021797
-- `synthetic_median`: 0.021499
-- `abs_mean_error`: 0.000797
+- `synthetic_mean`: 0.021154
+- `synthetic_median`: 0.021095
+- `abs_mean_error`: 0.000154
 - `rules`: CL1; CL3; CL4
 - `evidence_ids`: E01; E03; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL4: температура выше 43 C смещает механизм к более выраженному direct heat kill. CL3: в наблюдаемом домене этот режим не должен выглядеть мягче, чем 43C_45min. Без радиации различия между точками определяются главным образом тепловым порядком режимов.
@@ -35,9 +35,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 2 Gy, 42 C, 45 min
 
 - `real_survival`: 0.260000
-- `synthetic_mean`: 0.271068
-- `synthetic_median`: 0.266437
-- `abs_mean_error`: 0.011068
+- `synthetic_mean`: 0.269189
+- `synthetic_median`: 0.265155
+- `abs_mean_error`: 0.009189
 - `rules`: CL1; CL2; CL3
 - `evidence_ids`: E03; E04; E05; E06
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: 42 C, 45 мин остается внутри sensitizing window и может усиливать радиочувствительность без выхода в более жесткий тепловой режим. CL3: это самый мягкий тепловой режим в наблюдаемом дизайне и он должен давать наибольшую выживаемость среди трех терморежимов.
@@ -45,9 +45,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 2 Gy, 43 C, 45 min
 
 - `real_survival`: 0.051000
-- `synthetic_mean`: 0.053283
-- `synthetic_median`: 0.052462
-- `abs_mean_error`: 0.002283
+- `synthetic_mean`: 0.052050
+- `synthetic_median`: 0.051039
+- `abs_mean_error`: 0.001050
 - `rules`: CL1; CL2; CL3; CL4
 - `evidence_ids`: E01; E03; E04; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: режим попадает в окно 41-43 C и 30-60 мин, где по статьям ожидается подавление репарации ДНК и радиосенсибилизация. CL3/CL4: режим должен лежать между 42C_45min и 44C_30min по степени повреждения.
@@ -55,9 +55,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 2 Gy, 44 C, 30 min
 
 - `real_survival`: 0.008000
-- `synthetic_mean`: 0.008309
-- `synthetic_median`: 0.008133
-- `abs_mean_error`: 0.000309
+- `synthetic_mean`: 0.008113
+- `synthetic_median`: 0.008213
+- `abs_mean_error`: 0.000113
 - `rules`: CL1; CL3; CL4
 - `evidence_ids`: E01; E03; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL4: температура выше 43 C смещает механизм к более выраженному direct heat kill. CL3: в наблюдаемом домене этот режим не должен выглядеть мягче, чем 43C_45min.
@@ -65,9 +65,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 4 Gy, 42 C, 45 min
 
 - `real_survival`: 0.260000
-- `synthetic_mean`: 0.260495
-- `synthetic_median`: 0.253407
-- `abs_mean_error`: 0.000495
+- `synthetic_mean`: 0.262715
+- `synthetic_median`: 0.259256
+- `abs_mean_error`: 0.002715
 - `rules`: CL1; CL2; CL3
 - `evidence_ids`: E03; E04; E05; E06
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: 42 C, 45 мин остается внутри sensitizing window и может усиливать радиочувствительность без выхода в более жесткий тепловой режим. CL3: это самый мягкий тепловой режим в наблюдаемом дизайне и он должен давать наибольшую выживаемость среди трех терморежимов.
@@ -75,9 +75,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 4 Gy, 43 C, 45 min
 
 - `real_survival`: 0.051000
-- `synthetic_mean`: 0.051366
-- `synthetic_median`: 0.051133
-- `abs_mean_error`: 0.000366
+- `synthetic_mean`: 0.050931
+- `synthetic_median`: 0.050525
+- `abs_mean_error`: 0.000069
 - `rules`: CL1; CL2; CL3; CL4
 - `evidence_ids`: E01; E03; E04; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: режим попадает в окно 41-43 C и 30-60 мин, где по статьям ожидается подавление репарации ДНК и радиосенсибилизация. CL3/CL4: режим должен лежать между 42C_45min и 44C_30min по степени повреждения.
@@ -85,9 +85,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 4 Gy, 44 C, 30 min
 
 - `real_survival`: 0.008000
-- `synthetic_mean`: 0.007973
-- `synthetic_median`: 0.007817
-- `abs_mean_error`: 0.000027
+- `synthetic_mean`: 0.007966
+- `synthetic_median`: 0.007970
+- `abs_mean_error`: 0.000034
 - `rules`: CL1; CL3; CL4
 - `evidence_ids`: E01; E03; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL4: температура выше 43 C смещает механизм к более выраженному direct heat kill. CL3: в наблюдаемом домене этот режим не должен выглядеть мягче, чем 43C_45min.
@@ -95,9 +95,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 6 Gy, 42 C, 45 min
 
 - `real_survival`: 0.022000
-- `synthetic_mean`: 0.022499
-- `synthetic_median`: 0.021906
-- `abs_mean_error`: 0.000499
+- `synthetic_mean`: 0.022233
+- `synthetic_median`: 0.021837
+- `abs_mean_error`: 0.000233
 - `rules`: CL1; CL2; CL3
 - `evidence_ids`: E03; E04; E05; E06
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: 42 C, 45 мин остается внутри sensitizing window и может усиливать радиочувствительность без выхода в более жесткий тепловой режим. CL3: это самый мягкий тепловой режим в наблюдаемом дизайне и он должен давать наибольшую выживаемость среди трех терморежимов.
@@ -105,9 +105,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 6 Gy, 43 C, 45 min
 
 - `real_survival`: 0.012000
-- `synthetic_mean`: 0.012208
+- `synthetic_mean`: 0.012093
 - `synthetic_median`: 0.011941
-- `abs_mean_error`: 0.000208
+- `abs_mean_error`: 0.000093
 - `rules`: CL1; CL2; CL3; CL4; CL5
 - `evidence_ids`: E01; E03; E04; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: режим попадает в окно 41-43 C и 30-60 мин, где по статьям ожидается подавление репарации ДНК и радиосенсибилизация. CL3/CL4: режим должен лежать между 42C_45min и 44C_30min по степени повреждения. CL5: высокая комбинированная доза требует очень низкой выживаемости.
@@ -115,9 +115,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 6 Gy, 44 C, 30 min
 
 - `real_survival`: 0.000300
-- `synthetic_mean`: 0.000309
-- `synthetic_median`: 0.000301
-- `abs_mean_error`: 0.000009
+- `synthetic_mean`: 0.000302
+- `synthetic_median`: 0.000303
+- `abs_mean_error`: 0.000002
 - `rules`: CL1; CL3; CL4; CL5
 - `evidence_ids`: E01; E03; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL4: температура выше 43 C смещает механизм к более выраженному direct heat kill. CL3: в наблюдаемом домене этот режим не должен выглядеть мягче, чем 43C_45min. CL5: высокая комбинированная доза требует очень низкой выживаемости.
@@ -125,9 +125,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 8 Gy, 42 C, 45 min
 
 - `real_survival`: 0.000700
-- `synthetic_mean`: 0.000722
-- `synthetic_median`: 0.000707
-- `abs_mean_error`: 0.000022
+- `synthetic_mean`: 0.000703
+- `synthetic_median`: 0.000698
+- `abs_mean_error`: 0.000003
 - `rules`: CL1; CL2; CL3
 - `evidence_ids`: E03; E04; E05; E06
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: 42 C, 45 мин остается внутри sensitizing window и может усиливать радиочувствительность без выхода в более жесткий тепловой режим. CL3: это самый мягкий тепловой режим в наблюдаемом дизайне и он должен давать наибольшую выживаемость среди трех терморежимов.
@@ -135,9 +135,9 @@ Each row summarizes how the final synthetic dataset behaves at one of the 15 obs
 ## 8 Gy, 43 C, 45 min
 
 - `real_survival`: 0.000040
-- `synthetic_mean`: 0.000041
-- `synthetic_median`: 0.000041
-- `abs_mean_error`: 0.000001
+- `synthetic_mean`: 0.000040
+- `synthetic_median`: 0.000040
+- `abs_mean_error`: 0.000000
 - `rules`: CL1; CL2; CL3; CL4; CL5
 - `evidence_ids`: E01; E03; E04; E05; E06; E14
 - explanation: CL1: при фиксированном терморежиме выживаемость не должна расти с дозой радиации. CL2: режим попадает в окно 41-43 C и 30-60 мин, где по статьям ожидается подавление репарации ДНК и радиосенсибилизация. CL3/CL4: режим должен лежать между 42C_45min и 44C_30min по степени повреждения. CL5: высокая комбинированная доза требует очень низкой выживаемости.

@@ -12,22 +12,22 @@ This dataset is the primary synthetic dataset for the 15-point cell survival exp
 
 ## Statistical Metrics
 
-- `mean_wasserstein_normalized`: 0.0050
-- `mean_ks_statistic`: 0.0203
-- `pearson_correlation_mean_abs_diff`: 0.0015
-- `spearman_correlation_mean_abs_diff`: 0.0090
-- `tstr_mae`: 0.0022
-- `tstr_r2`: 0.9991
+- `mean_wasserstein_normalized`: 0.0045
+- `mean_ks_statistic`: 0.0190
+- `pearson_correlation_mean_abs_diff`: 0.0018
+- `spearman_correlation_mean_abs_diff`: 0.0077
+- `tstr_mae`: 0.0017
+- `tstr_r2`: 0.9995
 - `support_violation_rate_mean`: 0.0000
-- `duplicate_rate_vs_real`: 0.1230
-- `separability_auc_mean`: 0.3798
-- `separability_gini_abs_mean`: 0.2893
+- `duplicate_rate_vs_real`: 0.1280
+- `separability_auc_mean`: 0.3971
+- `separability_gini_abs_mean`: 0.2484
 
 ## Independent Cell-Level Validation
 
 - `exact_design_support_rate`: 1.0000
-- `local_mean_abs_error`: 0.0023
-- `local_max_abs_error`: 0.0122
+- `local_mean_abs_error`: 0.0016
+- `local_max_abs_error`: 0.0092
 - `radiation_monotonicity_mean_rate`: 1.0000
 - `thermal_monotonicity_mean_rate`: 1.0000
 - `high_combined_dose_low_survival_rate`: 1.0000
