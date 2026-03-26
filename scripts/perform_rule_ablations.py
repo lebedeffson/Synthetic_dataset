@@ -20,6 +20,76 @@ ABLATIONS = {
     "no_local_sigma": {"disable_local_sigma": True},
 }
 
+
+def format_delta(value: float, precision: int = 4) -> str:
+    sign = "+" if value >= 0 else "-"
+    return f"{sign}{abs(value):.{precision}f}"
+
+
+def build_observations(df: pd.DataFrame) -> List[str]:
+    baseline = df.loc[df["ablation"] == "full_pipeline"].iloc[0]
+    observations: List[str] = []
+
+    for ablation_name, title in [
+        ("no_projection", "Projection (CL1/CL3)"),
+        ("no_calibration", "Calibration"),
+        ("no_cap", "Caps (CL5)"),
+        ("no_local_sigma", "Local sigma"),
+    ]:
+        row = df.loc[df["ablation"] == ablation_name].iloc[0]
+        delta_mae = float(row["local_mean_abs_error"] - baseline["local_mean_abs_error"])
+        delta_pressure = float(row["mean_pressure"] - baseline["mean_pressure"])
+
+        if ablation_name == "no_projection":
+            delta_rad = float(row["radiation_monotonicity"] - baseline["radiation_monotonicity"])
+            delta_therm = float(row["thermal_monotonicity"] - baseline["thermal_monotonicity"])
+            if delta_rad < -1e-6 or delta_therm < -1e-6:
+                observations.append(
+                    f"- **{title}**: без projection monotonicity падает (`RT {format_delta(delta_rad)}`, `HT {format_delta(delta_therm)}`), "
+                    f"а Local MAE меняется на `{format_delta(delta_mae)}`."
+                )
+            else:
+                observations.append(
+                    f"- **{title}**: в этом датасете final monotonicity не просела, но pipeline потерял явную projection-stage коррекцию; "
+                    f"Local MAE изменился на `{format_delta(delta_mae)}`, pressure на `{format_delta(delta_pressure)}`."
+                )
+        elif ablation_name == "no_calibration":
+            observations.append(
+                f"- **{title}**: отключение calibration меняет Local MAE на `{format_delta(delta_mae)}` и pressure на `{format_delta(delta_pressure)}`; "
+                "этот шаг нужен для возврата synthetic mean к наблюдаемой матрице."
+            )
+        elif ablation_name == "no_cap":
+            delta_hd = float(row["high_dose_plausibility"] - baseline["high_dose_plausibility"])
+            observations.append(
+                f"- **{title}**: high-dose plausibility меняется на `{format_delta(delta_hd)}`; "
+                f"Local MAE меняется на `{format_delta(delta_mae)}`."
+            )
+        elif ablation_name == "no_local_sigma":
+            observations.append(
+                f"- **{title}**: без локальной оценки шума меняются fidelity и burden "
+                f"(Local MAE `{format_delta(delta_mae)}`, pressure `{format_delta(delta_pressure)}`)."
+            )
+
+    return observations
+
+
+def dataframe_to_markdown(df: pd.DataFrame) -> str:
+    headers = list(df.columns)
+    lines = [
+        "| " + " | ".join(headers) + " |",
+        "| " + " | ".join(["---"] * len(headers)) + " |",
+    ]
+    for _, row in df.iterrows():
+        cells: List[str] = []
+        for value in row.tolist():
+            if isinstance(value, float):
+                cells.append(f"{value:.6f}")
+            else:
+                cells.append(str(value))
+        lines.append("| " + " | ".join(cells) + " |")
+    return "\n".join(lines)
+
+
 def perform_ablations():
     results = []
     
@@ -57,14 +127,11 @@ def perform_ablations():
         "",
         "This report compares the impact of disabling different stages of the generation pipeline on survival quality and trust metrics.",
         "",
-        df.to_markdown(index=False),
+        dataframe_to_markdown(df),
         "",
         "## Observations",
         "",
-        "- **Projection (CL1/CL3)**: Disabling projection leads to severe drops in monotonicity rates.",
-        "- **Calibration**: Disabling calibration increases Local MAE as the blocks don't match the observed means anymore.",
-        "- **Caps (CL5)**: Disabling caps affects the high-combined-dose plausibility (though current sigma is small, so impact may be limited).",
-        "- **Local Sigma**: High constant sigma leads to higher pressure and more out-of-bounds samples.",
+        *build_observations(df),
     ]
     md_path.write_text("\n".join(lines), encoding="utf-8")
     

@@ -1,0 +1,16 @@
+{
+  "blocks_total": 67,
+  "pass_count": 67,
+  "reject_count": 0,
+  "pass_rate": 1.0,
+  "reject_rate": 0.0,
+  "mean_delta_projection": 0.00014738378240101372,
+  "mean_delta_cap": 0.0,
+  "mean_delta_calibration": 0.005653860486567778,
+  "mean_total_adjustment_abs": 0.005801244268968792,
+  "mean_constraint_pressure": 0.005801244268968792,
+  "p95_constraint_pressure": 0.006990628887314849,
+  "mean_projection_active_rate": 0.06567164179104479,
+  "mean_cap_active_rate": 0.0,
+  "mean_calibration_active_rate": 0.9681592039800996
+}

@@ -51,6 +51,15 @@ class CellLevelConfig:
     loo_bandwidth: Tuple[float, float, float] = (1.5, 0.6, 10.0)
     sigma_floor: float = 0.035
     sigma_cap: float = 0.120
+    mean_smoothing_strength: float = 0.18
+    sigma_shrinkage: float = 0.65
+    boundary_sigma_floor_ratio: float = 0.45
+    truncation_z: float = 2.2
+    sampling_temperature: float = 0.95
+    latent_block_scale: float = 0.55
+    latent_row_scale: float = 0.32
+    latent_col_scale: float = 0.24
+    local_noise_scale: float = 0.62
     projection_max_iter: int = 50
     calibration_iterations: int = 4
     # Explainability & Trust
@@ -117,6 +126,32 @@ def build_log_survival_matrix(real_df: pd.DataFrame) -> np.ndarray:
     return matrix
 
 
+def build_prior_mean_matrix(real_df: pd.DataFrame, cfg: CellLevelConfig) -> np.ndarray:
+    observed = build_log_survival_matrix(real_df)
+    neighborhood = observed.copy()
+
+    for i in range(observed.shape[0]):
+        for j in range(observed.shape[1]):
+            values = [observed[i, j]]
+            if i > 0:
+                values.append(observed[i - 1, j])
+            if i < observed.shape[0] - 1:
+                values.append(observed[i + 1, j])
+            if j > 0:
+                values.append(observed[i, j - 1])
+            if j < observed.shape[1] - 1:
+                values.append(observed[i, j + 1])
+            neighborhood[i, j] = float(np.mean(values))
+
+    blend = np.full_like(observed, cfg.mean_smoothing_strength, dtype=float)
+    blend[0, :] *= 0.35
+    blend[-1, :] *= 0.35
+    blend[:, 0] *= 0.55
+    blend[:, -1] *= 0.55
+    prior = (1.0 - blend) * observed + blend * neighborhood
+    return project_monotone_matrix(prior, cfg.projection_max_iter)
+
+
 def project_monotone_matrix(matrix: np.ndarray, max_iter: int) -> np.ndarray:
     projected = np.asarray(matrix, dtype=float).copy()
     row_ir = IsotonicRegression(increasing=False, out_of_bounds="clip")
@@ -135,7 +170,7 @@ def project_monotone_matrix(matrix: np.ndarray, max_iter: int) -> np.ndarray:
     return projected
 
 
-def estimate_noise_matrix(real_df: pd.DataFrame, mu_matrix: np.ndarray, cfg: CellLevelConfig) -> np.ndarray:
+def estimate_noise_matrix(real_df: pd.DataFrame, prior_matrix: np.ndarray, cfg: CellLevelConfig) -> np.ndarray:
     features = real_df[["Радиация", "Температура", "Время"]].to_numpy(dtype=float)
     y = log_survival_transform(real_df["Выживаемость"].to_numpy(dtype=float))
 
@@ -150,26 +185,62 @@ def estimate_noise_matrix(real_df: pd.DataFrame, mu_matrix: np.ndarray, cfg: Cel
     global_sigma = float(np.std(residuals, ddof=0))
     global_sigma = float(np.clip(global_sigma, cfg.sigma_floor, cfg.sigma_cap))
 
-    sigma = np.full_like(mu_matrix, fill_value=global_sigma, dtype=float)
-    for i in range(mu_matrix.shape[0]):
-        for j in range(mu_matrix.shape[1]):
+    sigma = np.full_like(prior_matrix, fill_value=global_sigma, dtype=float)
+    max_survival = 0.53
+    for i in range(prior_matrix.shape[0]):
+        for j in range(prior_matrix.shape[1]):
             gaps: List[float] = []
             if i > 0:
-                gaps.append(abs(mu_matrix[i - 1, j] - mu_matrix[i, j]))
-            if i < mu_matrix.shape[0] - 1:
-                gaps.append(abs(mu_matrix[i, j] - mu_matrix[i + 1, j]))
+                gaps.append(abs(prior_matrix[i - 1, j] - prior_matrix[i, j]))
+            if i < prior_matrix.shape[0] - 1:
+                gaps.append(abs(prior_matrix[i, j] - prior_matrix[i + 1, j]))
             if j > 0:
-                gaps.append(abs(mu_matrix[i, j - 1] - mu_matrix[i, j]))
-            if j < mu_matrix.shape[1] - 1:
-                gaps.append(abs(mu_matrix[i, j] - mu_matrix[i, j + 1]))
+                gaps.append(abs(prior_matrix[i, j - 1] - prior_matrix[i, j]))
+            if j < prior_matrix.shape[1] - 1:
+                gaps.append(abs(prior_matrix[i, j] - prior_matrix[i, j + 1]))
 
             positive_gaps = [g for g in gaps if g > 1e-6]
             if positive_gaps and not cfg.disable_local_sigma:
-                local_sigma = min(global_sigma, 0.35 * min(positive_gaps))
+                local_gap_sigma = float(np.clip(0.42 * np.median(positive_gaps), cfg.sigma_floor, cfg.sigma_cap))
             else:
-                local_sigma = global_sigma
-            sigma[i, j] = float(np.clip(local_sigma, cfg.sigma_floor, cfg.sigma_cap))
+                local_gap_sigma = global_sigma
+
+            if i in (0, prior_matrix.shape[0] - 1):
+                edge_factor = 0.82
+            else:
+                edge_factor = 1.0
+
+            survival = float(inverse_log_survival(np.array([prior_matrix[i, j]]))[0])
+            boundary_distance = min(survival, max_survival - survival) / max_survival
+            boundary_distance = float(np.clip(boundary_distance * 2.0, 0.0, 1.0))
+            boundary_factor = cfg.boundary_sigma_floor_ratio + (1.0 - cfg.boundary_sigma_floor_ratio) * (boundary_distance ** 0.65)
+
+            local_sigma = cfg.sigma_shrinkage * local_gap_sigma + (1.0 - cfg.sigma_shrinkage) * global_sigma
+            sigma[i, j] = float(np.clip(local_sigma * boundary_factor * edge_factor, cfg.sigma_floor, cfg.sigma_cap))
     return sigma
+
+
+def sample_structured_noise(sigma_matrix: np.ndarray, rng: np.random.Generator, cfg: CellLevelConfig) -> np.ndarray:
+    global_factor = rng.normal()
+    row_factors = rng.normal(size=(sigma_matrix.shape[0], 1))
+    col_factors = rng.normal(size=(1, sigma_matrix.shape[1]))
+    local_factors = rng.normal(size=sigma_matrix.shape)
+
+    raw = (
+        cfg.latent_block_scale * global_factor
+        + cfg.latent_row_scale * row_factors
+        + cfg.latent_col_scale * col_factors
+        + cfg.local_noise_scale * local_factors
+    )
+    scale_norm = math.sqrt(
+        cfg.latent_block_scale ** 2
+        + cfg.latent_row_scale ** 2
+        + cfg.latent_col_scale ** 2
+        + cfg.local_noise_scale ** 2
+    )
+    standardized = cfg.sampling_temperature * raw / max(scale_norm, 1e-8)
+    standardized = np.clip(standardized, -cfg.truncation_z, cfg.truncation_z)
+    return sigma_matrix * standardized
 
 
 def _single_pass_row_projection(matrix: np.ndarray) -> np.ndarray:
@@ -197,9 +268,9 @@ def generate_block_samples(
     records: List[Dict] = []
 
     for block_id in range(n_blocks):
-        sampled = mu_matrix + rng.normal(0.0, sigma_matrix)
-        lower = mu_matrix - 2.5 * sigma_matrix
-        upper = mu_matrix + 2.5 * sigma_matrix
+        sampled = mu_matrix + sample_structured_noise(sigma_matrix, rng, cfg)
+        lower = mu_matrix - cfg.truncation_z * sigma_matrix
+        upper = mu_matrix + cfg.truncation_z * sigma_matrix
         sampled = np.clip(sampled, lower, upper)
         sampled = np.clip(sampled, min_log, max_log)
 
@@ -578,20 +649,21 @@ def blocks_to_dataframe(blocks: List[np.ndarray], cfg: CellLevelConfig) -> pd.Da
 
 def build_generation_artifacts(cfg: CellLevelConfig) -> tuple[pd.DataFrame, pd.DataFrame, Dict]:
     real_df = make_real_dataframe()
-    mu_matrix = build_log_survival_matrix(real_df)
-    sigma_matrix = estimate_noise_matrix(real_df, mu_matrix, cfg)
+    target_matrix = build_log_survival_matrix(real_df)
+    prior_matrix = build_prior_mean_matrix(real_df, cfg)
+    sigma_matrix = estimate_noise_matrix(real_df, prior_matrix, cfg)
     
     # §11, §24: Resampling loop
     final_blocks: List[np.ndarray] = []
     final_records: List[Dict] = []
-    target_count_blocks = int(math.ceil(cfg.n_synthetic / mu_matrix.size))
+    target_count_blocks = int(math.ceil(cfg.n_synthetic / target_matrix.size))
     
     attempts = 0
     while len(final_blocks) < target_count_blocks and attempts < cfg.max_resample_attempts:
         needed = target_count_blocks - len(final_blocks)
-        tmp_cfg = dataclass_replace(cfg, n_synthetic=needed * mu_matrix.size, seed=cfg.seed + attempts)
-        blocks, records = generate_block_samples(mu_matrix, sigma_matrix, tmp_cfg)
-        blocks, records = calibrate_blocks_to_targets(blocks, mu_matrix, tmp_cfg, records)
+        tmp_cfg = dataclass_replace(cfg, n_synthetic=needed * target_matrix.size, seed=cfg.seed + attempts)
+        blocks, records = generate_block_samples(prior_matrix, sigma_matrix, tmp_cfg)
+        blocks, records = calibrate_blocks_to_targets(blocks, target_matrix, tmp_cfg, records)
         
         if cfg.explainability_mode == "enforced":
             passed_b, _ = apply_admission_control(blocks, records, tmp_cfg)
@@ -619,6 +691,8 @@ def build_generation_artifacts(cfg: CellLevelConfig) -> tuple[pd.DataFrame, pd.D
             for t in THERMAL_CONDITIONS
         ],
         "sigma_matrix_log10": sigma_matrix.tolist(),
+        "prior_matrix_log10": prior_matrix.tolist(),
+        "target_matrix_log10": target_matrix.tolist(),
         "calibration_iterations": cfg.calibration_iterations,
         "rules_file": "knowledge_base/cell_level_rules.json",
     }

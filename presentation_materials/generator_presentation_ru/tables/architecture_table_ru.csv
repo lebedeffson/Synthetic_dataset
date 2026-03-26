@@ -1,0 +1,6 @@
+﻿Метод,Архитектура,Как_получали,Параметры,Эпохи
+Matrix,Rule-guided stochastic 5x3 matrix with isotonic projection and calibration,No neural training. Direct rule-guided generator on the exact 15-point design support.,0,0
+Residual VAE,"Residual rule-aware block VAE, latent=6, hidden=128, matrix prior + rule loss",Learns residual stochasticity around the rule-guided matrix prior; projection/cap/calibration stay as a safety layer.,70171,320
+VAE,"MLP VAE, latent=8, hidden=96",Trained on rule-guided bootstrap blocks distilled from the observed 15-point matrix.,24031,260
+Diffusion,"DDPM-style MLP denoiser, steps=64, hidden=96",Trained on rule-guided bootstrap blocks distilled from the observed 15-point matrix.,15375,280
+GAN,"MLP GAN (LSGAN), latent=8, hidden=96",Trained on rule-guided bootstrap blocks distilled from the observed 15-point matrix.,11631,420

@@ -1,0 +1,6 @@
+﻿Rule_ID,Тип,Покрытие_в_15_точках,Роль
+CL1,hard,15,"Monotonicity по RT, hard enforcement"
+CL2,soft,10,"Sensitizing window, soft prior / interpretation"
+CL3,hard,15,"Thermal ordering, hard enforcement"
+CL4,soft,10,"Direct heat kill trend, domain prior"
+CL5,hard,4,High combined dose -> very low survival

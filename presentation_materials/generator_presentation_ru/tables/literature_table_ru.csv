@@ -1,0 +1,15 @@
+﻿ID,Год,Тип_источника,Биологический_контекст,Ключевой_вывод,Ссылка
+E01,1982,animal_experiment,malignant tumors,"Around 40 C tumor oxygenation improved, while higher temperatures reduced oxygenation because of vascular restriction",https://pubmed.ncbi.nlm.nih.gov/7146320/
+E02,2001,review,solid tumors,Mild hyperthermia improves oxygenation during and up to 1-2 days after heating and can enhance radiation response,https://pubmed.ncbi.nlm.nih.gov/11260653/
+E03,2015,mechanistic_review,cancer cells,Hyperthermia perturbs multiple DNA repair pathways including HR and NHEJ-related components,https://pmc.ncbi.nlm.nih.gov/articles/PMC4554295/
+E04,2011,in_vitro_mechanistic,mixed cancer cells,Mild hyperthermia inhibits homologous recombination and induces BRCA2 degradation,https://pubmed.ncbi.nlm.nih.gov/21555554/
+E05,2017,in_vitro_mechanistic,mixed cancer cells,HR inhibition and radiosensitization depend on thermal dose; 41-43 C for about 30-60 min is a key sensitizing range,https://pubmed.ncbi.nlm.nih.gov/28574821/
+E06,2020,in_vitro,cervical cancer,"Shorter interval caused more residual DNA damage, more apoptosis, and more cell kill; sequence had little effect",https://pubmed.ncbi.nlm.nih.gov/32138173/
+E07,2024,translational_multimodel,cervical cancer,Radiosensitization critically depended on the HT-RT interval and shorter intervals aligned with better survival,https://pubmed.ncbi.nlm.nih.gov/37820768/
+E08,2019,retrospective_clinical,locally advanced cervical cancer,Interval alone was not the dominant predictor once thermal dose and treatment quality were considered,https://pubmed.ncbi.nlm.nih.gov/30906734/
+E09,2005,randomized_trial,superficial tumors <=3 cm,Adequate thermal dose improved complete response; superficial lesions responded better when sufficient heating was achieved,https://pubmed.ncbi.nlm.nih.gov/15860867/
+E10,2019,in_vitro_pilot,hepatocellular carcinoma,The strongest cytotoxic pattern was 40 C + 4 Gy + 48 h with high apoptosis and reduced VEGF/PDGF,https://pubmed.ncbi.nlm.nih.gov/31450899/
+E11,2022,clinical_review,multiple tumors,"Temperature, duration, thermal dose, interval, and sequence all matter, but thermal dose is among the most reproducible predictors",https://pubmed.ncbi.nlm.nih.gov/35158893/
+E12,2016,systematic_review,locally advanced cervical cancer,HTRT improved complete response and loco-regional control over RT without clear excess of severe toxicity,https://pubmed.ncbi.nlm.nih.gov/27411568/
+E13,2025,phase_ii_clinical_trial,recurrent head and neck cancer after prior RT,Repeated HT within 2 h after RT produced high response with manageable toxicity,https://pubmed.ncbi.nlm.nih.gov/39920700/
+E14,2002,review_chapter,tumor cells and tumors,The cytotoxic threshold for hyperthermia was described around 42.5 C and the critical temperature for cell-killing curves was between 42.5 C and 43 C,https://www.ncbi.nlm.nih.gov/books/NBK6245/

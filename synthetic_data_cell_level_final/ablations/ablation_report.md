@@ -2,17 +2,17 @@
 
 This report compares the impact of disabling different stages of the generation pipeline on survival quality and trust metrics.
 
-| ablation       |   local_mean_abs_error |   radiation_monotonicity |   thermal_monotonicity |   high_dose_plausibility |   mean_pressure |   mean_delta_proj |   mean_delta_calib |
-|:---------------|-----------------------:|-------------------------:|-----------------------:|-------------------------:|----------------:|------------------:|-------------------:|
-| full_pipeline  |             0.00227539 |                        1 |                      1 |                        1 |       0.0338164 |         0.0133965 |          0.0204199 |
-| no_projection  |             0.00241169 |                        1 |                      1 |                        1 |       0.0314587 |         0         |          0.0314587 |
-| no_cap         |             0.00227539 |                        1 |                      1 |                        1 |       0.0338164 |         0.0133965 |          0.0204199 |
-| no_calibration |             0.0072498  |                        1 |                      1 |                        1 |       0         |         0.0133965 |          0         |
-| no_local_sigma |             0.00248051 |                        1 |                      1 |                        1 |       0.0349855 |         0.0138449 |          0.0211366 |
+| ablation | local_mean_abs_error | radiation_monotonicity | thermal_monotonicity | high_dose_plausibility | mean_pressure | mean_delta_proj | mean_delta_calib |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| full_pipeline | 0.002275 | 1.000000 | 1.000000 | 1.000000 | 0.033816 | 0.013396 | 0.020420 |
+| no_projection | 0.002412 | 1.000000 | 1.000000 | 1.000000 | 0.031459 | 0.000000 | 0.031459 |
+| no_cap | 0.002275 | 1.000000 | 1.000000 | 1.000000 | 0.033816 | 0.013396 | 0.020420 |
+| no_calibration | 0.007250 | 1.000000 | 1.000000 | 1.000000 | 0.000000 | 0.013396 | 0.000000 |
+| no_local_sigma | 0.002481 | 1.000000 | 1.000000 | 1.000000 | 0.034986 | 0.013845 | 0.021137 |
 
 ## Observations
 
-- **Projection (CL1/CL3)**: Disabling projection leads to severe drops in monotonicity rates.
-- **Calibration**: Disabling calibration increases Local MAE as the blocks don't match the observed means anymore.
-- **Caps (CL5)**: Disabling caps affects the high-combined-dose plausibility (though current sigma is small, so impact may be limited).
-- **Local Sigma**: High constant sigma leads to higher pressure and more out-of-bounds samples.
+- **Projection (CL1/CL3)**: в этом датасете final monotonicity не просела, но pipeline потерял явную projection-stage коррекцию; Local MAE изменился на `+0.0001`, pressure на `-0.0024`.
+- **Calibration**: отключение calibration меняет Local MAE на `+0.0050` и pressure на `-0.0338`; этот шаг нужен для возврата synthetic mean к наблюдаемой матрице.
+- **Caps (CL5)**: high-dose plausibility меняется на `+0.0000`; Local MAE меняется на `+0.0000`.
+- **Local sigma**: без локальной оценки шума меняются fidelity и burden (Local MAE `+0.0002`, pressure `+0.0012`).

@@ -1,0 +1,6 @@
+﻿Rule_ID,Название,Тип,IF,THEN,Evidence_IDs
+CL1,radiation_monotonicity,hard_process_rule,thermal_condition fixed; radiation_dose_gy increases,survival_fraction non_increasing,E03; E05; E06
+CL2,sensitizing_window,soft_mechanistic_rule,"temperature_c between [41.0, 43.0]; duration_min between [30.0, 60.0]",dna_repair_inhibition high; radiosensitization high,E03; E04; E05
+CL3,thermal_ordering_in_observed_domain,hard_article_guided_rule,radiation_dose_gy fixed,"survival_order non_increasing ['42C_45min', '43C_45min', '44C_30min']",E03; E05
+CL4,high_temperature_direct_cytotoxicity,soft_to_hard_rule_in_domain,temperature_c greater_equal 43.0,direct_heat_kill increases,E01; E05; E14
+CL5,high_combined_dose_low_survival,hard_plausibility_rule,radiation_dose_gy greater_equal 6.0; cem43 greater_equal 45.0,survival_fraction very_low,E05; E06

@@ -1,0 +1,6 @@
+﻿Сценарий,Рекомендуемый_метод,Почему
+Основной production / защита,Matrix,"Самый прозрачный, напрямую следует из правил CL1-CL5 и литературы; 100% стабильность по compliance на всех seed."
+Финальная гибридная версия / следующий спринт,Residual VAE,"Сохраняет rule-guided matrix prior, но сильно снижает explainability pressure и держит raw compliance = 1.0 по всем seed."
+Лучший чистый neural candidate,Diffusion,"Лучший по fidelity в full multi-seed после обновления matrix prior: минимальный Local MAE, лучший Wasserstein и лучший TSTR R2 среди pure neural baselines."
+Сильный альтернативный neural baseline,VAE,"Очень близок к Diffusion по качеству и чуть лучше по explainability pressure, но в полном multi-seed немного уступает ему по fidelity."
+"Метод, который не стоит брать как основной",GAN,"На multi-seed есть просадки monotonicity и compliance, значит надежность хуже остальных."

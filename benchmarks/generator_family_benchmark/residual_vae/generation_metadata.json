@@ -1,0 +1,4027 @@
+{
+  "generator": "residual_vae",
+  "seed": 42,
+  "n_synthetic_requested": 1000,
+  "n_synthetic_saved": 1000,
+  "rules_file": "knowledge_base/cell_level_rules.json",
+  "teacher_source": "rule-guided matrix bootstrap blocks",
+  "teacher_blocks": 768,
+  "architecture": "Residual rule-aware block VAE, latent=6, hidden=128, matrix prior + rule loss",
+  "train_info": {
+    "parameters": 70171,
+    "epochs": 320,
+    "cond_dim": 120,
+    "residual_dim": 15,
+    "loss_weights": {
+      "beta_kl": 0.02,
+      "lambda_rule": 2.0,
+      "lambda_center": 1.0,
+      "lambda_var": 0.25,
+      "lambda_smooth": 0.02
+    },
+    "teacher_mean_anchor": "teacher_block_mean"
+  },
+  "model_config": {
+    "seed": 42,
+    "n_synthetic": 1000,
+    "teacher_blocks": 768,
+    "batch_size": 64,
+    "epochs": 320,
+    "latent_dim": 6,
+    "hidden_dim": 128,
+    "lr": 0.001,
+    "beta_kl": 0.02,
+    "kl_warmup_epochs": 60,
+    "lambda_rule": 2.0,
+    "lambda_center": 1.0,
+    "lambda_var": 0.25,
+    "lambda_smooth": 0.02,
+    "sigma_scale": 2.5,
+    "device": "cpu",
+    "outdir": "benchmarks/generator_family_benchmark/residual_vae"
+  },
+  "raw_independent_validation": {
+    "dataset": "residual_vae_raw",
+    "n_rows": 1000,
+    "exact_design_support_rate": 1.0,
+    "unique_design_points_present": 15,
+    "design_count_min": 66,
+    "design_count_max": 67,
+    "local_mean_abs_error": 0.0015658319260786946,
+    "local_max_abs_error": 0.00962111071884697,
+    "radiation_monotonicity_mean_rate": 1.0,
+    "thermal_monotonicity_mean_rate": 1.0,
+    "high_combined_dose_low_survival_rate": 1.0,
+    "independent_article_compliance_mean": 1.0,
+    "grouped_design_summary": [
+      {
+        "index": 0,
+        "Радиация": 0.0,
+        "Температура": 42.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.5211545854229312,
+        "synthetic_median": 0.5263690448436298,
+        "synthetic_count": 67,
+        "real_survival": 0.53,
+        "abs_mean_error": 0.008845414577068778,
+        "abs_median_error": 0.0036309551563702414
+      },
+      {
+        "index": 1,
+        "Радиация": 0.0,
+        "Температура": 43.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.18251662736172777,
+        "synthetic_median": 0.18084193229955278,
+        "synthetic_count": 67,
+        "real_survival": 0.18,
+        "abs_mean_error": 0.00251662736172778,
+        "abs_median_error": 0.0008419322995527889
+      },
+      {
+        "index": 2,
+        "Радиация": 0.0,
+        "Температура": 44.0,
+        "Время": 30.0,
+        "synthetic_mean": 0.02111925277417914,
+        "synthetic_median": 0.021080560881372435,
+        "synthetic_count": 67,
+        "real_survival": 0.021,
+        "abs_mean_error": 0.00011925277417913771,
+        "abs_median_error": 8.056088137243372e-05
+      },
+      {
+        "index": 3,
+        "Радиация": 2.0,
+        "Температура": 42.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.269621110718847,
+        "synthetic_median": 0.2674178376117534,
+        "synthetic_count": 67,
+        "real_survival": 0.26,
+        "abs_mean_error": 0.00962111071884697,
+        "abs_median_error": 0.007417837611753408
+      },
+      {
+        "index": 4,
+        "Радиация": 2.0,
+        "Температура": 43.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.05193566894591444,
+        "synthetic_median": 0.05175277235962948,
+        "synthetic_count": 67,
+        "real_survival": 0.051,
+        "abs_mean_error": 0.0009356689459144446,
+        "abs_median_error": 0.0007527723596294847
+      },
+      {
+        "index": 5,
+        "Радиация": 2.0,
+        "Температура": 44.0,
+        "Время": 30.0,
+        "synthetic_mean": 0.008108022550210096,
+        "synthetic_median": 0.008114701263100864,
+        "synthetic_count": 67,
+        "real_survival": 0.008,
+        "abs_mean_error": 0.00010802255021009552,
+        "abs_median_error": 0.00011470126310086405
+      },
+      {
+        "index": 6,
+        "Радиация": 4.0,
+        "Температура": 42.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.260990503869881,
+        "synthetic_median": 0.2583945464800633,
+        "synthetic_count": 67,
+        "real_survival": 0.26,
+        "abs_mean_error": 0.0009905038698809765,
+        "abs_median_error": 0.0016054535199366837
+      },
+      {
+        "index": 7,
+        "Радиация": 4.0,
+        "Температура": 43.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.05091673203283093,
+        "synthetic_median": 0.05052434879708355,
+        "synthetic_count": 66,
+        "real_survival": 0.051,
+        "abs_mean_error": 8.326796716906504e-05,
+        "abs_median_error": 0.0004756512029164481
+      },
+      {
+        "index": 8,
+        "Радиация": 4.0,
+        "Температура": 44.0,
+        "Время": 30.0,
+        "synthetic_mean": 0.007963557036931844,
+        "synthetic_median": 0.007918243242625272,
+        "synthetic_count": 66,
+        "real_survival": 0.008,
+        "abs_mean_error": 3.644296306815585e-05,
+        "abs_median_error": 8.17567573747277e-05
+      },
+      {
+        "index": 9,
+        "Радиация": 6.0,
+        "Температура": 42.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.022138724017173192,
+        "synthetic_median": 0.021896435719229827,
+        "synthetic_count": 66,
+        "real_survival": 0.022,
+        "abs_mean_error": 0.00013872401717319321,
+        "abs_median_error": 0.00010356428077017144
+      },
+      {
+        "index": 10,
+        "Радиация": 6.0,
+        "Температура": 43.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.012088301993651553,
+        "synthetic_median": 0.012479156571282733,
+        "synthetic_count": 67,
+        "real_survival": 0.012,
+        "abs_mean_error": 8.830199365155236e-05,
+        "abs_median_error": 0.0004791565712827326
+      },
+      {
+        "index": 11,
+        "Радиация": 6.0,
+        "Температура": 44.0,
+        "Время": 30.0,
+        "synthetic_mean": 0.00030125793423766973,
+        "synthetic_median": 0.0002997775436247203,
+        "synthetic_count": 66,
+        "real_survival": 0.0003,
+        "abs_mean_error": 1.2579342376697607e-06,
+        "abs_median_error": 2.224563752796613e-07
+      },
+      {
+        "index": 12,
+        "Радиация": 8.0,
+        "Температура": 42.0,
+        "Время": 45.0,
+        "synthetic_mean": 0.0007027097971157466,
+        "synthetic_median": 0.0007013843431111488,
+        "synthetic_count": 67,
+        "real_survival": 0.0007,
+        "abs_mean_error": 2.7097971157466092e-06,
+        "abs_median_error": 1.3843431111487583e-06
+      },
+      {
+        "index": 13,
+        "Радиация": 8.0,
+        "Температура": 43.0,
+        "Время": 45.0,
+        "synthetic_mean": 4.0155194565927745e-05,
+        "synthetic_median": 4.002927534491249e-05,
+        "synthetic_count": 67,
+        "real_survival": 4e-05,
+        "abs_mean_error": 1.5519456592774194e-07,
+        "abs_median_error": 2.9275344912488483e-08
+      },
+      {
+        "index": 14,
+        "Радиация": 8.0,
+        "Температура": 44.0,
+        "Время": 30.0,
+        "synthetic_mean": 1.8226370930966676e-08,
+        "synthetic_median": 8.638882434969018e-09,
+        "synthetic_count": 66,
+        "real_survival": 0.0,
+        "abs_mean_error": 1.8226370930966676e-08,
+        "abs_median_error": 8.638882434969018e-09
+      }
+    ]
+  },
+  "explainability_records": [
+    {
+      "block_id": 0,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0417356887479765,
+      "after_projection_mean": -2.0417356887479765,
+      "after_cap_mean": -2.0417356887479765,
+      "after_calibration_mean": -2.0427521330323457,
+      "final_mean": -2.0427521330323457,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003238511462462279,
+      "total_adjustment_abs_mean": 0.003238511462462279,
+      "constraint_pressure_score": 0.003238511462462279,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0027611797131308347,
+          0.004216966268478117
+        ],
+        [
+          0.009687147381501338,
+          0.002761130847820814,
+          0.00421690822588161
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015246813728969855
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.31009538061332603,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 1,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.138595870750186,
+      "after_projection_mean": -2.138595870750186,
+      "after_cap_mean": -2.138595870750186,
+      "after_calibration_mean": -2.137563763459002,
+      "final_mean": -2.137563763459002,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002507403210319903,
+      "total_adjustment_abs_mean": 0.002507403210319903,
+      "constraint_pressure_score": 0.002507403210319903,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0018400300759181532,
+          0.005644522421063725,
+          0.0035801176474077323
+        ],
+        [
+          0.0018400183158950867,
+          0.005644473555754148,
+          0.0035800596048112254
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.32803768855647325,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 2,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.149654994648732,
+      "after_projection_mean": -2.149654994648732,
+      "after_cap_mean": -2.149654994648732,
+      "after_calibration_mean": -2.148622887357548,
+      "final_mean": -2.148622887357548,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0022229345793702616,
+      "total_adjustment_abs_mean": 0.0022229345793702616,
+      "constraint_pressure_score": 0.0022229345793702616,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00019504618824572884,
+          0.005644522421063725,
+          0.0030915868029577354
+        ],
+        [
+          0.00019503442822266237,
+          0.005644473555754148,
+          0.0030915287603612285
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3791567283381609,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 3,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.094643855205989,
+      "after_projection_mean": -2.094643855205989,
+      "after_cap_mean": -2.094643855205989,
+      "after_calibration_mean": -2.094131346980148,
+      "final_mean": -2.094131346980148,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0025582072682638532,
+      "total_adjustment_abs_mean": 0.0025582072682638532,
+      "constraint_pressure_score": 0.0025582072682638532,
+      "per_cell_delta_abs": [
+        [
+          0.008995219931782261,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.006443907739530519,
+          0.0038591782949575215,
+          0.003731861526949487
+        ],
+        [
+          0.006443895979507452,
+          0.003859129429647501,
+          0.00373180348435298
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0013077460076029723
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.16472813364552943,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 4,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.011442462133382,
+      "after_projection_mean": -2.011442462133382,
+      "after_cap_mean": -2.011442462133382,
+      "after_calibration_mean": -2.0125017054012484,
+      "final_mean": -2.0125017054012484,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002895003429944613,
+      "total_adjustment_abs_mean": 0.002895003429944613,
+      "constraint_pressure_score": 0.002895003429944613,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0008677655286797314,
+          0.0032130778328163245
+        ],
+        [
+          0.009687147381501338,
+          0.0008677166633697109,
+          0.0032130197902198177
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.47326858898138074,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 5,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.071758644952691,
+      "after_projection_mean": -2.071758644952691,
+      "after_cap_mean": -2.071758644952691,
+      "after_calibration_mean": -2.0720491716036338,
+      "final_mean": -2.0720491716036338,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002724425053644508,
+      "total_adjustment_abs_mean": 0.002724425053644508,
+      "constraint_pressure_score": 0.002724425053644508,
+      "per_cell_delta_abs": [
+        [
+          0.0008309985108981288,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00922967609943004,
+          0.0038358668252536088,
+          0.004357497872115257
+        ],
+        [
+          0.009229664339406973,
+          0.003835817959943588,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.005189047738474173
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.18985167411861437,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 6,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.085249592459392,
+      "after_projection_mean": -2.085249592459392,
+      "after_cap_mean": -2.085249592459392,
+      "after_calibration_mean": -2.0851482103132097,
+      "final_mean": -2.0851482103132097,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0030703340903404652,
+      "total_adjustment_abs_mean": 0.0030703340903404652,
+      "constraint_pressure_score": 0.0030703340903404652,
+      "per_cell_delta_abs": [
+        [
+          0.005656446196914688,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.008864596718858198,
+          0.004909132273465788,
+          0.004357497872115257
+        ],
+        [
+          0.008864584958835131,
+          0.004909083408156656,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.004135863467615408
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.16408306919029017,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 7,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.121409625609037,
+      "after_projection_mean": -2.121409625609037,
+      "after_cap_mean": -2.121409625609037,
+      "after_calibration_mean": -2.120591307899022,
+      "final_mean": -2.120591307899022,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0026044848308464947,
+      "total_adjustment_abs_mean": 0.0026044848308464947,
+      "constraint_pressure_score": 0.0026044848308464947,
+      "per_cell_delta_abs": [
+        [
+          0.012568878342242018,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.004037353442917779,
+          0.005644522421063725,
+          0.003420066137669764
+        ],
+        [
+          0.004037341682894713,
+          0.005644473555754148,
+          0.003420008095073257
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0002942621554549163
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.25072499961830436,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 8,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.131469541066177,
+      "after_projection_mean": -2.131469541066177,
+      "after_cap_mean": -2.131469541066177,
+      "after_calibration_mean": -2.130628937577867,
+      "final_mean": -2.130628937577867,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0026997570450895386,
+      "total_adjustment_abs_mean": 0.0026997570450895386,
+      "constraint_pressure_score": 0.0026997570450895386,
+      "per_cell_delta_abs": [
+        [
+          0.012608902861208693,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.004213531734357789,
+          0.005644522421063725,
+          0.004085548271296702
+        ],
+        [
+          0.004213519974334723,
+          0.005644473555754148,
+          0.004085490228700195
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2909383204562856,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 9,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1733786134591075,
+      "after_projection_mean": -2.1733786134591075,
+      "after_cap_mean": -2.1733786134591075,
+      "after_calibration_mean": -2.1723465061679237,
+      "final_mean": -2.1723465061679237,
+      "delta_projection_mean": 0.0008357536126776403,
+      "delta_projection_radiation_mean": 0.0008357536126776403,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0018670816524583836,
+      "total_adjustment_abs_mean": 0.002702835265136024,
+      "constraint_pressure_score": 0.002702835265136024,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0062681579750939465,
+          0.004677452278852856,
+          0.001584794421551905
+        ],
+        [
+          0.006268157975093835,
+          0.004677403413543724,
+          0.001584736378955398
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.7333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0010446920158470503,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.5018115035861849,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 10,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.143766868354914,
+      "after_projection_mean": -2.143766868354914,
+      "after_cap_mean": -2.143766868354914,
+      "after_calibration_mean": -2.1427347610637297,
+      "final_mean": -2.1427347610637297,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0025737543136578798,
+      "total_adjustment_abs_mean": 0.0025737543136578798,
+      "constraint_pressure_score": 0.0025737543136578798,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0015602831262454542,
+          0.005644522421063725,
+          0.004357497872115257
+        ],
+        [
+          0.0015602713662223877,
+          0.005644473555754148,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3484716367867781,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 11,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.179644833000538,
+      "after_projection_mean": -2.179644833000538,
+      "after_cap_mean": -2.179644833000538,
+      "after_calibration_mean": -2.178612725709354,
+      "final_mean": -2.178612725709354,
+      "delta_projection_mean": 0.0017488759090109533,
+      "delta_projection_radiation_mean": 0.0017488759090109533,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.001301860243455429,
+      "total_adjustment_abs_mean": 0.0030507361524663825,
+      "constraint_pressure_score": 0.0030507361524663825,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.013116575197593794,
+          0.0015991256959446698,
+          0.0004239604369384864
+        ],
+        [
+          0.013116575197593683,
+          0.0015990768306346492,
+          0.0004239023943419795
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.7333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0021860948862636917,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.5672493588672787,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 12,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0403970888773744,
+      "after_projection_mean": -2.0403970888773744,
+      "after_cap_mean": -2.0403970888773744,
+      "after_calibration_mean": -2.0414563321452404,
+      "final_mean": -2.0414563321452404,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003276818242565094,
+      "total_adjustment_abs_mean": 0.003276818242565094,
+      "constraint_pressure_score": 0.003276818242565094,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.003079341856361273,
+          0.0038651125997883895
+        ],
+        [
+          0.009687147381501338,
+          0.0030792929910512523,
+          0.0038650545571918826
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.315550626800202,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 13,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.152267495410678,
+      "after_projection_mean": -2.152267495410678,
+      "after_cap_mean": -2.152267495410678,
+      "after_calibration_mean": -2.151235388119494,
+      "final_mean": -2.151235388119494,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002243060336031359,
+      "total_adjustment_abs_mean": 0.002243060336031359,
+      "constraint_pressure_score": 0.002243060336031359,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0003255505579814466,
+          0.005644522421063725,
+          0.0031120256081802466
+        ],
+        [
+          0.00032553879795838014,
+          0.005644473555754148,
+          0.0031119675655837398
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3907733704572215,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 14,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1219374193109943,
+      "after_projection_mean": -2.1219374193109943,
+      "after_cap_mean": -2.1219374193109943,
+      "after_calibration_mean": -2.1211409183548526,
+      "final_mean": -2.1211409183548526,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0024456789401920494,
+      "total_adjustment_abs_mean": 0.0024456789401920494,
+      "constraint_pressure_score": 0.0024456789401920494,
+      "per_cell_delta_abs": [
+        [
+          0.011947364878685252,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.003449146868596986,
+          0.005293046256125367,
+          0.003626592506526194
+        ],
+        [
+          0.0034491351085739197,
+          0.005292997390816234,
+          0.003626534463929687
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2559005481262604,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 15,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.078866599735435,
+      "after_projection_mean": -2.078866599735435,
+      "after_cap_mean": -2.078866599735435,
+      "after_calibration_mean": -2.0792138241250453,
+      "final_mean": -2.0792138241250453,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0027633853614290123,
+      "total_adjustment_abs_mean": 0.0027633853614290123,
+      "constraint_pressure_score": 0.0027633853614290123,
+      "per_cell_delta_abs": [
+        [
+          0.0021793887548456348,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.007575197378109411,
+          0.004968545997113383,
+          0.0033978764460069755
+        ],
+        [
+          0.007575185618086344,
+          0.00496849713180425,
+          0.0033978184034104686
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.007387904062431616
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.17204718525103857,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 16,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0257385521153752,
+      "after_projection_mean": -2.0257385521153752,
+      "after_cap_mean": -2.0257385521153752,
+      "after_calibration_mean": -2.0267977953832412,
+      "final_mean": -2.0267977953832412,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0030367506016247456,
+      "total_adjustment_abs_mean": 0.0030367506016247456,
+      "constraint_pressure_score": 0.0030367506016247456,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0013138187505015164,
+          0.0038301283985955337
+        ],
+        [
+          0.009687147381501338,
+          0.0013137698851914958,
+          0.003830070355999027
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3980467918865981,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 17,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0760712165099298,
+      "after_projection_mean": -2.0760712165099298,
+      "after_cap_mean": -2.0760712165099298,
+      "after_calibration_mean": -2.0764245814818034,
+      "final_mean": -2.0764245814818034,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0030343419298489455,
+      "total_adjustment_abs_mean": 0.0030343419298489455,
+      "constraint_pressure_score": 0.0030343419298489455,
+      "per_cell_delta_abs": [
+        [
+          0.0038374437548527873,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.007993505569110826,
+          0.0043856172278229355,
+          0.003890561920462332
+        ],
+        [
+          0.00799349380908776,
+          0.004385568362513803,
+          0.003890503877865825
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.009138067796390814
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.1754489509445349,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 18,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.039420419585719,
+      "after_projection_mean": -2.039420419585719,
+      "after_cap_mean": -2.039420419585719,
+      "after_calibration_mean": -2.0404796628535853,
+      "final_mean": -2.0404796628535853,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0030897363149989215,
+      "total_adjustment_abs_mean": 0.0030897363149989215,
+      "constraint_pressure_score": 0.0030897363149989215,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00913703185499759,
+          0.003039242831588629,
+          0.003052224454341612
+        ],
+        [
+          0.009137020094974524,
+          0.0030391939662786083,
+          0.0030521664117451053
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.32119426224756664,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 19,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.150604152547357,
+      "after_projection_mean": -2.150604152547357,
+      "after_cap_mean": -2.150604152547357,
+      "after_calibration_mean": -2.1495720452561726,
+      "final_mean": -2.1495720452561726,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0023562142903783335,
+      "total_adjustment_abs_mean": 0.0023562142903783335,
+      "constraint_pressure_score": 0.0023562142903783335,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0013094593304500135,
+          0.005644522421063725,
+          0.00297677149331399
+        ],
+        [
+          0.001309447570426947,
+          0.005644473555754148,
+          0.002976713450717483
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3838459128065825,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 20,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0196065202623745,
+      "after_projection_mean": -2.0196065202623745,
+      "after_cap_mean": -2.0196065202623745,
+      "after_calibration_mean": -2.020665763530241,
+      "final_mean": -2.020665763530241,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003076343111093142,
+      "total_adjustment_abs_mean": 0.003076343111093142,
+      "constraint_pressure_score": 0.003076343111093142,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0021022298760422498,
+          0.003338661094067774
+        ],
+        [
+          0.009687147381501338,
+          0.002102181010732229,
+          0.0033386030514712672
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.42603433524266043,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 21,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1527118917475514,
+      "after_projection_mean": -2.1527118917475514,
+      "after_cap_mean": -2.1527118917475514,
+      "after_calibration_mean": -2.1516797844563675,
+      "final_mean": -2.1516797844563675,
+      "delta_projection_mean": 0.00011177771584231314,
+      "delta_projection_radiation_mean": 0.00011177771584231314,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002222870923757577,
+      "total_adjustment_abs_mean": 0.00233464863959989,
+      "constraint_pressure_score": 0.00233464863959989,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0008383387488289928,
+          0.005644522421063725,
+          0.0032861438140852073
+        ],
+        [
+          0.0008383387488288818,
+          0.005644473555754148,
+          0.0032860857714887004
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.7333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.00013972214480289144,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.39198112495337256,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 22,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1362997850013645,
+      "after_projection_mean": -2.1362997850013645,
+      "after_cap_mean": -2.1362997850013645,
+      "after_calibration_mean": -2.1352676777101807,
+      "final_mean": -2.1352676777101807,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0027338621174472833,
+      "total_adjustment_abs_mean": 0.0027338621174472833,
+      "constraint_pressure_score": 0.0027338621174472833,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.003404845716367677,
+          0.005644522421063725,
+          0.003713743810413561
+        ],
+        [
+          0.0034048339563446106,
+          0.005644473555754148,
+          0.0037136857678170543
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.31635849703869656,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 23,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0807443840143,
+      "after_projection_mean": -2.0807443840143,
+      "after_cap_mean": -2.0807443840143,
+      "after_calibration_mean": -2.080860803076415,
+      "final_mean": -2.080860803076415,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0024076097071130636,
+      "total_adjustment_abs_mean": 0.0024076097071130636,
+      "constraint_pressure_score": 0.0024076097071130636,
+      "per_cell_delta_abs": [
+        [
+          0.0034539148740778125,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.006686037639091924,
+          0.0036832575142093926,
+          0.0033605210975391486
+        ],
+        [
+          0.006686025879068858,
+          0.003683208648899372,
+          0.0033604630549426417
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.005200350269239706
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.17184470895964063,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 24,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0173758677164857,
+      "after_projection_mean": -2.0173758677164857,
+      "after_cap_mean": -2.0173758677164857,
+      "after_calibration_mean": -2.0184351109843517,
+      "final_mean": -2.0184351109843517,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002963072927688855,
+      "total_adjustment_abs_mean": 0.002963072927688855,
+      "constraint_pressure_score": 0.002963072927688855,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0017200225420006543,
+          0.0028713420525772193
+        ],
+        [
+          0.009687147381501338,
+          0.0017199736766906337,
+          0.0028712840099807124
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.43933151068163867,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 25,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.110662234535602,
+      "after_projection_mean": -2.110662234535602,
+      "after_cap_mean": -2.110662234535602,
+      "after_calibration_mean": -2.1099827841253718,
+      "final_mean": -2.1099827841253718,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002505705121238366,
+      "total_adjustment_abs_mean": 0.002505705121238366,
+      "constraint_pressure_score": 0.002505705121238366,
+      "per_cell_delta_abs": [
+        [
+          0.010191606690020338,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.005044161574850992,
+          0.005644522421063725,
+          0.003008177087513886
+        ],
+        [
+          0.005044149814827925,
+          0.005644473555754148,
+          0.003008119044917379
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.20819059039225205,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 26,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0887177538668484,
+      "after_projection_mean": -2.0887177538668484,
+      "after_cap_mean": -2.0887177538668484,
+      "after_calibration_mean": -2.088518709039354,
+      "final_mean": -2.088518709039354,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0023785058603461176,
+      "total_adjustment_abs_mean": 0.0023785058603461176,
+      "constraint_pressure_score": 0.0023785058603461176,
+      "per_cell_delta_abs": [
+        [
+          0.0029855229489813007,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00793047365726085,
+          0.004057936967880371,
+          0.004357497872115257
+        ],
+        [
+          0.007930461897237784,
+          0.004057888102570351,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.16735578225538802,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 27,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.004775613324855,
+      "after_projection_mean": -2.004775613324855,
+      "after_cap_mean": -2.004775613324855,
+      "after_calibration_mean": -2.0058348565927213,
+      "final_mean": -2.0058348565927213,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0027786238709045434,
+      "total_adjustment_abs_mean": 0.0027786238709045434,
+      "constraint_pressure_score": 0.0027786238709045434,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.00018098963570678528,
+          0.003027007032988749
+        ],
+        [
+          0.009687147381501338,
+          0.0001809407703967647,
+          0.003026948990392242
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.5087237727440141,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 28,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1263051138180367,
+      "after_projection_mean": -2.1263051138180367,
+      "after_cap_mean": -2.1263051138180367,
+      "after_calibration_mean": -2.125273006526853,
+      "final_mean": -2.125273006526853,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0026813511704582237,
+      "total_adjustment_abs_mean": 0.0026813511704582237,
+      "constraint_pressure_score": 0.0026813511704582237,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0036939599084958585,
+          0.005644522421063725,
+          0.003030797515867434
+        ],
+        [
+          0.003693948148472792,
+          0.005644473555754148,
+          0.003030739473270927
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2755851046551491,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 29,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0631724585736935,
+      "after_projection_mean": -2.0631724585736935,
+      "after_cap_mean": -2.0631724585736935,
+      "after_calibration_mean": -2.063803208403949,
+      "final_mean": -2.063803208403949,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002821531253500672,
+      "total_adjustment_abs_mean": 0.002821531253500672,
+      "constraint_pressure_score": 0.002821531253500672,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.008749566273699716,
+          0.0039609266832181245,
+          0.0037201690048558334
+        ],
+        [
+          0.00874955451367665,
+          0.003960877817908104,
+          0.0037201109622593265
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.009461396917265219
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.22009556711665784,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 30,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.077666546344699,
+      "after_projection_mean": -2.077666546344699,
+      "after_cap_mean": -2.077666546344699,
+      "after_calibration_mean": -2.078208576036035,
+      "final_mean": -2.078208576036035,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0031808448685814155,
+      "total_adjustment_abs_mean": 0.0031808448685814155,
+      "constraint_pressure_score": 0.0031808448685814155,
+      "per_cell_delta_abs": [
+        [
+          0.00010173568207122452,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.005644522421063725,
+          0.004357497872115257
+        ],
+        [
+          0.009687147381501338,
+          0.005644473555754148,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.008232330515545172
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.16709355428474307,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 31,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.06285141243489,
+      "after_projection_mean": -2.06285141243489,
+      "after_cap_mean": -2.06285141243489,
+      "after_calibration_mean": -2.0634188211542006,
+      "final_mean": -2.0634188211542006,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0027104237252909853,
+      "total_adjustment_abs_mean": 0.0027104237252909853,
+      "constraint_pressure_score": 0.0027104237252909853,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00870164972723575,
+          0.003408590929181221,
+          0.0039621731758696654
+        ],
+        [
+          0.008701637967212683,
+          0.0034085420638712005,
+          0.0039621151332731586
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.008511280253094
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.222644997859211,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 32,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1130700569831204,
+      "after_projection_mean": -2.1130700569831204,
+      "after_cap_mean": -2.1130700569831204,
+      "after_calibration_mean": -2.1125030462028223,
+      "final_mean": -2.1125030462028223,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0024617864942345375,
+      "total_adjustment_abs_mean": 0.0024617864942345375,
+      "constraint_pressure_score": 0.0024617864942345375,
+      "per_cell_delta_abs": [
+        [
+          0.008505012241036669,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.005040998803387597,
+          0.005644522421063725,
+          0.0035252473809403995
+        ],
+        [
+          0.005040987043364531,
+          0.005644473555754148,
+          0.0035251893383438926
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2183394629251034,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 33,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.014881664913907,
+      "after_projection_mean": -2.014881664913907,
+      "after_cap_mean": -2.014881664913907,
+      "after_calibration_mean": -2.0159409081817734,
+      "final_mean": -2.0159409081817734,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0028818819641026837,
+      "total_adjustment_abs_mean": 0.0028818819641026837,
+      "constraint_pressure_score": 0.0028818819641026837,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0011509546465882092,
+          0.0028314777210933784
+        ],
+        [
+          0.009687147381501338,
+          0.0011509057812781887,
+          0.0028314196784968715
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.4543324480148174,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 34,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.097395923441218,
+      "after_projection_mean": -2.097395923441218,
+      "after_cap_mean": -2.097395923441218,
+      "after_calibration_mean": -2.097122609151566,
+      "final_mean": -2.097122609151566,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002337008936699188,
+      "total_adjustment_abs_mean": 0.002337008936699188,
+      "constraint_pressure_score": 0.002337008936699188,
+      "per_cell_delta_abs": [
+        [
+          0.007197324053228871,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.005136144580255464,
+          0.004700191450834668,
+          0.002543565400747738
+        ],
+        [
+          0.0051361328202323975,
+          0.004700142585525535,
+          0.0025435073581512313
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0030977591718848174
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.16851910270441908,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 35,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -1.9996095612913511,
+      "after_projection_mean": -1.9996095612913511,
+      "after_cap_mean": -1.9996095612913511,
+      "after_calibration_mean": -2.0006688045592176,
+      "final_mean": -2.0006688045592176,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002827454976136782,
+      "total_adjustment_abs_mean": 0.002827454976136782,
+      "constraint_pressure_score": 0.002827454976136782,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0002039746768482953,
+          0.0033702552810890296
+        ],
+        [
+          0.009687147381501338,
+          0.00020392581153827471,
+          0.0033701972384925227
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.5387969427915477,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 36,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0627087850303116,
+      "after_projection_mean": -2.0627087850303116,
+      "after_cap_mean": -2.0627087850303116,
+      "after_calibration_mean": -2.063205570388003,
+      "final_mean": -2.063205570388003,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0029562361474318602,
+      "total_adjustment_abs_mean": 0.0029562361474318602,
+      "constraint_pressure_score": 0.0029562361474318602,
+      "per_cell_delta_abs": [
+        [
+          0.0019382395379552997,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009259105892787889,
+          0.002890838907630089,
+          0.004357497872115257
+        ],
+        [
+          0.009259094132764822,
+          0.0028907900423200683,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.009390169366758627
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.22071824631725168,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 37,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.146246158572075,
+      "after_projection_mean": -2.146246158572075,
+      "after_cap_mean": -2.146246158572075,
+      "after_calibration_mean": -2.145214051280891,
+      "final_mean": -2.145214051280891,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0023119958395936353,
+      "total_adjustment_abs_mean": 0.0023119958395936353,
+      "constraint_pressure_score": 0.0023119958395936353,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0009654734748706373,
+          0.005644522421063725,
+          0.002989118968008242
+        ],
+        [
+          0.0009654617148475708,
+          0.005644473555754148,
+          0.002989060925411735
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.36318930209881384,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 38,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1007773646488204,
+      "after_projection_mean": -2.1007773646488204,
+      "after_cap_mean": -2.1007773646488204,
+      "after_calibration_mean": -2.1004660234805583,
+      "final_mean": -2.1004660234805583,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002684584714840806,
+      "total_adjustment_abs_mean": 0.002684584714840806,
+      "constraint_pressure_score": 0.002684584714840806,
+      "per_cell_delta_abs": [
+        [
+          0.0072182394627789415,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.006059536943148092,
+          0.00528930792731086,
+          0.0039021610774678805
+        ],
+        [
+          0.006059525183125025,
+          0.005289259062001728,
+          0.0039021030348713737
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.002548271402281088
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.17005344585326768,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 39,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0541113844409726,
+      "after_projection_mean": -2.0541113844409726,
+      "after_cap_mean": -2.0541113844409726,
+      "after_calibration_mean": -2.0549096307736274,
+      "final_mean": -2.0549096307736274,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0030893748049461173,
+      "total_adjustment_abs_mean": 0.0030893748049461173,
+      "constraint_pressure_score": 0.0030893748049461173,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.003278907520295027,
+          0.0042171981677991965
+        ],
+        [
+          0.009687147381501338,
+          0.0032788586549850063,
+          0.00421714012520269
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.011973844453256888
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.25338038151350883,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 40,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0680466918454234,
+      "after_projection_mean": -2.0680466918454234,
+      "after_cap_mean": -2.0680466918454234,
+      "after_calibration_mean": -2.068763708107833,
+      "final_mean": -2.068763708107833,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0029067915290553934,
+      "total_adjustment_abs_mean": 0.0029067915290553934,
+      "constraint_pressure_score": 0.0029067915290553934,
+      "per_cell_delta_abs": [
+        [
+          0.0011298114963183559,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.007758901687274888,
+          0.0043225452691022515,
+          0.003211857334582291
+        ],
+        [
+          0.007758889927251822,
+          0.004322496403793119,
+          0.003211799291985784
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.011885204895895285
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.19821578150536737,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 41,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.04605783785583,
+      "after_projection_mean": -2.04605783785583,
+      "after_cap_mean": -2.04605783785583,
+      "after_calibration_mean": -2.0471123426861206,
+      "final_mean": -2.0471123426861206,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003347224870773487,
+      "total_adjustment_abs_mean": 0.003347224870773487,
+      "constraint_pressure_score": 0.003347224870773487,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0032382422513970166,
+          0.004269800198136053
+        ],
+        [
+          0.009687147381501338,
+          0.003238193386086996,
+          0.0042697421555395465
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.01581772191778974
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2879748354845318,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 42,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.055968036591524,
+      "after_projection_mean": -2.055968036591524,
+      "after_cap_mean": -2.055968036591524,
+      "after_calibration_mean": -2.056476089763804,
+      "final_mean": -2.056476089763804,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002670459411546296,
+      "total_adjustment_abs_mean": 0.002670459411546296,
+      "constraint_pressure_score": 0.002670459411546296,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0021731910682925015,
+          0.004357497872115257
+        ],
+        [
+          0.009687147381501338,
+          0.002173142202982481,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.007620947047632498
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.24966847071805884,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 43,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.104036885740397,
+      "after_projection_mean": -2.104036885740397,
+      "after_cap_mean": -2.104036885740397,
+      "after_calibration_mean": -2.103665392506285,
+      "final_mean": -2.103665392506285,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.001993581217552409,
+      "total_adjustment_abs_mean": 0.001993581217552409,
+      "constraint_pressure_score": 0.001993581217552409,
+      "per_cell_delta_abs": [
+        [
+          0.0055722490482340015,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.004773740889440492,
+          0.0037499201871165067,
+          0.003641949550120316
+        ],
+        [
+          0.0047737291294174256,
+          0.003749871321806486,
+          0.003641891507523809
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.18510450960661315,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 44,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1583709375232827,
+      "after_projection_mean": -2.1583709375232827,
+      "after_cap_mean": -2.1583709375232827,
+      "after_calibration_mean": -2.157338830232099,
+      "final_mean": -2.157338830232099,
+      "delta_projection_mean": 0.00020468744929669954,
+      "delta_projection_radiation_mean": 0.00020468744929669954,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002107155005510523,
+      "total_adjustment_abs_mean": 0.0023118424548072224,
+      "constraint_pressure_score": 0.0023118424548072224,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0015351617497368908,
+          0.0053855778105265095,
+          0.002677219037769518
+        ],
+        [
+          0.0015351617497367798,
+          0.005385528945216933,
+          0.0026771609951730113
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.7333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.00025585931162087444,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.4198676185009818,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 45,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.050313381877556,
+      "after_projection_mean": -2.050313381877556,
+      "after_cap_mean": -2.050313381877556,
+      "after_calibration_mean": -2.051283023104731,
+      "final_mean": -2.051283023104731,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003351369256230526,
+      "total_adjustment_abs_mean": 0.003351369256230526,
+      "constraint_pressure_score": 0.003351369256230526,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.004051217941165808,
+          0.004124384422658167
+        ],
+        [
+          0.009687147381501338,
+          0.004051169075855787,
+          0.00412432638006166
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.014544767871063513
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2685898141722008,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 46,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.150882315255242,
+      "after_projection_mean": -2.150882315255242,
+      "after_cap_mean": -2.150882315255242,
+      "after_calibration_mean": -2.149850207964058,
+      "final_mean": -2.149850207964058,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0022131333405950083,
+      "total_adjustment_abs_mean": 0.0022131333405950083,
+      "constraint_pressure_score": 0.0022131333405950083,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0003736440557345899,
+          0.005644522421063725,
+          0.0028394796446544746
+        ],
+        [
+          0.00037363229571152345,
+          0.005644473555754148,
+          0.0028394216020579677
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3851433736557733,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 47,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.052548701591307,
+      "after_projection_mean": -2.052548701591307,
+      "after_cap_mean": -2.052548701591307,
+      "after_calibration_mean": -2.0532736461318173,
+      "final_mean": -2.0532736461318173,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003033697319035437,
+      "total_adjustment_abs_mean": 0.003033697319035437,
+      "constraint_pressure_score": 0.003033697319035437,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0032707901127346783,
+          0.004357497872115257
+        ],
+        [
+          0.009687147381501338,
+          0.0032707412474246578,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.010874317571085257
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.26198298879973353,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 48,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.104792277626014,
+      "after_projection_mean": -2.104792277626014,
+      "after_cap_mean": -2.104792277626014,
+      "after_calibration_mean": -2.104540529755914,
+      "final_mean": -2.104540529755914,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002679811752885686,
+      "total_adjustment_abs_mean": 0.002679811752885686,
+      "constraint_pressure_score": 0.002679811752885686,
+      "per_cell_delta_abs": [
+        [
+          0.005517594848603979,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0066962309646710905,
+          0.005644522421063725,
+          0.004128150225488625
+        ],
+        [
+          0.006696219204648024,
+          0.005644473555754148,
+          0.004128092182892118
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0017415262605364745
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.18447658705353712,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 49,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.048707090584503,
+      "after_projection_mean": -2.048707090584503,
+      "after_cap_mean": -2.048707090584503,
+      "after_calibration_mean": -2.049605813344979,
+      "final_mean": -2.049605813344979,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.003063341059343786,
+      "total_adjustment_abs_mean": 0.003063341059343786,
+      "constraint_pressure_score": 0.003063341059343786,
+      "per_cell_delta_abs": [
+        [
+          4.037270027495987e-05,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0021494088150271207,
+          0.004357497872115257
+        ],
+        [
+          0.009687147381501338,
+          0.0021493599497171,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.013521363570850653
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.27906316057113156,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 50,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1721200690836087,
+      "after_projection_mean": -2.1721200690836087,
+      "after_cap_mean": -2.1721200690836087,
+      "after_calibration_mean": -2.1710879617924244,
+      "final_mean": -2.1710879617924244,
+      "delta_projection_mean": 0.0009411773413026199,
+      "delta_projection_radiation_mean": 0.0009411773413026199,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0018494878514368077,
+      "total_adjustment_abs_mean": 0.0027906651927394276,
+      "constraint_pressure_score": 0.0027906651927394276,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.007058835939781294,
+          0.004327211660862362,
+          0.0018030815318805793
+        ],
+        [
+          0.007058835939781183,
+          0.00432716279555323,
+          0.0018030234892840724
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.7333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.001176471676628275,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.4988309039924053,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 51,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.011378500264897,
+      "after_projection_mean": -2.011378500264897,
+      "after_cap_mean": -2.011378500264897,
+      "after_calibration_mean": -2.0124377435327636,
+      "final_mean": -2.0124377435327636,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002776183225102084,
+      "total_adjustment_abs_mean": 0.002776183225102084,
+      "constraint_pressure_score": 0.002776183225102084,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009260450722585689,
+          0.001668397469044569,
+          0.0019480027750713447
+        ],
+        [
+          0.009260438962562512,
+          0.0016683486037345485,
+          0.0019479447324748378
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.4732808466343469,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 52,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.167632150269585,
+      "after_projection_mean": -2.167632150269585,
+      "after_cap_mean": -2.167632150269585,
+      "after_calibration_mean": -2.166600042978401,
+      "final_mean": -2.166600042978401,
+      "delta_projection_mean": 0.0007363549202287063,
+      "delta_projection_radiation_mean": 0.0007363549202287063,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.001888207277035588,
+      "total_adjustment_abs_mean": 0.0026245621972642943,
+      "constraint_pressure_score": 0.0026245621972642943,
+      "per_cell_delta_abs": [
+        [
+          0.01548145990432137,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.005522667781726942,
+          0.004369136077881253,
+          0.0020515528068525413
+        ],
+        [
+          0.005522667781726831,
+          0.00436908721257212,
+          0.0020514947642560344
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791730395717e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.7333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0009204436502858829,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.4697739070979397,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 53,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1118766123660278,
+      "after_projection_mean": -2.1118766123660278,
+      "after_cap_mean": -2.1118766123660278,
+      "after_calibration_mean": -2.1111322367272414,
+      "final_mean": -2.1111322367272414,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002638029461875742,
+      "total_adjustment_abs_mean": 0.002638029461875742,
+      "constraint_pressure_score": 0.002638029461875742,
+      "per_cell_delta_abs": [
+        [
+          0.011165485118360297,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0049834318924054655,
+          0.005527631511510034,
+          0.003691291020123444
+        ],
+        [
+          0.004983420132382399,
+          0.005527582646200457,
+          0.003691232977526937
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.21273385428037705,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 54,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.001036407825365,
+      "after_projection_mean": -2.001036407825365,
+      "after_cap_mean": -2.001036407825365,
+      "after_calibration_mean": -2.002095651093231,
+      "final_mean": -2.002095651093231,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0026019825258804343,
+      "total_adjustment_abs_mean": 0.0026019825258804343,
+      "constraint_pressure_score": 0.0026019825258804343,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          6.955130171859558e-05,
+          0.001813635279296122
+        ],
+        [
+          0.009687147381501338,
+          6.950243640857501e-05,
+          0.001813577236699615
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.5292212930289498,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 55,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.077365744582009,
+      "after_projection_mean": -2.077365744582009,
+      "after_cap_mean": -2.077365744582009,
+      "after_calibration_mean": -2.0776982723909505,
+      "final_mean": -2.0776982723909505,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0031198868463916877,
+      "total_adjustment_abs_mean": 0.0031198868463916877,
+      "constraint_pressure_score": 0.0031198868463916877,
+      "per_cell_delta_abs": [
+        [
+          0.0025668608554015315,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00897194561542125,
+          0.005008689725369608,
+          0.004357497872115257
+        ],
+        [
+          0.008971933855398184,
+          0.005008640860060476,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.007554927452963156
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.1713218942661986,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 56,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1009783092651886,
+      "after_projection_mean": -2.1009783092651886,
+      "after_cap_mean": -2.1009783092651886,
+      "after_calibration_mean": -2.100441637978617,
+      "final_mean": -2.100441637978617,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002378647385935173,
+      "total_adjustment_abs_mean": 0.002378647385935173,
+      "constraint_pressure_score": 0.002378647385935173,
+      "per_cell_delta_abs": [
+        [
+          0.00804991983513631,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.0054744307416781934,
+          0.004561560360312855,
+          0.0037787803941053966
+        ],
+        [
+          0.005474418981655127,
+          0.004561511495003723,
+          0.0037787223515088897
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.1739306797204063,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 57,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1280612219977253,
+      "after_projection_mean": -2.1280612219977253,
+      "after_cap_mean": -2.1280612219977253,
+      "after_calibration_mean": -2.12719444728957,
+      "final_mean": -2.12719444728957,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002811123873424241,
+      "total_adjustment_abs_mean": 0.002811123873424241,
+      "constraint_pressure_score": 0.002811123873424241,
+      "per_cell_delta_abs": [
+        [
+          0.013001471158892886,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.004580549197207406,
+          0.005644522421063725,
+          0.004357497872115257
+        ],
+        [
+          0.00458053743718434,
+          0.005644473555754148,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2783078531065904,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 58,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.053633872384344,
+      "after_projection_mean": -2.053633872384344,
+      "after_cap_mean": -2.053633872384344,
+      "after_calibration_mean": -2.054581904444261,
+      "final_mean": -2.054581904444261,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.00309015926713138,
+      "total_adjustment_abs_mean": 0.00309015926713138,
+      "constraint_pressure_score": 0.00309015926713138,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.008945648791204408,
+          0.0036011786587246686,
+          0.003518927891610346
+        ],
+        [
+          0.008945637031181342,
+          0.003601129793414648,
+          0.0035188698490138393
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.014220630362194342
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.25311159666369165,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 59,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -1.997489079114809,
+      "after_projection_mean": -1.997489079114809,
+      "after_cap_mean": -1.997489079114809,
+      "after_calibration_mean": -1.9985483223826752,
+      "final_mean": -1.9985483223826752,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0027214193064921083,
+      "total_adjustment_abs_mean": 0.0027214193064921083,
+      "constraint_pressure_score": 0.0027214193064921083,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0008970723874577313,
+          0.001881890048144541
+        ],
+        [
+          0.009687147381501338,
+          0.0008970235221477108,
+          0.0018818320055480342
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888798481430655
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.5479705710578827,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 60,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.1196924721432597,
+      "after_projection_mean": -2.1196924721432597,
+      "after_cap_mean": -2.1196924721432597,
+      "after_calibration_mean": -2.1190777892576294,
+      "final_mean": -2.1190777892576294,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0026082796857549106,
+      "total_adjustment_abs_mean": 0.0026082796857549106,
+      "constraint_pressure_score": 0.0026082796857549106,
+      "per_cell_delta_abs": [
+        [
+          0.009220093821019903,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00504247029305549,
+          0.005644522421063725,
+          0.0042649340376836875
+        ],
+        [
+          0.005042458533032423,
+          0.005644473555754148,
+          0.004264875995087181
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.24217202986917813,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 61,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0836531655266297,
+      "after_projection_mean": -2.0836531655266297,
+      "after_cap_mean": -2.0836531655266297,
+      "after_calibration_mean": -2.0838605551223344,
+      "final_mean": -2.0838605551223344,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0023632613678733075,
+      "total_adjustment_abs_mean": 0.0023632613678733075,
+      "constraint_pressure_score": 0.0023632613678733075,
+      "per_cell_delta_abs": [
+        [
+          0.00022418597418166764,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00745349214405866,
+          0.004661512227327025,
+          0.003829649233130894
+        ],
+        [
+          0.007453480384035593,
+          0.0046614633620178925,
+          0.003829591190534387
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.003335179373186392
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.17347947572617806,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 62,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0392358602603418,
+      "after_projection_mean": -2.0392358602603418,
+      "after_cap_mean": -2.0392358602603418,
+      "after_calibration_mean": -2.0402950778312126,
+      "final_mean": -2.0402950778312126,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002921020035886657,
+      "total_adjustment_abs_mean": 0.002921020035886657,
+      "constraint_pressure_score": 0.002921020035886657,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.00916278106154056,
+          0.0014941824055918485,
+          0.003306356307922087
+        ],
+        [
+          0.009162769301517493,
+          0.0014941335402818279,
+          0.00330629826532558
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.015888413026493353
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3243055693874668,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 63,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.113921432732455,
+      "after_projection_mean": -2.113921432732455,
+      "after_cap_mean": -2.113921432732455,
+      "after_calibration_mean": -2.11338413944658,
+      "final_mean": -2.11338413944658,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0024807207944038865,
+      "total_adjustment_abs_mean": 0.0024807207944038865,
+      "constraint_pressure_score": 0.0024807207944038865,
+      "per_cell_delta_abs": [
+        [
+          0.008059249824688808,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.005027258070121721,
+          0.005644522421063725,
+          0.0039038765736503223
+        ],
+        [
+          0.005027246310098654,
+          0.005644473555754148,
+          0.0039038185310538154
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.2206332283701468,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 64,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.0395248143891633,
+      "after_projection_mean": -2.0395248143891633,
+      "after_cap_mean": -2.0395248143891633,
+      "after_calibration_mean": -2.0404405938790875,
+      "final_mean": -2.0404405938790875,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0031071893493381203,
+      "total_adjustment_abs_mean": 0.0031071893493381203,
+      "constraint_pressure_score": 0.0031071893493381203,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0023907182194002896,
+          0.004357497872115257
+        ],
+        [
+          0.009687147381501338,
+          0.002390669354090269,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.013736841812294287
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.3236988480703108,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 65,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.091758053022689,
+      "after_projection_mean": -2.091758053022689,
+      "after_cap_mean": -2.091758053022689,
+      "after_calibration_mean": -2.0916267754839497,
+      "final_mean": -2.0916267754839497,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.002361822929032971,
+      "total_adjustment_abs_mean": 0.002361822929032971,
+      "constraint_pressure_score": 0.002361822929032971,
+      "per_cell_delta_abs": [
+        [
+          0.002476772160113827,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.007282155798684076,
+          0.004581628964811957,
+          0.004357497872115257
+        ],
+        [
+          0.007282144038661009,
+          0.004581580099502824,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.0005077585424597686
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.16721677424041823,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 66,
+      "generator_family": "residual_rule_aware_vae",
+      "sampled_before_constraints_mean": -2.044546220726782,
+      "after_projection_mean": -2.044546220726782,
+      "after_cap_mean": -2.044546220726782,
+      "after_calibration_mean": -2.0453941698825995,
+      "final_mean": -2.0453941698825995,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0030357954025315307,
+      "total_adjustment_abs_mean": 0.0030357954025315307,
+      "constraint_pressure_score": 0.0030357954025315307,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          5.5666240506013764e-09,
+          5.1333121087182576e-08
+        ],
+        [
+          0.009687159141524515,
+          0.0023639911241539746,
+          0.004357497872115257
+        ],
+        [
+          0.009687147381501338,
+          0.002363942258843954,
+          0.00435743982951875
+        ],
+        [
+          1.475131039541111e-08,
+          1.333791728175271e-07,
+          2.4612953453129194e-08
+        ],
+        [
+          1.0805524741641648e-07,
+          2.893119788183185e-08,
+          0.01271938680068807
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "raw_radiation_violation_mean": 0.0,
+      "raw_thermal_violation_mean": 0.0,
+      "raw_highdose_violation_mean": 0.0,
+      "residual_budget_utilization": 0.29848334851718256,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    }
+  ],
+  "explainability_summary": {
+    "blocks_total": 67,
+    "pass_count": 67,
+    "reject_count": 0,
+    "pass_rate": 1.0,
+    "reject_rate": 0.0,
+    "mean_delta_projection": 6.833771564714825e-05,
+    "mean_delta_cap": 0.0,
+    "mean_delta_calibration": 0.002666277508662435,
+    "mean_total_adjustment_abs": 0.0027346152243095828,
+    "mean_constraint_pressure": 0.0027346152243095828,
+    "p95_constraint_pressure": 0.0032212114842980195,
+    "mean_projection_active_rate": 0.011940298507462687,
+    "mean_cap_active_rate": 0.0,
+    "mean_calibration_active_rate": 0.8716417910447761,
+    "mean_raw_radiation_violation": 8.542214455893531e-05,
+    "mean_raw_thermal_violation": 0.0,
+    "mean_raw_highdose_violation": 0.0,
+    "mean_residual_budget_utilization": 0.30391572274296075
+  },
+  "target_matrix_log10": [
+    [
+      -0.2757233109764332,
+      -0.7447250821562743,
+      -1.677760025068848
+    ],
+    [
+      -0.5850249816690024,
+      -1.292421308407472,
+      -2.0968557295904615
+    ],
+    [
+      -0.5850249816690024,
+      -1.292421308407472,
+      -2.0968557295904615
+    ],
+    [
+      -1.6575575789681631,
+      -1.920782564253433,
+      -3.5214335044061564
+    ],
+    [
+      -3.1542819820333414,
+      -4.3872161432802645,
+      -6.0
+    ]
+  ],
+  "prior_mu_matrix_log10": [
+    [
+      -0.2847127157300596,
+      -0.7606598201745213,
+      -1.6718240268654325
+    ],
+    [
+      -0.5948778244061385,
+      -1.2761976156624317,
+      -2.0665733589792725
+    ],
+    [
+      -0.6290782225389338,
+      -1.3185356850179295,
+      -2.112204277592871
+    ],
+    [
+      -1.6745711445466824,
+      -2.0351005022631727,
+      -3.507903614476636
+    ],
+    [
+      -3.151235204740341,
+      -4.354352447114289,
+      -5.952744903430778
+    ]
+  ],
+  "prior_sigma_matrix_log10": [
+    [
+      0.05106385577367348,
+      0.08537769453499576,
+      0.054788702387920454
+    ],
+    [
+      0.11823362337644945,
+      0.07716862899715292,
+      0.06109787793816804
+    ],
+    [
+      0.11502841224092221,
+      0.07574603306824652,
+      0.06062925589457741
+    ],
+    [
+      0.06676290479840202,
+      0.061440261228463924,
+      0.05481919298162924
+    ],
+    [
+      0.04542695114780829,
+      0.04446683671738638,
+      0.04428395892197348
+    ]
+  ]
+}

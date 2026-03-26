@@ -1,0 +1,3552 @@
+{
+  "generator": "cell_level_article_guided_design_preserving",
+  "seed": 21,
+  "n_synthetic_requested": 1000,
+  "n_synthetic_saved": 1000,
+  "resample_attempts_used": 1,
+  "design_support": [
+    {
+      "radiation": 0.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 0.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 0.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 2.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 2.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 2.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 4.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 4.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 4.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 6.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 6.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 6.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    },
+    {
+      "radiation": 8.0,
+      "temperature": 42.0,
+      "time": 45.0,
+      "label": "42C_45min"
+    },
+    {
+      "radiation": 8.0,
+      "temperature": 43.0,
+      "time": 45.0,
+      "label": "43C_45min"
+    },
+    {
+      "radiation": 8.0,
+      "temperature": 44.0,
+      "time": 30.0,
+      "label": "44C_30min"
+    }
+  ],
+  "sigma_matrix_log10": [
+    [
+      0.05106385577367348,
+      0.08537769453499576,
+      0.054788702387920454
+    ],
+    [
+      0.11823362337644945,
+      0.07716862899715292,
+      0.06109787793816804
+    ],
+    [
+      0.11502841224092221,
+      0.07574603306824652,
+      0.06062925589457741
+    ],
+    [
+      0.06676290479840202,
+      0.061440261228463924,
+      0.05481919298162924
+    ],
+    [
+      0.04542695114780829,
+      0.04446683671738638,
+      0.04428395892197348
+    ]
+  ],
+  "prior_matrix_log10": [
+    [
+      -0.2847127157300596,
+      -0.7606598201745213,
+      -1.6718240268654325
+    ],
+    [
+      -0.5948778244061385,
+      -1.2761976156624317,
+      -2.0665733589792725
+    ],
+    [
+      -0.6290782225389338,
+      -1.3185356850179295,
+      -2.112204277592871
+    ],
+    [
+      -1.6745711445466824,
+      -2.0351005022631727,
+      -3.507903614476636
+    ],
+    [
+      -3.151235204740341,
+      -4.354352447114289,
+      -5.952744903430778
+    ]
+  ],
+  "target_matrix_log10": [
+    [
+      -0.2757233109764332,
+      -0.7447250821562743,
+      -1.677760025068848
+    ],
+    [
+      -0.5850249816690024,
+      -1.292421308407472,
+      -2.0968557295904615
+    ],
+    [
+      -0.5850249816690024,
+      -1.292421308407472,
+      -2.0968557295904615
+    ],
+    [
+      -1.6575575789681631,
+      -1.920782564253433,
+      -3.5214335044061564
+    ],
+    [
+      -3.1542819820333414,
+      -4.3872161432802645,
+      -6.0
+    ]
+  ],
+  "calibration_iterations": 4,
+  "rules_file": "knowledge_base/cell_level_rules.json",
+  "explainability_records": [
+    {
+      "block_id": 0,
+      "sampled_before_constraints_mean": -2.0797203859725246,
+      "after_projection_mean": -2.0797203859725246,
+      "after_cap_mean": -2.0797203859725246,
+      "after_calibration_mean": -2.073437193547242,
+      "final_mean": -2.073437193547242,
+      "delta_projection_mean": 0.03589766936365478,
+      "delta_projection_radiation_mean": 0.03589766936365478,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.022379898161319904,
+      "total_adjustment_abs_mean": 0.05827756752497468,
+      "constraint_pressure_score": 0.05827756752497468,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.18241603896688985,
+          0.11597854911045213,
+          0.01382360962186091
+        ],
+        [
+          0.1824160389668898,
+          0.11597854911045191,
+          0.01382360962186091
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.042198207853761716
+        ]
+      ],
+      "projection_active_rate": 0.4,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 1,
+      "sampled_before_constraints_mean": -2.096832633765528,
+      "after_projection_mean": -2.096832633765528,
+      "after_cap_mean": -2.096832633765528,
+      "after_calibration_mean": -2.090045531103132,
+      "final_mean": -2.090045531103132,
+      "delta_projection_mean": 0.003319249468307817,
+      "delta_projection_radiation_mean": 0.003319249468307817,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02187598792420657,
+      "total_adjustment_abs_mean": 0.025195237392514384,
+      "constraint_pressure_score": 0.025195237392514384,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.006120905836037638,
+          0.020052925551262035,
+          0.015022581898879839
+        ],
+        [
+          0.05948817623187952,
+          0.020052925551262035,
+          0.015022581898879839
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.03463955429706189
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 2,
+      "sampled_before_constraints_mean": -2.0976902668172115,
+      "after_projection_mean": -2.097690266817212,
+      "after_cap_mean": -2.097690266817212,
+      "after_calibration_mean": -2.0885371175981406,
+      "final_mean": -2.0885371175981406,
+      "delta_projection_mean": 0.007372965883656805,
+      "delta_projection_radiation_mean": 0.007372965883656805,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.01962342724127381,
+      "total_adjustment_abs_mean": 0.026996393124930615,
+      "constraint_pressure_score": 0.026996393124930615,
+      "per_cell_delta_abs": [
+        [
+          0.0008511440530705183,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.04958894225588706,
+          0.015055418090653694,
+          0.03363856125267706
+        ],
+        [
+          0.04958894225588695,
+          0.015055418090653472,
+          0.0336385612526775
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.4,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 3,
+      "sampled_before_constraints_mean": -2.051013540128546,
+      "after_projection_mean": -2.051013540128546,
+      "after_cap_mean": -2.051013540128546,
+      "after_calibration_mean": -2.04564802343151,
+      "final_mean": -2.04564802343151,
+      "delta_projection_mean": 0.00017542710183790315,
+      "delta_projection_radiation_mean": 0.00017542710183790315,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03049251502068377,
+      "total_adjustment_abs_mean": 0.03066794212252167,
+      "constraint_pressure_score": 0.03066794212252167,
+      "per_cell_delta_abs": [
+        [
+          0.022704377742830073,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.03412024429774296,
+          0.003544619402954474,
+          0.0480753342132636
+        ],
+        [
+          0.03412024429774296,
+          0.0005112333361747545,
+          0.03074644740437593
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 4,
+      "sampled_before_constraints_mean": -2.1503328493783536,
+      "after_projection_mean": -2.1503328493783536,
+      "after_cap_mean": -2.1503328493783536,
+      "after_calibration_mean": -2.137286101737406,
+      "final_mean": -2.137286101737406,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03060327944322457,
+      "total_adjustment_abs_mean": 0.03060327944322457,
+      "constraint_pressure_score": 0.03060327944322457,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.01899901404646387,
+          0.02788522816144079,
+          0.026624934018321778
+        ],
+        [
+          0.08460809611438136,
+          0.024851842094660848,
+          0.009296047209434555
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 5,
+      "sampled_before_constraints_mean": -2.1149283287308602,
+      "after_projection_mean": -2.1149283287308602,
+      "after_cap_mean": -2.1149283287308602,
+      "after_calibration_mean": -2.105253614868565,
+      "final_mean": -2.105253614868565,
+      "delta_projection_mean": 0.003753041869326405,
+      "delta_projection_radiation_mean": 0.003753041869326405,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03285158846027127,
+      "total_adjustment_abs_mean": 0.036604630329597675,
+      "constraint_pressure_score": 0.036604630329597675,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.060952355053906615,
+          0.04775235370529862,
+          0.01248322066670804
+        ],
+        [
+          0.060952355053906615,
+          0.0447189676385189,
+          0.004845666142179184
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.050580506679781756
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 6,
+      "sampled_before_constraints_mean": -2.0907354342681073,
+      "after_projection_mean": -2.0907354342681073,
+      "after_cap_mean": -2.0907354342681073,
+      "after_calibration_mean": -2.085066681847852,
+      "final_mean": -2.085066681847852,
+      "delta_projection_mean": 0.0015640913446269462,
+      "delta_projection_radiation_mean": 0.0015640913446269462,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02982826031159868,
+      "total_adjustment_abs_mean": 0.03139235165622563,
+      "constraint_pressure_score": 0.03139235165622563,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.013247378118091735,
+          0.044512877303446
+        ],
+        [
+          0.0896795076627428,
+          0.013247378118091735,
+          0.027183990494559218
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.05141480792917452
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 7,
+      "sampled_before_constraints_mean": -2.1031875330475587,
+      "after_projection_mean": -2.1031875330475587,
+      "after_cap_mean": -2.1031875330475587,
+      "after_calibration_mean": -2.0953853001746308,
+      "final_mean": -2.0953853001746308,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03982290520934037,
+      "total_adjustment_abs_mean": 0.03982290520934037,
+      "constraint_pressure_score": 0.03982290520934037,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.0012692894545057731,
+          0.04757845875405797,
+          0.05447476050338773
+        ],
+        [
+          0.06687837152242282,
+          0.044545072687278475,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 8,
+      "sampled_before_constraints_mean": -2.088392799829359,
+      "after_projection_mean": -2.088392799829359,
+      "after_cap_mean": -2.088392799829359,
+      "after_calibration_mean": -2.079665452978647,
+      "final_mean": -2.079665452978647,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.036342906676114145,
+      "total_adjustment_abs_mean": 0.036342906676114145,
+      "constraint_pressure_score": 0.036342906676114145,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.006995390183044292,
+          0.04208560643221215,
+          0.03507987793087919
+        ],
+        [
+          0.07260447225096145,
+          0.03905222036543243,
+          0.01775099112199241
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.06479101185352487
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 9,
+      "sampled_before_constraints_mean": -2.133433224370827,
+      "after_projection_mean": -2.133433224370827,
+      "after_cap_mean": -2.133433224370827,
+      "after_calibration_mean": -2.121755786925662,
+      "final_mean": -2.121755786925662,
+      "delta_projection_mean": 0.004112515921809279,
+      "delta_projection_radiation_mean": 0.004112515921809279,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.024886335858932105,
+      "total_adjustment_abs_mean": 0.028998851780741384,
+      "constraint_pressure_score": 0.028998851780741384,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.04440069912874367,
+          0.020764404352174193,
+          0.014817679347906676
+        ],
+        [
+          0.04440069912874378,
+          0.020764404352174415,
+          0.002511207460980991
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.020539652936731656
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 10,
+      "sampled_before_constraints_mean": -2.1593202680748664,
+      "after_projection_mean": -2.1593202680748664,
+      "after_cap_mean": -2.1593202680748664,
+      "after_calibration_mean": -2.1478664799779192,
+      "final_mean": -2.1478664799779192,
+      "delta_projection_mean": 0.0020135394393452724,
+      "delta_projection_radiation_mean": 0.0020135394393452724,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.036025297384886266,
+      "total_adjustment_abs_mean": 0.038038836824231544,
+      "constraint_pressure_score": 0.038038836824231544,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.04790608682904818,
+          0.04775235370529862,
+          0.05447476050338773
+        ],
+        [
+          0.04790608682904807,
+          0.0447189676385189,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.02389439316000619
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 11,
+      "sampled_before_constraints_mean": -2.062194154230665,
+      "after_projection_mean": -2.062194154230665,
+      "after_cap_mean": -2.062194154230665,
+      "after_calibration_mean": -2.058342262716484,
+      "final_mean": -2.058342262716484,
+      "delta_projection_mean": 0.00292056364573392,
+      "delta_projection_radiation_mean": 0.00292056364573392,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03215539296719499,
+      "total_adjustment_abs_mean": 0.035075956612928914,
+      "constraint_pressure_score": 0.035075956612928914,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.054708768376962924,
+          0.039969149706227114,
+          0.03547457738024029
+        ],
+        [
+          0.054708768376963035,
+          0.036935763639447394,
+          0.018145690571352624
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 12,
+      "sampled_before_constraints_mean": -2.090042268600642,
+      "after_projection_mean": -2.090042268600642,
+      "after_cap_mean": -2.090042268600642,
+      "after_calibration_mean": -2.0818001258606413,
+      "final_mean": -2.0818001258606413,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.039133578404468995,
+      "total_adjustment_abs_mean": 0.039133578404468995,
+      "constraint_pressure_score": 0.039133578404468995,
+      "per_cell_delta_abs": [
+        [
+          0.034409462256161594,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.04775235370529862,
+          0.05447476050338773
+        ],
+        [
+          0.0896795076627428,
+          0.0447189676385189,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.04722341538914687
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 13,
+      "sampled_before_constraints_mean": -2.0489453795791497,
+      "after_projection_mean": -2.0489453795791497,
+      "after_cap_mean": -2.0489453795791497,
+      "after_calibration_mean": -2.0426642395102186,
+      "final_mean": -2.0426642395102186,
+      "delta_projection_mean": 0.0028995811319556678,
+      "delta_projection_radiation_mean": 0.0028995811319556678,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02724044762717175,
+      "total_adjustment_abs_mean": 0.030140028759127416,
+      "constraint_pressure_score": 0.030140028759127416,
+      "per_cell_delta_abs": [
+        [
+          0.036438728321252056,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.02116837560761775,
+          0.02326355152305748,
+          0.009206374944992657
+        ],
+        [
+          0.04444070646029963,
+          0.023263551523057258,
+          0.008122511863894122
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 14,
+      "sampled_before_constraints_mean": -2.048005383714585,
+      "after_projection_mean": -2.048005383714585,
+      "after_cap_mean": -2.048005383714585,
+      "after_calibration_mean": -2.043119690057944,
+      "final_mean": -2.043119690057944,
+      "delta_projection_mean": 0.0007289198075457026,
+      "delta_projection_radiation_mean": 0.0007289198075457026,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.027028680678360447,
+      "total_adjustment_abs_mean": 0.02775760048590615,
+      "constraint_pressure_score": 0.02775760048590615,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.03827143959055146,
+          0.027418014179771077,
+          0.013924819808701638
+        ],
+        [
+          0.03827143959055146,
+          0.024384628112991358,
+          0.0034040670001855844
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0631606893833867
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 15,
+      "sampled_before_constraints_mean": -2.0572814007156977,
+      "after_projection_mean": -2.0572814007156977,
+      "after_cap_mean": -2.0572814007156977,
+      "after_calibration_mean": -2.052177422112949,
+      "final_mean": -2.052177422112949,
+      "delta_projection_mean": 0.005499941875204654,
+      "delta_projection_radiation_mean": 0.005499941875204654,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02570757828042019,
+      "total_adjustment_abs_mean": 0.031207520155624842,
+      "constraint_pressure_score": 0.031207520155624842,
+      "per_cell_delta_abs": [
+        [
+          0.013415654584018055,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.002697842640230319,
+          0.024225989279045956,
+          0.027204711222821754
+        ],
+        [
+          0.06830692470814764,
+          0.024225989279045956,
+          0.027204711222822198
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07330206977578779
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 16,
+      "sampled_before_constraints_mean": -2.0810931295025017,
+      "after_projection_mean": -2.0810931295025017,
+      "after_cap_mean": -2.0810931295025017,
+      "after_calibration_mean": -2.076834379781688,
+      "final_mean": -2.076834379781688,
+      "delta_projection_mean": 0.009979994967069672,
+      "delta_projection_radiation_mean": 0.009979994967069672,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.025218057279054407,
+      "total_adjustment_abs_mean": 0.03519805224612408,
+      "constraint_pressure_score": 0.03519805224612408,
+      "per_cell_delta_abs": [
+        [
+          0.006102873099491812,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.030125178472401815,
+          0.0763666552864124,
+          0.010317776027527259
+        ],
+        [
+          0.035483903595515676,
+          0.0763666552864124,
+          0.00701111078135952
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 17,
+      "sampled_before_constraints_mean": -2.1401251795687815,
+      "after_projection_mean": -2.1401251795687815,
+      "after_cap_mean": -2.1401251795687815,
+      "after_calibration_mean": -2.13080200438008,
+      "final_mean": -2.13080200438008,
+      "delta_projection_mean": 0.006144705424974657,
+      "delta_projection_radiation_mean": 0.006144705424974657,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02644045342273438,
+      "total_adjustment_abs_mean": 0.03258515884770904,
+      "constraint_pressure_score": 0.03258515884770904,
+      "per_cell_delta_abs": [
+        [
+          0.003401533597524653,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.07888983172126851,
+          0.04775235370529862,
+          0.022462420759095103
+        ],
+        [
+          0.07888983172126851,
+          0.0447189676385189,
+          0.005133533950208324
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 18,
+      "sampled_before_constraints_mean": -2.079670746312488,
+      "after_projection_mean": -2.079670746312488,
+      "after_cap_mean": -2.079670746312488,
+      "after_calibration_mean": -2.0716199156878385,
+      "final_mean": -2.0716199156878385,
+      "delta_projection_mean": 0.0001566549326700676,
+      "delta_projection_radiation_mean": 0.0001566549326700676,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.027035506135494863,
+      "total_adjustment_abs_mean": 0.027192161068164928,
+      "constraint_pressure_score": 0.027192161068164928,
+      "per_cell_delta_abs": [
+        [
+          0.027809740999233223,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.004485195857910074,
+          0.023397991369106252,
+          0.00983935539946934
+        ],
+        [
+          0.061123886210007305,
+          0.02036460530232631,
+          0.00983935539946934
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.04349337586249913
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 19,
+      "sampled_before_constraints_mean": -2.0987327783640612,
+      "after_projection_mean": -2.0987327783640612,
+      "after_cap_mean": -2.0987327783640612,
+      "after_calibration_mean": -2.0892869462259296,
+      "final_mean": -2.0892869462259296,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03636193710997063,
+      "total_adjustment_abs_mean": 0.03636193710997063,
+      "constraint_pressure_score": 0.03636193710997063,
+      "per_cell_delta_abs": [
+        [
+          0.03527023200678042,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.04775235370529862,
+          0.0418543515300116
+        ],
+        [
+          0.0896795076627428,
+          0.0447189676385189,
+          0.024525464721124823
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.030028844167803825
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 20,
+      "sampled_before_constraints_mean": -2.0844966536067826,
+      "after_projection_mean": -2.0844966536067826,
+      "after_cap_mean": -2.0844966536067826,
+      "after_calibration_mean": -2.079284247315487,
+      "final_mean": -2.079284247315487,
+      "delta_projection_mean": 0.0006138621007516794,
+      "delta_projection_radiation_mean": 0.0006138621007516794,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.030258592967510003,
+      "total_adjustment_abs_mean": 0.030872455068261685,
+      "constraint_pressure_score": 0.030872455068261685,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.007056104774350147,
+          0.04703659633394919,
+          0.013268409160081429
+        ],
+        [
+          0.07266518684226753,
+          0.04400321026716969,
+          0.013268409160081429
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.05825999986357289
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 21,
+      "sampled_before_constraints_mean": -2.0422676305488197,
+      "after_projection_mean": -2.0422676305488197,
+      "after_cap_mean": -2.0422676305488197,
+      "after_calibration_mean": -2.0358152325347523,
+      "final_mean": -2.0358152325347523,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03354035784404389,
+      "total_adjustment_abs_mean": 0.03354035784404389,
+      "constraint_pressure_score": 0.03354035784404389,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.04775235370529862,
+          0.033511983111856214
+        ],
+        [
+          0.0896795076627428,
+          0.0447189676385189,
+          0.016183096302969435
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.039660124021994037
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 22,
+      "sampled_before_constraints_mean": -2.0688949676667536,
+      "after_projection_mean": -2.0688949676667536,
+      "after_cap_mean": -2.0688949676667536,
+      "after_calibration_mean": -2.065043076152573,
+      "final_mean": -2.065043076152573,
+      "delta_projection_mean": 0.0038170548254876867,
+      "delta_projection_radiation_mean": 0.0038170548254876867,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.024811199072421568,
+      "total_adjustment_abs_mean": 0.028628253897909253,
+      "constraint_pressure_score": 0.028628253897909253,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.03307162991118806,
+          0.014479411998787661,
+          0.024062546752973812
+        ],
+        [
+          0.03307162991118795,
+          0.014479411998787661,
+          0.02406254675297337
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.4,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 23,
+      "sampled_before_constraints_mean": -2.075426965379882,
+      "after_projection_mean": -2.075426965379882,
+      "after_cap_mean": -2.075426965379882,
+      "after_calibration_mean": -2.0715750738657013,
+      "final_mean": -2.0715750738657013,
+      "delta_projection_mean": 0.0056662915359071715,
+      "delta_projection_radiation_mean": 0.0056662915359071715,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02988572235987127,
+      "total_adjustment_abs_mean": 0.035552013895778445,
+      "constraint_pressure_score": 0.035552013895778445,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.0020472120881855904,
+          0.044013879552693425,
+          0.053340599376574316
+        ],
+        [
+          0.06765629415610275,
+          0.044013879552693425,
+          0.03601171256768687
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 24,
+      "sampled_before_constraints_mean": -2.0490377851837396,
+      "after_projection_mean": -2.0490377851837396,
+      "after_cap_mean": -2.0490377851837396,
+      "after_calibration_mean": -2.0451858936695584,
+      "final_mean": -2.0451858936695584,
+      "delta_projection_mean": 0.004363384842985396,
+      "delta_projection_radiation_mean": 0.004363384842985396,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02678913661778857,
+      "total_adjustment_abs_mean": 0.031152521460773963,
+      "constraint_pressure_score": 0.031152521460773963,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.04010726949585053,
+          0.017867917657031773,
+          0.034087101264941744
+        ],
+        [
+          0.04010726949585064,
+          0.014834531590252498,
+          0.034087101264941966
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 25,
+      "sampled_before_constraints_mean": -2.1598176108085356,
+      "after_projection_mean": -2.1598176108085356,
+      "after_cap_mean": -2.1598176108085356,
+      "after_calibration_mean": -2.15288090238056,
+      "final_mean": -2.15288090238056,
+      "delta_projection_mean": 0.0060936765742275545,
+      "delta_projection_radiation_mean": 0.0060936765742275545,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.024245666421315162,
+      "total_adjustment_abs_mean": 0.030339342995542716,
+      "constraint_pressure_score": 0.030339342995542716,
+      "per_cell_delta_abs": [
+        [
+          0.018894631970162223,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.07653036714424821,
+          0.0024568464978209636,
+          0.009701038136429307
+        ],
+        [
+          0.07653036714424821,
+          0.0024568464978207416,
+          0.009701038136429752
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179539,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.05129009978352883
+        ]
+      ],
+      "projection_active_rate": 0.4,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 26,
+      "sampled_before_constraints_mean": -2.096025346798435,
+      "after_projection_mean": -2.096025346798435,
+      "after_cap_mean": -2.096025346798435,
+      "after_calibration_mean": -2.08421976175238,
+      "final_mean": -2.08421976175238,
+      "delta_projection_mean": 0.0012854231448232501,
+      "delta_projection_radiation_mean": 0.0012854231448232501,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.032628536947752064,
+      "total_adjustment_abs_mean": 0.033913960092575315,
+      "constraint_pressure_score": 0.033913960092575315,
+      "per_cell_delta_abs": [
+        [
+          0.05706643626470653,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.011157366619564346,
+          0.05447476050338773
+        ],
+        [
+          0.0896795076627428,
+          0.011157366619564124,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.01642875480688577
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 27,
+      "sampled_before_constraints_mean": -2.125361998683364,
+      "after_projection_mean": -2.125361998683364,
+      "after_cap_mean": -2.125361998683364,
+      "after_calibration_mean": -2.113659831758312,
+      "final_mean": -2.113659831758312,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03308775712498997,
+      "total_adjustment_abs_mean": 0.03308775712498997,
+      "constraint_pressure_score": 0.03308775712498997,
+      "per_cell_delta_abs": [
+        [
+          0.03908640964277388,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.022097470085235438,
+          0.04775235370529862,
+          0.05447476050338773
+        ],
+        [
+          0.04351161198268194,
+          0.0447189676385189,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 28,
+      "sampled_before_constraints_mean": -2.1159298087759217,
+      "after_projection_mean": -2.1159298087759217,
+      "after_cap_mean": -2.1159298087759217,
+      "after_calibration_mean": -2.1075694009848958,
+      "final_mean": -2.1075694009848958,
+      "delta_projection_mean": 0.008495827644851676,
+      "delta_projection_radiation_mean": 0.008495827644851676,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03037743320260151,
+      "total_adjustment_abs_mean": 0.03887326084745319,
+      "constraint_pressure_score": 0.03887326084745319,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.03504468163413088,
+          0.06299525976960485,
+          0.0336343944803601
+        ],
+        [
+          0.03504468163413099,
+          0.06299525976960485,
+          0.01630550767147243
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07029509774882836
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 29,
+      "sampled_before_constraints_mean": -2.125821746134812,
+      "after_projection_mean": -2.125821746134812,
+      "after_cap_mean": -2.125821746134812,
+      "after_calibration_mean": -2.112829857011506,
+      "final_mean": -2.112829857011506,
+      "delta_projection_mean": 0.004801665523106857,
+      "delta_projection_radiation_mean": 0.004801665523106857,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.023571884180791664,
+      "total_adjustment_abs_mean": 0.028373549703898524,
+      "constraint_pressure_score": 0.028373549703898524,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.041002527618650975,
+          0.02886752429692563,
+          0.009128116979517209
+        ],
+        [
+          0.041002527618650975,
+          0.02886752429692563,
+          0.009128116979517209
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0008228777646248631
+        ]
+      ],
+      "projection_active_rate": 0.4,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 30,
+      "sampled_before_constraints_mean": -1.9943335563518474,
+      "after_projection_mean": -1.9943335563518474,
+      "after_cap_mean": -1.9943335563518474,
+      "after_calibration_mean": -1.9904816648376662,
+      "final_mean": -1.9904816648376662,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.026670235861980533,
+      "total_adjustment_abs_mean": 0.026670235861980533,
+      "constraint_pressure_score": 0.026670235861980533,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.01837370873206695,
+          0.009882101670734,
+          0.024422947126625072
+        ],
+        [
+          0.04723537333585043,
+          0.006848715603954281,
+          0.007094060317736961
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 31,
+      "sampled_before_constraints_mean": -2.053199039182594,
+      "after_projection_mean": -2.053199039182594,
+      "after_cap_mean": -2.053199039182594,
+      "after_calibration_mean": -2.0463261245262734,
+      "final_mean": -2.0463261245262734,
+      "delta_projection_mean": 0.0062462754940151004,
+      "delta_projection_radiation_mean": 0.0062462754940151004,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.022296207455880426,
+      "total_adjustment_abs_mean": 0.028542482949895528,
+      "constraint_pressure_score": 0.028542482949895528,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.05519068943996264,
+          0.025977610832498943,
+          0.021124123250876536
+        ],
+        [
+          0.05519068943996264,
+          0.025977610832498943,
+          0.0037952364419888696
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.033352374388191386
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 32,
+      "sampled_before_constraints_mean": -2.058661391924244,
+      "after_projection_mean": -2.058661391924244,
+      "after_cap_mean": -2.058661391924244,
+      "after_calibration_mean": -2.0548095004100633,
+      "final_mean": -2.0548095004100633,
+      "delta_projection_mean": 0.0014260935149562762,
+      "delta_projection_radiation_mean": 0.0014260935149562762,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.033629042127149386,
+      "total_adjustment_abs_mean": 0.03505513564210567,
+      "constraint_pressure_score": 0.03505513564210567,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.04350024239613076,
+          0.043088132322164796,
+          0.04340796346396081
+        ],
+        [
+          0.04350024239613076,
+          0.040054746255384854,
+          0.026079076655072697
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 33,
+      "sampled_before_constraints_mean": -2.0650069757618583,
+      "after_projection_mean": -2.065006975761858,
+      "after_cap_mean": -2.065006975761858,
+      "after_calibration_mean": -2.055179902343738,
+      "final_mean": -2.055179902343738,
+      "delta_projection_mean": 0.0003981546168457806,
+      "delta_projection_radiation_mean": 0.0003981546168457806,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03178826253093456,
+      "total_adjustment_abs_mean": 0.03218641714778034,
+      "constraint_pressure_score": 0.03218641714778034,
+      "per_cell_delta_abs": [
+        [
+          0.05827277704994405,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.0357907006603021,
+          0.01146438171141817,
+          0.0477669543326984
+        ],
+        [
+          0.03579070066030199,
+          0.00843099564463845,
+          0.03043806752381162
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.04731277001113732
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 34,
+      "sampled_before_constraints_mean": -2.1336800587864815,
+      "after_projection_mean": -2.1336800587864815,
+      "after_cap_mean": -2.1336800587864815,
+      "after_calibration_mean": -2.127558222982951,
+      "final_mean": -2.127558222982951,
+      "delta_projection_mean": 0.002902398286015758,
+      "delta_projection_radiation_mean": 0.002902398286015758,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.033456566960807545,
+      "total_adjustment_abs_mean": 0.0363589652468233,
+      "constraint_pressure_score": 0.0363589652468233,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.054572528179076873,
+          0.04775235370529862,
+          0.05447476050338773
+        ],
+        [
+          0.054572528179076873,
+          0.0447189676385189,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179539,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.04461855718003793
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 35,
+      "sampled_before_constraints_mean": -2.087658423769659,
+      "after_projection_mean": -2.087658423769659,
+      "after_cap_mean": -2.087658423769659,
+      "after_calibration_mean": -2.0823293284702427,
+      "final_mean": -2.0823293284702427,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.028753012234928974,
+      "total_adjustment_abs_mean": 0.028753012234928974,
+      "constraint_pressure_score": 0.028753012234928974,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.026868447907624993,
+          0.029410209554331157,
+          0.03159469042940932
+        ],
+        [
+          0.038740634160292164,
+          0.02637682348755166,
+          0.014265803620521655
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.056509664741750676
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 36,
+      "sampled_before_constraints_mean": -2.082070455535985,
+      "after_projection_mean": -2.082070455535985,
+      "after_cap_mean": -2.082070455535985,
+      "after_calibration_mean": -2.077460245075448,
+      "final_mean": -2.077460245075448,
+      "delta_projection_mean": 0.005232130294203626,
+      "delta_projection_radiation_mean": 0.005232130294203626,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.030426535579981605,
+      "total_adjustment_abs_mean": 0.03565866587418523,
+      "constraint_pressure_score": 0.03565866587418523,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.01576586293422444,
+          0.035069939036927344,
+          0.04790542061097103
+        ],
+        [
+          0.08137494500214182,
+          0.032036552970147625,
+          0.04790542061097103
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.06729293732494224
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 37,
+      "sampled_before_constraints_mean": -2.0375256619274325,
+      "after_projection_mean": -2.0375256619274325,
+      "after_cap_mean": -2.0375256619274325,
+      "after_calibration_mean": -2.0325255605797587,
+      "final_mean": -2.0325255605797587,
+      "delta_projection_mean": 0.00017058517917289961,
+      "delta_projection_radiation_mean": 0.00017058517917289961,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02786963908176033,
+      "total_adjustment_abs_mean": 0.02804022426093323,
+      "constraint_pressure_score": 0.02804022426093323,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.030551222339168405,
+          0.03458325988801492,
+          0.009943832248240358
+        ],
+        [
+          0.035057859728748975,
+          0.031549873821234975,
+          0.009943832248239914
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.061444574017897935
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 38,
+      "sampled_before_constraints_mean": -2.042066473595361,
+      "after_projection_mean": -2.042066473595361,
+      "after_cap_mean": -2.042066473595361,
+      "after_calibration_mean": -2.034450007023194,
+      "final_mean": -2.034450007023194,
+      "delta_projection_mean": 0.005335524758794263,
+      "delta_projection_radiation_mean": 0.005335524758794263,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03949108630814376,
+      "total_adjustment_abs_mean": 0.044826611066938034,
+      "constraint_pressure_score": 0.044826611066938034,
+      "per_cell_delta_abs": [
+        [
+          0.056468625869793454,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.07282097672491561,
+          0.04775235370529862,
+          0.05447476050338773
+        ],
+        [
+          0.07282097672491572,
+          0.0447189676385189,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 39,
+      "sampled_before_constraints_mean": -2.1106817453567457,
+      "after_projection_mean": -2.1106817453567457,
+      "after_cap_mean": -2.1106817453567457,
+      "after_calibration_mean": -2.1037992683274234,
+      "final_mean": -2.1037992683274234,
+      "delta_projection_mean": 0.0048764995844566466,
+      "delta_projection_radiation_mean": 0.0048764995844566466,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03155092056828877,
+      "total_adjustment_abs_mean": 0.03642742015274542,
+      "constraint_pressure_score": 0.03642742015274542,
+      "per_cell_delta_abs": [
+        [
+          0.04545878272711423,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.03809043991681449,
+          0.02107698106950817
+        ],
+        [
+          0.0896795076627428,
+          0.03809043991681449,
+          0.003748094260621393
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 40,
+      "sampled_before_constraints_mean": -2.108899689788265,
+      "after_projection_mean": -2.108899689788265,
+      "after_cap_mean": -2.108899689788265,
+      "after_calibration_mean": -2.10180142915323,
+      "final_mean": -2.10180142915323,
+      "delta_projection_mean": 0.005928271187984713,
+      "delta_projection_radiation_mean": 0.005928271187984713,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.026517613110834545,
+      "total_adjustment_abs_mean": 0.032445884298819255,
+      "constraint_pressure_score": 0.032445884298819255,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.003529227599310847,
+          0.045978726943275205,
+          0.05447476050338773
+        ],
+        [
+          0.06207985446860653,
+          0.045978726943275205,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.02997218470748031
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 41,
+      "sampled_before_constraints_mean": -2.0740893539392826,
+      "after_projection_mean": -2.0740893539392826,
+      "after_cap_mean": -2.0740893539392826,
+      "after_calibration_mean": -2.0649490765599356,
+      "final_mean": -2.0649490765599356,
+      "delta_projection_mean": 0.005287086974116532,
+      "delta_projection_radiation_mean": 0.005287086974116532,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.026898211518452217,
+      "total_adjustment_abs_mean": 0.03218529849256875,
+      "constraint_pressure_score": 0.03218529849256875,
+      "per_cell_delta_abs": [
+        [
+          0.010596519695452777,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.04719559623244868,
+          0.04775235370529862,
+          0.03392654051182786
+        ],
+        [
+          0.04719559623244862,
+          0.0447189676385189,
+          0.03392654051182786
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.00993845323825493
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 42,
+      "sampled_before_constraints_mean": -2.1613525066607604,
+      "after_projection_mean": -2.1613525066607604,
+      "after_cap_mean": -2.1613525066607604,
+      "after_calibration_mean": -2.1497655389895507,
+      "final_mean": -2.1497655389895507,
+      "delta_projection_mean": 0.0027236111658742066,
+      "delta_projection_radiation_mean": 0.0027236111658742066,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03096040351712707,
+      "total_adjustment_abs_mean": 0.03368401468300128,
+      "constraint_pressure_score": 0.03368401468300128,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.010716211033760414,
+          0.037194159164810836,
+          0.02909152714849972
+        ],
+        [
+          0.07632529310167768,
+          0.03416077309803156,
+          0.029091527148500163
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.021896699546073428
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 43,
+      "sampled_before_constraints_mean": -2.0414002508152533,
+      "after_projection_mean": -2.0414002508152533,
+      "after_cap_mean": -2.0414002508152533,
+      "after_calibration_mean": -2.034779104685868,
+      "final_mean": -2.034779104685868,
+      "delta_projection_mean": 0.006875138455619334,
+      "delta_projection_radiation_mean": 0.006875138455619334,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02616609321277598,
+      "total_adjustment_abs_mean": 0.033041231668395316,
+      "constraint_pressure_score": 0.033041231668395316,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.01724223049304352,
+          0.053080231450534976,
+          0.04826000247557971
+        ],
+        [
+          0.04836685157487386,
+          0.053080231450534754,
+          0.030931115666692932
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.03712890229221699
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 44,
+      "sampled_before_constraints_mean": -2.0912127364231616,
+      "after_projection_mean": -2.0912127364231616,
+      "after_cap_mean": -2.0912127364231616,
+      "after_calibration_mean": -2.0836122212438246,
+      "final_mean": -2.0836122212438246,
+      "delta_projection_mean": 0.0051373556566486935,
+      "delta_projection_radiation_mean": 0.0051373556566486935,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03131247147382477,
+      "total_adjustment_abs_mean": 0.03644982713047346,
+      "constraint_pressure_score": 0.03644982713047346,
+      "per_cell_delta_abs": [
+        [
+          0.05622935497733633,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.07133470845882384,
+          0.023678251588635124,
+          0.015684008634659463
+        ],
+        [
+          0.07133470845882373,
+          0.02064486552185585,
+          0.0016448781742273155
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 45,
+      "sampled_before_constraints_mean": -2.1654002384371114,
+      "after_projection_mean": -2.1654002384371114,
+      "after_cap_mean": -2.1654002384371114,
+      "after_calibration_mean": -2.154515525665107,
+      "final_mean": -2.154515525665107,
+      "delta_projection_mean": 0.005694995906181418,
+      "delta_projection_radiation_mean": 0.005694995906181418,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.031007078559475452,
+      "total_adjustment_abs_mean": 0.03670207446565687,
+      "constraint_pressure_score": 0.03670207446565687,
+      "per_cell_delta_abs": [
+        [
+          0.04764546636625694,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.023266346661236725,
+          0.044229162329750604,
+          0.045632329367973234
+        ],
+        [
+          0.088875428729154,
+          0.04422916232975038,
+          0.02830344255908601
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.020820869019192223
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 46,
+      "sampled_before_constraints_mean": -2.1339244079019957,
+      "after_projection_mean": -2.1339244079019957,
+      "after_cap_mean": -2.1339244079019957,
+      "after_calibration_mean": -2.1238025644834244,
+      "final_mean": -2.1238025644834244,
+      "delta_projection_mean": 0.002528246898098511,
+      "delta_projection_radiation_mean": 0.002528246898098511,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.021519983907309144,
+      "total_adjustment_abs_mean": 0.024048230805407654,
+      "constraint_pressure_score": 0.024048230805407654,
+      "per_cell_delta_abs": [
+        [
+          0.022317692544445378,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          2.2833000138167137e-05,
+          0.002333166649091334,
+          0.027626295140182222
+        ],
+        [
+          0.06563191506805532,
+          0.0007002194176879417,
+          0.027626295140182222
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.006936135498879281
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 47,
+      "sampled_before_constraints_mean": -2.117034432883494,
+      "after_projection_mean": -2.1170344328834942,
+      "after_cap_mean": -2.1170344328834942,
+      "after_calibration_mean": -2.107351919425528,
+      "final_mean": -2.107351919425528,
+      "delta_projection_mean": 0.018328589524722088,
+      "delta_projection_radiation_mean": 0.018328589524722088,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.022487852304496434,
+      "total_adjustment_abs_mean": 0.04081644182921852,
+      "constraint_pressure_score": 0.04081644182921852,
+      "per_cell_delta_abs": [
+        [
+          0.026304563818949578,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.1337508217621628,
+          0.025731955087799685,
+          0.020967322057245497
+        ],
+        [
+          0.1337508217621629,
+          0.025731955087799463,
+          0.020967322057245497
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.017512956182459405
+        ]
+      ],
+      "projection_active_rate": 0.4,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 48,
+      "sampled_before_constraints_mean": -2.08774767573223,
+      "after_projection_mean": -2.08774767573223,
+      "after_cap_mean": -2.08774767573223,
+      "after_calibration_mean": -2.0798402174280275,
+      "final_mean": -2.0798402174280275,
+      "delta_projection_mean": 0.011308147148126368,
+      "delta_projection_radiation_mean": 0.011308147148126368,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.022992141489450925,
+      "total_adjustment_abs_mean": 0.03430028863757729,
+      "constraint_pressure_score": 0.03430028863757729,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.11761564464490637,
+          0.007099118569269258,
+          0.030036973359277575
+        ],
+        [
+          0.11761564464490631,
+          0.0040657325024893165,
+          0.012708086550389464
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.01783421966996812
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 49,
+      "sampled_before_constraints_mean": -2.1391202518755503,
+      "after_projection_mean": -2.1391202518755503,
+      "after_cap_mean": -2.1391202518755503,
+      "after_calibration_mean": -2.1260735042346024,
+      "final_mean": -2.1260735042346024,
+      "delta_projection_mean": 0.004815266171715112,
+      "delta_projection_radiation_mean": 0.004815266171715112,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.030021918163891295,
+      "total_adjustment_abs_mean": 0.03483718433560641,
+      "constraint_pressure_score": 0.03483718433560641,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.011640820061059709,
+          0.03763118932125331,
+          0.05447476050338773
+        ],
+        [
+          0.07724990212897687,
+          0.03763118932125309,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 50,
+      "sampled_before_constraints_mean": -2.0187176734986414,
+      "after_projection_mean": -2.0187176734986414,
+      "after_cap_mean": -2.0187176734986414,
+      "after_calibration_mean": -2.011794816559407,
+      "final_mean": -2.011794816559407,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03358493627364991,
+      "total_adjustment_abs_mean": 0.03358493627364991,
+      "constraint_pressure_score": 0.03358493627364991,
+      "per_cell_delta_abs": [
+        [
+          0.02701798204260364,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.0038207638426949186,
+          0.04775235370529862,
+          0.03442720682488165
+        ],
+        [
+          0.061788318225222516,
+          0.0447189676385189,
+          0.01709832001599354
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.05962122218708199
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 51,
+      "sampled_before_constraints_mean": -2.1248504041447576,
+      "after_projection_mean": -2.1248504041447576,
+      "after_cap_mean": -2.1248504041447576,
+      "after_calibration_mean": -2.1157539978625577,
+      "final_mean": -2.1157539978625577,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03026078450924471,
+      "total_adjustment_abs_mean": 0.03026078450924471,
+      "constraint_pressure_score": 0.03026078450924471,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.02202283831377061,
+          0.05447476050338773
+        ],
+        [
+          0.0896795076627428,
+          0.018989452246991112,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.8666666666666667,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 52,
+      "sampled_before_constraints_mean": -2.1566710846494788,
+      "after_projection_mean": -2.1566710846494788,
+      "after_cap_mean": -2.1566710846494788,
+      "after_calibration_mean": -2.1436243370085313,
+      "final_mean": -2.1436243370085313,
+      "delta_projection_mean": 0.003906159858772007,
+      "delta_projection_radiation_mean": 0.003906159858772007,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.026726415742460003,
+      "total_adjustment_abs_mean": 0.03063257560123201,
+      "constraint_pressure_score": 0.03063257560123201,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.0196427566043067,
+          0.01983457877431638
+        ],
+        [
+          0.0896795076627428,
+          0.0196427566043067,
+          0.019834578774316824
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 53,
+      "sampled_before_constraints_mean": -2.128197860848937,
+      "after_projection_mean": -2.128197860848937,
+      "after_cap_mean": -2.128197860848937,
+      "after_calibration_mean": -2.118613039217155,
+      "final_mean": -2.118613039217155,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.036375564605020054,
+      "total_adjustment_abs_mean": 0.036375564605020054,
+      "constraint_pressure_score": 0.036375564605020054,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.018437040201667476,
+          0.03925046920331354,
+          0.033149360465969835
+        ],
+        [
+          0.08404612226958497,
+          0.0362170831365336,
+          0.015820473657082168
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.05192889013748392
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 54,
+      "sampled_before_constraints_mean": -2.0936821773982985,
+      "after_projection_mean": -2.0936821773982985,
+      "after_cap_mean": -2.0936821773982985,
+      "after_calibration_mean": -2.0848254394093106,
+      "final_mean": -2.0848254394093106,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.030582853860764557,
+      "total_adjustment_abs_mean": 0.030582853860764557,
+      "constraint_pressure_score": 0.030582853860764557,
+      "per_cell_delta_abs": [
+        [
+          0.044805786958005966,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.007708751819655801,
+          0.003727780238898193,
+          0.04494371333273017
+        ],
+        [
+          0.07331783388757296,
+          0.0006943941721186953,
+          0.027614826523843394
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.04840081135619023
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 55,
+      "sampled_before_constraints_mean": -2.0985642715945443,
+      "after_projection_mean": -2.0985642715945443,
+      "after_cap_mean": -2.0985642715945443,
+      "after_calibration_mean": -2.0906898720847322,
+      "final_mean": -2.0906898720847322,
+      "delta_projection_mean": 0.001349817785592533,
+      "delta_projection_radiation_mean": 0.001349817785592533,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03496213916779483,
+      "total_adjustment_abs_mean": 0.03631195695338737,
+      "constraint_pressure_score": 0.03631195695338737,
+      "per_cell_delta_abs": [
+        [
+          0.04508456139320405,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.011640326425333969,
+          0.05447476050338773
+        ],
+        [
+          0.0896795076627428,
+          0.011640326425333747,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.06341466297902976
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 56,
+      "sampled_before_constraints_mean": -2.0815620477414525,
+      "after_projection_mean": -2.0815620477414525,
+      "after_cap_mean": -2.0815620477414525,
+      "after_calibration_mean": -2.0766372823062413,
+      "final_mean": -2.0766372823062413,
+      "delta_projection_mean": 0.0047360532607450875,
+      "delta_projection_radiation_mean": 0.0047360532607450875,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.027629908574296796,
+      "total_adjustment_abs_mean": 0.03236596183504188,
+      "constraint_pressure_score": 0.03236596183504188,
+      "per_cell_delta_abs": [
+        [
+          0.005116450076967649,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.03703709248897802,
+          0.011634680198983727
+        ],
+        [
+          0.0896795076627428,
+          0.03703709248897802,
+          0.00569420660990394
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.06769106278179571
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 57,
+      "sampled_before_constraints_mean": -2.0534403117678552,
+      "after_projection_mean": -2.0534403117678552,
+      "after_cap_mean": -2.0534403117678552,
+      "after_calibration_mean": -2.0493675985573434,
+      "final_mean": -2.0493675985573434,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.03495954985031858,
+      "total_adjustment_abs_mean": 0.03495954985031858,
+      "constraint_pressure_score": 0.03495954985031858,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.02765502155210775,
+          0.04775235370529862,
+          0.0503787127270765
+        ],
+        [
+          0.03795406051580941,
+          0.0447189676385189,
+          0.03304982591818906
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07535539607532549
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 58,
+      "sampled_before_constraints_mean": -2.0943502278408332,
+      "after_projection_mean": -2.0943502278408332,
+      "after_cap_mean": -2.0943502278408332,
+      "after_calibration_mean": -2.0860287113947553,
+      "final_mean": -2.0860287113947553,
+      "delta_projection_mean": 0.0014746014317965628,
+      "delta_projection_radiation_mean": 0.0014746014317965628,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02599889615986437,
+      "total_adjustment_abs_mean": 0.02747349759166093,
+      "constraint_pressure_score": 0.02747349759166093,
+      "per_cell_delta_abs": [
+        [
+          0.018359489550223984,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.024070425594825418,
+          0.0038959274721548365,
+          0.01734471970415319
+        ],
+        [
+          0.0896795076627428,
+          0.0038959274721546144,
+          0.01734471970415319
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.02998283709205296
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 59,
+      "sampled_before_constraints_mean": -2.1103772652111554,
+      "after_projection_mean": -2.1103772652111554,
+      "after_cap_mean": -2.1103772652111554,
+      "after_calibration_mean": -2.1065158898711696,
+      "final_mean": -2.1065158898711696,
+      "delta_projection_mean": 0.0023479067402123023,
+      "delta_projection_radiation_mean": 0.0023479067402123023,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.025571584428990525,
+      "total_adjustment_abs_mean": 0.027919491169202827,
+      "constraint_pressure_score": 0.027919491169202827,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.0057740188678032656,
+          0.00820623738917492,
+          0.01958419960025104
+        ],
+        [
+          0.07138310093572064,
+          0.00820623738917492,
+          0.01958419960025104
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0785254641332136
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 60,
+      "sampled_before_constraints_mean": -2.109600173755153,
+      "after_projection_mean": -2.109600173755153,
+      "after_cap_mean": -2.109600173755153,
+      "after_calibration_mean": -2.1019936421752177,
+      "final_mean": -2.1019936421752177,
+      "delta_projection_mean": 0.006773837444194597,
+      "delta_projection_radiation_mean": 0.006773837444194597,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0335766717902036,
+      "total_adjustment_abs_mean": 0.040350509234398195,
+      "constraint_pressure_score": 0.040350509234398195,
+      "per_cell_delta_abs": [
+        [
+          0.012036004543502843,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.083608321865418,
+          0.04775235370529862,
+          0.05447476050338773
+        ],
+        [
+          0.08360832186541811,
+          0.0447189676385189,
+          0.037145873694500064
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.03438412507747568
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 61,
+      "sampled_before_constraints_mean": -2.090205742966061,
+      "after_projection_mean": -2.090205742966061,
+      "after_cap_mean": -2.090205742966061,
+      "after_calibration_mean": -2.083788916426262,
+      "final_mean": -2.083788916426262,
+      "delta_projection_mean": 0.0,
+      "delta_projection_radiation_mean": 0.0,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02940200893788293,
+      "total_adjustment_abs_mean": 0.02940200893788293,
+      "constraint_pressure_score": 0.02940200893788293,
+      "per_cell_delta_abs": [
+        [
+          0.004398674237689804,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.02805666863927614,
+          0.04495972386101532,
+          0.02467196146005568
+        ],
+        [
+          0.03755241342864102,
+          0.041926337794235824,
+          0.007343074651168902
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.044592370373708334
+        ]
+      ],
+      "projection_active_rate": 0.0,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": false,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 62,
+      "sampled_before_constraints_mean": -2.1333189324043027,
+      "after_projection_mean": -2.1333189324043027,
+      "after_cap_mean": -2.1333189324043027,
+      "after_calibration_mean": -2.121081943635827,
+      "final_mean": -2.121081943635827,
+      "delta_projection_mean": 0.005016033779117738,
+      "delta_projection_radiation_mean": 0.005016033779117738,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.028669795809147525,
+      "total_adjustment_abs_mean": 0.03368582958826526,
+      "constraint_pressure_score": 0.03368582958826526,
+      "per_cell_delta_abs": [
+        [
+          0.047108737294137115,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.07042479437734162,
+          0.04775235370529862,
+          0.010050172181537143
+        ],
+        [
+          0.07042479437734162,
+          0.0447189676385189,
+          0.007278714627350968
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 63,
+      "sampled_before_constraints_mean": -2.183909644768005,
+      "after_projection_mean": -2.183909644768005,
+      "after_cap_mean": -2.183909644768005,
+      "after_calibration_mean": -2.170862897127057,
+      "final_mean": -2.170862897127057,
+      "delta_projection_mean": 0.0011155565258917032,
+      "delta_projection_radiation_mean": 0.0011155565258917032,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.02429984009595503,
+      "total_adjustment_abs_mean": 0.02541539662184673,
+      "constraint_pressure_score": 0.02541539662184673,
+      "per_cell_delta_abs": [
+        [
+          0.05925512038121239,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.025992999691115348,
+          0.009883366977577746,
+          0.02319999505492598
+        ],
+        [
+          0.03961608237680203,
+          0.009883366977577523,
+          0.0058711082460378705
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179495,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 64,
+      "sampled_before_constraints_mean": -2.0861566560295266,
+      "after_projection_mean": -2.0861566560295266,
+      "after_cap_mean": -2.0861566560295266,
+      "after_calibration_mean": -2.077872433135716,
+      "final_mean": -2.077872433135716,
+      "delta_projection_mean": 0.0026702727854691706,
+      "delta_projection_radiation_mean": 0.0026702727854691706,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.0228601473414044,
+      "total_adjustment_abs_mean": 0.02553042012687357,
+      "constraint_pressure_score": 0.02553042012687357,
+      "per_cell_delta_abs": [
+        [
+          0.018116035873890823,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.02912496548058985,
+          0.003526947557486615,
+          0.028691489295462613
+        ],
+        [
+          0.03648411658732742,
+          0.0004935614907073393,
+          0.028691489295462613
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.0302987866997233
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 65,
+      "sampled_before_constraints_mean": -2.0154043113530373,
+      "after_projection_mean": -2.0154043113530373,
+      "after_cap_mean": -2.0154043113530373,
+      "after_calibration_mean": -2.011552419838857,
+      "final_mean": -2.011552419838857,
+      "delta_projection_mean": 7.455636282823382e-05,
+      "delta_projection_radiation_mean": 7.455636282823382e-05,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.024811199072421696,
+      "total_adjustment_abs_mean": 0.024885755435249932,
+      "constraint_pressure_score": 0.024885755435249932,
+      "per_cell_delta_abs": [
+        [
+          0.0,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.01359590683788564,
+          0.0020758657546016135,
+          0.017219281630906025
+        ],
+        [
+          0.05201317523003168,
+          0.0020758657546016135,
+          0.00010960517798208613
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.13333333333333333,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 0.9333333333333333,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    },
+    {
+      "block_id": 66,
+      "sampled_before_constraints_mean": -2.093369267163852,
+      "after_projection_mean": -2.093369267163852,
+      "after_cap_mean": -2.093369267163852,
+      "after_calibration_mean": -2.0886037259228933,
+      "final_mean": -2.0886037259228933,
+      "delta_projection_mean": 0.0067591486993242725,
+      "delta_projection_radiation_mean": 0.0067591486993242725,
+      "delta_projection_thermal_mean": 0.0,
+      "delta_cap_mean": 0.0,
+      "delta_calibration_mean": 0.027149374262215073,
+      "total_adjustment_abs_mean": 0.033908522961539345,
+      "constraint_pressure_score": 0.033908522961539345,
+      "per_cell_delta_abs": [
+        [
+          0.013704745901666038,
+          0.016726524437271073,
+          0.00015418321377413946
+        ],
+        [
+          0.0343384481671376,
+          0.050676401145143046,
+          0.028012827781505045
+        ],
+        [
+          0.03433844816713749,
+          0.050676401145142824,
+          0.010683940972617822
+        ],
+        [
+          0.02411889548876034,
+          0.10836449419179583,
+          0.021658222037554076
+        ],
+        [
+          0.004556631817393519,
+          0.03194995843590398,
+          0.07866772152028734
+        ]
+      ],
+      "projection_active_rate": 0.26666666666666666,
+      "cap_active_rate": 0.0,
+      "calibration_active_rate": 1.0,
+      "rule_CL1_active": true,
+      "rule_CL3_active": false,
+      "rule_CL5_active": false,
+      "explainability_status": "pass",
+      "reject_reason": ""
+    }
+  ],
+  "explainability_summary": {
+    "blocks_total": 67,
+    "pass_count": 67,
+    "reject_count": 0,
+    "pass_rate": 1.0,
+    "reject_rate": 0.0,
+    "mean_delta_projection": 0.0037778263262888408,
+    "mean_delta_cap": 0.0,
+    "mean_delta_calibration": 0.02915652636992442,
+    "mean_total_adjustment_abs": 0.032934352696213254,
+    "mean_constraint_pressure": 0.032934352696213254,
+    "p95_constraint_pressure": 0.04019222802688085,
+    "mean_projection_active_rate": 0.14925373134328357,
+    "mean_cap_active_rate": 0.0,
+    "mean_calibration_active_rate": 0.9671641791044778,
+    "top_reject_reasons": {}
+  },
+  "architecture": "Rule-guided stochastic 5x3 matrix with isotonic projection and calibration"
+}
